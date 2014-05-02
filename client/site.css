@@ -1,0 +1,25 @@
+/* CSS declarations go here */
+
+body {
+  padding-top: 20px;
+  padding-bottom: 40px;
+}
+
+#calendar {
+  width: 900px;
+  z-index: 10;
+  margin: 0 auto;
+}
+
+.modal {
+
+}
+
+.hidden-data {
+  display: none;
+}
+
+
+#account {
+	margin: 10px 0;
+}

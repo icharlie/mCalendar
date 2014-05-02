@@ -1,0 +1,6 @@
+// TODO: rename to config.js ,and replace USER_NAME and USER_PASSWORD
+if (Meteor.isServer) {
+	Meteor.startup(function () {
+	  process.env.MAIL_URL = 'smtp://postmaster%40postmaster.USER_NAME:USER_PASSWORD@smtp.mailgun.org:587';
+	});
+}

@@ -1,0 +1,327 @@
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>mCalendar</title>
+    <link rel="icon" type="image/png" href="/imgs/calendar.png">
+</head>
+
+
+<body>
+</body>
+
+<template name="main">
+    {{> navBar}}
+  <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                {{> yield}}
+             </div>
+        </div>
+  </div>
+</template>
+
+<template name="navBar">
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <!-- You'll want to use a responsive image option so this logo looks good on devices - I recommend using something like retina.js (do a quick Google search for it and you'll find it) -->
+                <a class="navbar-brand logo-nav" href="{{pathFor 'home'}}">
+                    <img src="/imgs/calendar.png">
+                </a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="{{pathFor 'about'}}">About</a>
+                    </li>
+                    {{#if currentUser and isNotCalendarView }}
+                        <li>
+                            <a href="{{pathFor 'calendar'}}">Go calendar</a>
+                        </li>
+                    {{/if}}
+                    <li>
+                        {{#if currentUser}}
+                                <a href="#"  id='logout'>Logout</a>
+                        {{else}}
+                            <a href="{{pathFor 'login'}}">Login</a>
+                        {{/if}}
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+</template>
+
+<template name="notFound">
+    <style>
+        ::-moz-selection {
+            background: #b3d4fc;
+            text-shadow: none;
+        }
+
+        ::selection {
+            background: #b3d4fc;
+            text-shadow: none;
+        }
+
+        html {
+            padding: 30px 10px;
+            font-size: 20px;
+            line-height: 1.4;
+            color: #737373;
+            background: #f0f0f0;
+            -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+        }
+
+        html,
+        input {
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            max-width: 500px;
+            _width: 500px;
+            padding: 30px 20px 50px;
+            border: 1px solid #b3b3b3;
+            border-radius: 4px;
+            margin: 0 auto;
+            box-shadow: 0 1px 10px #a7a7a7, inset 0 1px 0 #fff;
+            background: #fcfcfc;
+        }
+
+        h1 {
+            margin: 0 10px;
+            font-size: 50px;
+            text-align: center;
+        }
+
+        h1 span {
+            color: #bbb;
+        }
+
+        h3 {
+            margin: 1.5em 0 0.5em;
+        }
+
+        p {
+            margin: 1em 0;
+        }
+
+        ul {
+            padding: 0 0 0 40px;
+            margin: 1em 0;
+        }
+
+        .container {
+            max-width: 380px;
+            _width: 380px;
+            margin: 0 auto;
+        }
+
+        /* google search */
+
+        #goog-fixurl ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        #goog-fixurl form {
+            margin: 0;
+        }
+
+        #goog-wm-qt,
+        #goog-wm-sb {
+            border: 1px solid #bbb;
+            font-size: 16px;
+            line-height: normal;
+            vertical-align: top;
+            color: #444;
+            border-radius: 2px;
+        }
+
+        #goog-wm-qt {
+            width: 220px;
+            height: 20px;
+            padding: 5px;
+            margin: 5px 10px 0 0;
+            box-shadow: inset 0 1px 1px #ccc;
+        }
+
+        #goog-wm-sb {
+            display: inline-block;
+            height: 32px;
+            padding: 0 10px;
+            margin: 5px 0 0;
+            white-space: nowrap;
+            cursor: pointer;
+            background-color: #f5f5f5;
+            background-image: -webkit-linear-gradient(rgba(255,255,255,0), #f1f1f1);
+            background-image: -moz-linear-gradient(rgba(255,255,255,0), #f1f1f1);
+            background-image: -ms-linear-gradient(rgba(255,255,255,0), #f1f1f1);
+            background-image: -o-linear-gradient(rgba(255,255,255,0), #f1f1f1);
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            *overflow: visible;
+            *display: inline;
+            *zoom: 1;
+        }
+
+        #goog-wm-sb:hover,
+        #goog-wm-sb:focus {
+            border-color: #aaa;
+            box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+            background-color: #f8f8f8;
+        }
+
+        #goog-wm-qt:hover,
+        #goog-wm-qt:focus {
+            border-color: #105cb6;
+            outline: 0;
+            color: #222;
+        }
+
+        input::-moz-focus-inner {
+            padding: 0;
+            border: 0;
+        }
+    </style>
+  <div class="container">
+      <h1>Not found <span>:(</span></h1>
+      <p>Sorry, but the page you were trying to view does not exist.</p>
+      <p>It looks like this was the result of either:</p>
+      <ul>
+          <li>a mistyped address</li>
+          <li>an out-of-date link</li>
+      </ul>
+      <script>
+          var GOOG_FIXURL_LANG = (navigator.language || '').slice(0,2),GOOG_FIXURL_SITE = location.host;
+      </script>
+      <script src="//linkhelp.clients.google.com/tbproxy/lh/wm/fixurl.js"></script>
+  </div>
+</template>
+
+<template name="calendar">
+    {{#if currentUser}}
+      <div id='calendar'>
+      </div>
+      {{> modal}}
+      {{> emailModal}}
+    {{/if}}
+</template>
+
+<template name='modal'>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">New Event</h4>
+                </div>
+                <div class="modal-body">
+                    <label for="title">Title</label>
+                    <input type="text" name="title" id="title" value="" />
+                    <label for="desc">Description</label>
+                    <textarea name="desc" id=desc rows="8" cols="40"></textarea>
+                    <input type="hidden" name="date" id="eventStart" value="" />
+                    <input type="hidden" name="date" id="eventEnd" value="" />
+                    <input type="hidden" name="date" id="eventAllDay" value="" />
+                    <div id="current_evt_data" class="hidden-data"></div>
+                    <div id="current_evt_action" class="hidden-data"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" id="deleteEvent">Delete</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-info" id="shareEvent">Share</button>
+                    <button type="button" class="btn btn-primary" id="saveEvent">Save</button>
+                </div>
+            </div> <!-- /.modal-content -->
+        </div> <!-- /.modal-dialog -->
+    </div> <!-- /.modal -->
+</template>
+
+<template name='emailModal'>
+    <div class="modal fade" id="myEmailModal" tabindex="-1" role="dialog" aria-labelledby="myEmailModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Email</h4>
+                </div>
+                <div class="modal-body">
+                    <label for="email">Email: </label>
+                    <input type="email" name="email" id="email" value="" />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="backEvent">Back</button>
+                    <button type="button" class="btn btn-info" id="sendEmail">Send</button>
+                </div>
+            </div> <!-- /.modal-content -->
+        </div> <!-- /.modal-dialog -->
+    </div> <!-- /.modal -->
+</template>
+
+<template name="emailTemplate">
+    <html>
+        <head>
+            <title>Email From TOM</title>
+        </head>
+        <body>
+            Click <a href="{{pathFor 'share'}}/{{ event._id }}"> {{ event.title }}</a> to add this event into your calendar.
+        </body>
+    </html>
+</template>
+
+<template name="loginForm">
+    <div class="col-lg-4 col-lg-offset-4 col-md-4 col-md-offset-4 col-xs-4 col-xs-offset-4">
+        <h1>Login</h1>
+        <form role="form">
+          <div class="form-group">
+            <label for="user_email">Email:</label>
+            <input type="email" class="form-control"  id="userEmail" name="user_email" />
+          </div>
+          <div class="form-group">
+            <label for="user_password">Password:</label>
+            <input type="password" class="form-control"  id="userPassword" name="user_password" />
+          </div>
+          {{#if creatingAccount}}
+            <a id='creatingAccount' class="btn btn-default">Create</a>
+            <a id="goLogin" href="#">(Login)</a>
+          {{else}}
+            <a id='login' class="btn btn-default">Login</a>
+            <a id="goCreate" href="#">(Create Account)</a>
+          {{/if}}
+        </form>
+    </div>
+</template>
+
+<template name="loading">
+  <h4>Loading</h4>
+</template>
+
+<template name="home">
+    <div class="col-lg-4 col-lg-offset-4 col-md-4 col-md-offset-4 col-xs-4 col-xs-offset-4">
+
+    </div>
+</template>
+
+<template name="about">
+
+    <div class="col-lg-4 col-lg-offset-4 col-md-4 col-md-offset-4 col-xs-4 col-xs-offset-4">
+        <p>
+            <iframe src="http://ghbtns.com/github-btn.html?user=icharlie&repo=mCalendar&type=fork" allowtransparency="true" frameborder="0" scrolling="0" width="62" height="20"></iframe>
+            <iframe src="http://ghbtns.com/github-btn.html?user=icharlie&repo=mCalendar&type=watch" allowtransparency="true" frameborder="0" scrolling="0" width="62" height="20"></iframe>
+        </p>
+    </div>
+</template>
