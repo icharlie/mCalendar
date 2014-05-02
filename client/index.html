@@ -230,10 +230,15 @@
                     <h4 class="modal-title">New Event</h4>
                 </div>
                 <div class="modal-body">
-                    <label for="title">Title</label>
-                    <input type="text" name="title" id="title" value="" />
-                    <label for="desc">Description</label>
-                    <textarea name="desc" id=desc rows="8" cols="40"></textarea>
+                    <div class="form-group">
+                        <label for="title">Title</label>
+                        <input type="text" class="form-control" name="title" id="title" value="" />
+                    </div>
+                    <div class="form-group">
+                        <label for="desc">Description</label>
+                        <textarea name="desc" class="form-control" id=desc rows="8" cols="40"></textarea>
+                    </div>
+
                     <input type="hidden" name="date" id="eventStart" value="" />
                     <input type="hidden" name="date" id="eventEnd" value="" />
                     <input type="hidden" name="date" id="eventAllDay" value="" />
