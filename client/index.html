@@ -39,13 +39,13 @@
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="{{pathFor 'about'}}">About</a>
+                        <a href="{{pathFor 'home'}}">Home</a>
                     </li>
-                    {{#if currentUser and isNotCalendarView }}
-                        <li>
-                            <a href="{{pathFor 'calendar'}}">Go calendar</a>
-                        </li>
-                    {{/if}}
+                        {{#if isNotCalendarView}}
+                            <li>
+                                <a href="{{pathFor 'calendar'}}">My Calendar</a>
+                            </li>
+                        {{/if}}
                     <li>
                         {{#if currentUser}}
                                 <a href="#"  id='logout'>Logout</a>
@@ -262,11 +262,13 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">Email</h4>
+                    <h4 class="modal-title">Share Event</h4>
                 </div>
                 <div class="modal-body">
-                    <label for="email">Email: </label>
-                    <input type="email" name="email" id="email" value="" />
+                    <div class="form-group">
+                        <label for="email">Email: </label>
+                        <input type="email" name="email" id="email" class="form-control"  value="" />
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" id="backEvent">Back</button>
@@ -291,12 +293,17 @@
 <template name="loginForm">
     <div class="col-lg-4 col-lg-offset-4 col-md-4 col-md-offset-4 col-xs-4 col-xs-offset-4">
         <h1>Login</h1>
+        {{#if err}}
+          <div class="alert alert-danger">
+            {{ err.reason }}
+          </div>
+        {{/if}}
         <form role="form">
-          <div class="form-group">
+          <div class="form-group {{#if isUserError}}has-error{{/if}}">
             <label for="user_email">Email:</label>
             <input type="email" class="form-control"  id="userEmail" name="user_email" />
           </div>
-          <div class="form-group">
+          <div class="form-group {{#if isPasswordError}}has-error{{/if}}">
             <label for="user_password">Password:</label>
             <input type="password" class="form-control"  id="userPassword" name="user_password" />
           </div>
@@ -316,17 +323,64 @@
 </template>
 
 <template name="home">
-    <div class="col-lg-4 col-lg-offset-4 col-md-4 col-md-offset-4 col-xs-4 col-xs-offset-4">
+  <div id="mCalendar-show" class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2">
+    <div id="mCalendar-carousel" class="carousel slide" data-ride="carousel">
+      <!-- Indicators -->
+      <ol class="carousel-indicators">
+        <li data-target="#mCalendar-carousel" data-slide-to="0" class="active"></li>
+        <li data-target="#mCalendar-carousel" data-slide-to="1"></li>
+        <li data-target="#mCalendar-carousel" data-slide-to="2"></li>
+        <li data-target="#mCalendar-carousel" data-slide-to="3"></li>
+      </ol>
 
+      <!-- Wrapper for slides -->
+      <div class="carousel-inner">
+        <div class="item active">
+          <img src="/imgs/calendar.jpg" alt="calendar">
+          <div class="carousel-caption">
+            <h3>
+              Calendar
+            </h3>
+          </div>
+        </div>
+        <div class="item">
+            <img src="/imgs/add_event.jpg" alt="add event">
+            <div class="carousel-caption">
+              <h3>
+                Add an Event
+              </h3>
+            </div>
+        </div>
+        <div class="item">
+            <img src="/imgs/edit_event.jpg" alt="edit event">
+            <div class="carousel-caption">
+              <h3>
+                Edit an Event
+              </h3>
+            </div>
+        </div>
+        <div class="item">
+            <img src="/imgs/email.jpg" alt="email">
+            <div class="carousel-caption">
+              <h3>
+                Share an Event via email
+              </h3>
+            </div>
+        </div>
+      </div>
+      <!-- Controls -->
+      <a class="left carousel-control" href="#mCalendar-carousel" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+      </a>
+      <a class="right carousel-control" href="#mCalendar-carousel" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right"></span>
+      </a>
     </div>
-</template>
-
-<template name="about">
-
-    <div class="col-lg-4 col-lg-offset-4 col-md-4 col-md-offset-4 col-xs-4 col-xs-offset-4">
-        <p>
-            <iframe src="http://ghbtns.com/github-btn.html?user=icharlie&repo=mCalendar&type=fork" allowtransparency="true" frameborder="0" scrolling="0" width="62" height="20"></iframe>
-            <iframe src="http://ghbtns.com/github-btn.html?user=icharlie&repo=mCalendar&type=watch" allowtransparency="true" frameborder="0" scrolling="0" width="62" height="20"></iframe>
-        </p>
-    </div>
+  </div>
+  <div class="col-lg-4 col-lg-offset-4 col-md-4 col-md-offset-4 col-xs-4 col-xs-offset-4">
+      <p>
+          <iframe src="http://ghbtns.com/github-btn.html?user=icharlie&repo=mCalendar&type=fork" allowtransparency="true" frameborder="0" scrolling="0" width="62" height="20"></iframe>
+          <iframe src="http://ghbtns.com/github-btn.html?user=icharlie&repo=mCalendar&type=watch" allowtransparency="true" frameborder="0" scrolling="0" width="62" height="20"></iframe>
+      </p>
+  </div>
 </template>

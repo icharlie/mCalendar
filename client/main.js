@@ -10,10 +10,11 @@ this.App.getEventsData = function() {
 this.App.generateCalendar = function() {
   if(!$('#calendar').children().length) {
     $("#calendar").fullCalendar({
+      theme: true,
       header: {
         left: "prev,next today",
         center: "title",
-        right: "month,agendaWeek"
+        right: "month,agendaWeek,agendaDay"
       },
       selectable: true,
       selectHelper: true,
@@ -38,7 +39,7 @@ this.App.generateCalendar = function() {
         delete evt.source;
         $("#title").val(evt.title);
         $("#desc").val(evt.desc);
-        $('.modal-title').html('Edti Event');
+        $('#myModal .modal-title').html('Edti Event');
         $('#saveEvent').html('Edit');
         $('#deleteEvent').show();
         $('#shareEvent').show();
@@ -46,32 +47,10 @@ this.App.generateCalendar = function() {
         $("#current_evt_action").html("edit");
         $("#myModal").modal();
       },
-      //dayDblClick: function(date, allDay, jsEvt, view) {
-        //$("#current_evt_data").html();
-        //$("#current_evt_action").html("add");
-        //$('.modal-title').html('New Event');
-        //$('#saveEvent').html('Add');
-        //$('#deleteEvent').hide();
-        //$('#shareEvent').hide();
-        //$("#title").val("");
-        //$("#desc").val("");
-        //$("#eventDate").val(date);
-        //$("#myModal").modal();
-      //},
       eventDrop: function( event, dayDelta, minuteDelta, allDay, revertFunc, jsEvent, ui, view ){
         console.log(event);
         Events.update({_id: event._id}, {$set: { title: event.title, desc: event.desc, start: event.start, end: event.end, allDay: JSON.parse(event.allDay)}});
       }
-
-      //eventragStart: function (evt, jsEvt, ui, view) {
-        //console.log('start');
-        //console.log(evt);
-      //},
-      //eventDragStop: function (evt, jsEvt, ui, view) {
-        //console.log('stop');
-        //console.log(evt.source);
-        //console.log(jsEvt);
-      //}
     });
   } else {
     $("#calendar").fullCalendar("removeEvents");

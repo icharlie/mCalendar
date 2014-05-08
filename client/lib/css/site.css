@@ -1,0 +1,45 @@
+/* CSS declarations go here */
+
+body {
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+
+#calendar {
+  width: 900px;
+  z-index: 10;
+  margin: 0 auto;
+}
+
+.logo-nav img {
+  width: 45px;
+}
+
+.media-object {
+    width: 250px;
+}
+
+.hidden-data {
+  display: none;
+}
+
+
+#account {
+	margin: 10px 0;
+}
+#mCalendar-show .item {
+  height: 450px;
+}
+#mCalendar-show img {
+  padding: 0 45px;
+  margin: 0 auto;
+}
+
+#mCalendar-show .carousel-caption {
+  color: #000;
+}
+
+#mCalendar-show .carousel-control {
+  background-image: none;
+  color: #9E1313;
+}

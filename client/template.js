@@ -1,6 +1,3 @@
-
-"use strict";
-
 var ifViewing, login;
 
 ifViewing = function(viewName) {
@@ -12,7 +9,7 @@ Template.navBar.userEmail = function() {
 };
 
 Template.navBar.isNotCalendarView = function() {
-  return ! (Session.get('currentView') === 'calendar')
+  return (Meteor.userId() && Session.get('currentView') !== 'calendar');
 };
 
 Template.navBar.events({
@@ -33,6 +30,9 @@ Template.calendar.rendered = function() {App.generateCalendar();
 };
 
 Template.calendar.events({
+  'click .fc-button-agendaDay': function() {
+    Meteor.users.update({_id:Meteor.userId()}, {$set:{"profile.calendarView":"agendaDay"}});
+  },
   'click .fc-button-agendaWeek': function(e, t) {
     Meteor.users.update({_id:Meteor.userId()}, {$set:{"profile.calendarView":"agendaWeek"}});
   },
@@ -95,6 +95,22 @@ Template.emailModal.events({
     $("#myEmailModal").modal("hide");
   }
 });
+
+Template.loginForm.err = function () {
+  return Session.get('err');
+};
+
+Template.loginForm.isPasswordError = function () {
+  if (Session.get('err')) {
+    return Session.get('err').reason.match(/password/ig);
+  }
+};
+
+Template.loginForm.isUserError = function () {
+  if (Session.get('err')) {
+    return Session.get('err').reason.match(/user/ig);
+  }
+};
 
 Template.loginForm.events({
   'submit': function(e, t) {
