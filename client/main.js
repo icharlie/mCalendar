@@ -81,6 +81,28 @@ this.App.parseQueryString = function(queryString) {
   }
 };
 
+
+this.App.putPendingEventsIntoAccount = function(){
+  var failedEvents = {};
+  var pendingEvents = JSON.parse(Session.get('pendingEvents'));
+  var event;
+  if (pendingEvents.length) {
+    pendingEvents.map(function(eventId) {
+      event = Events.find({'_id': eventId}).fetch()[0];
+      if (!event || event.ownerId !== Meteor.userId() || event.partnerIds.indexOf(Meteor.userId()) === -1) {
+        Events.update({_id: eventId}, {$addToSet: { partnerIds: Meteor.userId() }, $pull: {pendingEmail: Meteor.user().emails[0].address}}, function(err) {
+          if (err) failedEvents[eventId] = err;
+        });
+      }
+    });
+    pendingEvents = Object.keys(failedEvents);
+    if (pendingEvents.length)
+      Session.set('pendingEvents', JSON.stringify(pendingEvents));
+    else
+      Session.set('pendingEvents', null);
+  }
+}
+
 this.App.login = function(params) {
   return Meteor.loginWithPassword(params.email, params.password, function(err) {
     if (err) {
@@ -88,6 +110,7 @@ this.App.login = function(params) {
       return Router.go('login');
     } else {
       Session.set('err', null);
+      App.putPendingEventsIntoAccount();
       return Router.go('calendar');
     }
   });

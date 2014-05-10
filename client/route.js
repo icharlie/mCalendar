@@ -21,6 +21,17 @@ var emailTempate = function(event) {
   '</html>';
 };
 
+var putPendingEvents = function(eventId) {
+  var pendingEvents = Session.get('pendingEvents');
+  if (!pendingEvents)
+    pendingEvents = [];
+  else
+    pendingEvents = JSON.parse(pendingEvents);
+  pendingEvents.push(eventId);
+  Session.set('pendingEvents', JSON.stringify(pendingEvents));
+};
+
+
 Router.configure({
   layoutTemplate: 'main',
   notFoundTemplate: 'notFound'
@@ -80,21 +91,13 @@ Router.map(function() {
     },
     action: function() {
       if (!Meteor.userId()) {
+        putPendingEvents(this.params.id)
         return Router.go('login');
       }
       if (this.ready()) {
-        var eventId = this.params.id;
-        var event = Events.find({'_id': eventId}).fetch()[0];
-        if (!event || event.ownerId !== Meteor.userId()) {
-          if (!event || event.partnerIds.indexOf(Meteor.userId()) === -1){
-            Events.update({_id: eventId}, {$push: { partnerIds: Meteor.userId() }}, function() {
-              Events.update({_id: eventId},{$pull: {pendingEmail: Meteor.user().emails[0].address}}, function() {
-                Router.go('/calendar');
-              });
-            });
-          }
-          Router.go('/calendar');
-        }
+        putPendingEvents(this.params.id)
+        App.putPendingEventsIntoAccount();
+        Router.go('/calendar');
       } else {
         this.render('loading');
       }
@@ -128,7 +131,7 @@ Router.map(function() {
         Router.go('/login');
       }
 
-      Events.update({_id: this.params.eventId},{$push: {pendingEmail: this.params.to}});
+      Events.update({_id: this.params.eventId},{$addToSet: {pendingEmail: this.params.to}});
       var event = Events.find({"_id":this.params.eventId}).fetch()[0];
       if (event) {
         var from = Meteor.user().emails[0].address;
