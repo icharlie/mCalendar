@@ -47,8 +47,10 @@ this.App.generateCalendar = function() {
         $("#current_evt_action").html("edit");
         $("#myModal").modal();
       },
-      eventDrop: function( event, dayDelta, minuteDelta, allDay, revertFunc, jsEvent, ui, view ){
-        console.log(event);
+      eventDrop: function( event, dayDelta, minuteDelta, allDay, revertFunc, jsEvent, ui, view){
+        Events.update({_id: event._id}, {$set: { title: event.title, desc: event.desc, start: event.start, end: event.end, allDay: JSON.parse(event.allDay)}});
+      },
+      eventResize: function( event, dayDelta, minuteDelta, revertFunc, jsEvent, ui, view)  {
         Events.update({_id: event._id}, {$set: { title: event.title, desc: event.desc, start: event.start, end: event.end, allDay: JSON.parse(event.allDay)}});
       }
     });
