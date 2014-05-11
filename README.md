@@ -15,7 +15,9 @@ A Calendar App builds on top of fullcalendar and Meteor.js
 
 		meteor run
 
-
+### Setup Email
+- Rename `lib/config.js.example` to `config.js`
+- Change ` USER_NAME` and `USER_PASSWORD` to your mailgun's account info.
 
 ### API
 

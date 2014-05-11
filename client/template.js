@@ -117,10 +117,6 @@ Template.loginForm.events({
     e.preventDefault();
     App.login({email: t.find('#userEmail').value, password: t.find('#userPassword').value});
   },
-  'click a#login': function(e, t) {
-    e.preventDefault();
-    App.login({email: t.find('#userEmail').value, password: t.find('#userPassword').value});
-  },
   'click a#creatingAccount': function(e, t) {
     e.preventDefault();
     Session.set('creatingAccount', false);
@@ -155,4 +151,3 @@ var serialize = function(obj) {
     }
     return str.join("&");
 };
-

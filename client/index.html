@@ -308,10 +308,10 @@
             <input type="password" class="form-control"  id="userPassword" name="user_password" />
           </div>
           {{#if creatingAccount}}
-            <a id='creatingAccount' class="btn btn-default">Create</a>
+            <input id='creatingAccount' class="btn btn-default" type="submit" value="Create">
             <a id="goLogin" href="#">(Login)</a>
           {{else}}
-            <a id='login' class="btn btn-default">Login</a>
+            <input id='login' class="btn btn-default" type="submit" value="Login">
             <a id="goCreate" href="#">(Create Account)</a>
           {{/if}}
         </form>
