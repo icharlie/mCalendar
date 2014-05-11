@@ -6,7 +6,8 @@ body {
 }
 
 #calendar {
-  width: 900px;
+  width: auto;
+  max-width: 900px;
   z-index: 10;
   margin: 0 auto;
 }
@@ -42,4 +43,15 @@ body {
 #mCalendar-show .carousel-control {
   background-image: none;
   color: #9E1313;
+}
+
+.fc-header-title h2 {
+  white-space: normal;
+}
+@media (max-width: 480px) {
+  .fc-header-left, .fc-header-center, .fc-header-right {
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
 }

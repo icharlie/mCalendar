@@ -115,19 +115,19 @@ Template.loginForm.isUserError = function () {
 Template.loginForm.events({
   'submit': function(e, t) {
     e.preventDefault();
-    App.login({email: t.find('#userEmail').value, password: t.find('#userPassword').value});
-  },
-  'click a#creatingAccount': function(e, t) {
-    e.preventDefault();
-    Session.set('creatingAccount', false);
-    Accounts.createUser({
-      username: t.find('#userName') ? t.find('#userName').value : '',
-      email: t.find('#userEmail').value,
-      password: t.find('#userPassword').value,
-      profile: {
-        name: t.find('#userName') ? t.find('#userName').value : ''
-      }
-    });
+    if(t.find('input#creatingAccount')) {
+      Session.set('creatingAccount', false);
+      Accounts.createUser({
+        username: t.find('#userName') ? t.find('#userName').value : '',
+        email: t.find('#userEmail').value,
+        password: t.find('#userPassword').value,
+        profile: {
+          name: t.find('#userName') ? t.find('#userName').value : ''
+        }
+      });
+    } else {
+      App.login({email: t.find('#userEmail').value, password: t.find('#userPassword').value});
+    }
   },
   'click a#goLogin': function(e, t) {
     e.preventDefault();
