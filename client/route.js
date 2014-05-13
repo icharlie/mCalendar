@@ -116,7 +116,7 @@ Router.map(function() {
     path: '/event/Create',
     data: function () {
       if (!Meteor.userId()) {
-        return this.reidrect('login');
+        return Router.go('login');
       }
       var event = $.extend({}, this.params);
       event.allDay = JSON.parse(event.allDay);
