@@ -24,6 +24,36 @@ body {
   display: none;
 }
 
+/* customize modal style */
+.modal-header {
+  background-color: #D8EDF7;
+  color: #3986AD;
+  border-radius: 5px 5px 0 0;
+}
+.modal-body {
+  padding: 5px;
+}
+
+.modal-body .form-group {
+  border-radius: 0px;
+  margin-bottom: 5px;
+}
+.modal-body input {
+  background: url('/imgs/calendar_icon.png') no-repeat 5px 8px;
+  padding-left: 25px;
+  border-radius: 0px;
+}
+.modal-body textarea#msg {
+  border-radius: 0px;
+  padding-left: 25px;
+  background: url('/imgs/attachment_icon.png') no-repeat 5px 8px;
+  height: 300px;
+  resize: vertical;
+}
+.modal-footer {
+  margin-top: 0px;
+}
+
 
 #account {
 	margin: 10px 0;

@@ -103,24 +103,39 @@ Router.map(function() {
       }
     }
   });
-  this.route('event', {
-    path: '/event/:_action',
+  this.route('eventNew', {
+    path: '/event/new',
+    action: function () {
+      if (!Meteor.userId()) {
+        return Router.go('login');
+      }
+      this.render('newEvent');
+    }
+  });
+  this.route('eventCreate', {
+    path: '/event/Create',
+    data: function () {
+      if (!Meteor.userId()) {
+        return this.reidrect('login');
+      }
+      var event = $.extend({}, this.params);
+      event.allDay = JSON.parse(event.allDay);
+      event.partnerIds = [];
+      event.ownerId = Meteor.userId();
+      Events.insert(event);
+      Router.go('/calendar');
+    }
+  });
+  this.route('eventUpdate', {
+    path: '/event/Update',
     data: function() {
       if (!Meteor.userId()) {
         return this.reidrect('login');
       }
       var event = $.extend({}, this.params);
       event.allDay = JSON.parse(event.allDay);
-      if (this.params._action === 'add') {
-        delete(event._action);
-        event.partnerIds = [];
-        event.ownerId = Meteor.userId();
-        Events.insert(event);
-      }
-      if (this.params._action === 'edit') {
-        delete(event._action);
-        Events.update({_id: event._id}, {$set: { title: event.title, desc: event.desc}});
-      }
+      delete(event._action);
+      Events.update({_id: event._id}, {$set: { title: event.title, desc: event.desc}});
       Router.go('/calendar');
     }
   });

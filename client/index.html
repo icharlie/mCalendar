@@ -223,10 +223,14 @@
       {{> emailModal}}
     {{/if}}
 </template>
+<!-- Advanced Add new event -->
+<template name="newEvent">
+  new Event
+</template>
 
 <template name='modal'>
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog modal-md">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -234,12 +238,10 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="title">Title</label>
-                        <input type="text" class="form-control" name="title" id="title" value="" />
+                        <input type="text" class="form-control" name="title" id="title" placeholder="Title" value="" />
                     </div>
                     <div class="form-group">
-                        <label for="desc">Description</label>
-                        <textarea name="desc" class="form-control" id=desc rows="8" cols="40"></textarea>
+                        <textarea name="desc" class="form-control" id="msg" rows="12" cols="40" placeholder="Message"></textarea>
                     </div>
 
                     <input type="hidden" name="date" id="eventStart" value="" />

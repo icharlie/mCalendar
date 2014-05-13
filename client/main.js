@@ -26,7 +26,7 @@ this.App.generateCalendar = function() {
         $('#deleteEvent').hide();
         $('#shareEvent').hide();
         $("#title").val("");
-        $("#desc").val("");
+        $("#msg").val("");
         $("#eventStart").val(start);
         $("#eventEnd").val(end);
         $("#eventAllDay").val(allDay);
@@ -38,9 +38,9 @@ this.App.generateCalendar = function() {
         var cacheSource = evt.source;
         delete evt.source;
         $("#title").val(evt.title);
-        $("#desc").val(evt.desc);
+        $("#msg").val(evt.desc);
         $('#myModal .modal-title').html('Edti Event');
-        $('#saveEvent').html('Edit');
+        $('#saveEvent').html('Update');
         $('#deleteEvent').show();
         $('#shareEvent').show();
         $("#current_evt_data").html(JSON.stringify(evt));

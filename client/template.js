@@ -46,19 +46,22 @@ Template.modal.events({
       var action = $("#current_evt_action").html();
       var event = void 0;
       var id = void 0;
+      var url;
       event = {};
       if (action === "edit") {
         event = JSON.parse($("#current_evt_data").html());
         event.title = $("#title").val();
-        event.desc = $("#desc").val();
+        event.desc = $("#msg").val();
+        url = '/event/Update'
       } else {
         event.start = $("#eventStart").val();
         event.end = $("#eventEnd").val();
         event.allDay = $("#eventAllDay").val();
         event.title = $("#title").val();
-        event.desc = $("#desc").val();
+        event.desc = $("#msg").val();
+        url = '/event/Create'
       }
-      var url = '/event/' + action + '?' + serialize(event);
+      url += '?' + serialize(event);
       Router.go(url);
       $("#myModal").modal("hide");
   },
