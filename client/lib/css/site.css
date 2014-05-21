@@ -38,23 +38,139 @@ body {
   border-radius: 0px;
   margin-bottom: 5px;
 }
-.modal-body input {
+input.event-title {
   background: url('/imgs/calendar_icon.png') no-repeat 5px 8px;
   padding-left: 25px;
   border-radius: 0px;
 }
-.modal-body textarea#msg {
+textarea.event-msg {
   border-radius: 0px;
   padding-left: 25px;
-  background: url('/imgs/attachment_icon.png') no-repeat 5px 8px;
+  background: url('/imgs/comments_icon.png') no-repeat 5px 8px;
   height: 300px;
   resize: vertical;
 }
 .modal-footer {
   margin-top: 0px;
+  padding: 5px;
+  border-top: 0px;
+}
+
+/* advanced event */
+.panel-body.advancedEvent {
+  padding: 5px;
+}
+input.event-address {
+  background: url('/imgs/address_icon.png') no-repeat 5px 8px;
+  padding-left: 25px;
+  border-radius: 0px;
+}
+input.event-start {
+  background: url('/imgs/clock_icon.png') no-repeat 5px 8px;
+  padding-left: 25px;
+  border-radius: 0px;
+}
+input.event-end {
+  background: url('/imgs/clock_icon.png') no-repeat 5px 8px;
+  padding-left: 25px;
+  border-radius: 0px;
+}
+
+input.event-sharedEmail {
+  background: url('/imgs/email_icon.png') no-repeat 5px 8px;
+  padding-left: 25px;
+  border-radius: 0px;
+}
+
+.form-group > .row .col-md-4{
+  padding-right: 0px;
+}
+
+@media (max-width: 767px) {
+  .form-group > .row .col-md-4{
+    padding: 5px 15px;
+  }
+}
+
+/* from http://lea.verou.me/2013/03/ios-6-switch-style-checkboxes-with-pure-css/ */
+/* = iphone style checkbox  = */
+input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+}
+/* Normal Track */
+input[type="checkbox"].ios-switch + div {
+  display: inline-block;
+  vertical-align: middle;
+  width: 40px;  height: 20px;
+  border: 1px solid rgba(0,0,0,.4);
+  border-radius: 999px;
+  background-color: rgba(0, 0, 0, 0.1);
+  -webkit-transition-duration: .4s;
+  -webkit-transition-property: background-color, box-shadow;
+  box-shadow: inset 0 0 0 0px rgba(0,0,0,0.4);
+}
+
+input[type="checkbox"].ios-switch:checked + div {
+  width: 40px;
+  background-position: 0 0;
+  background-color: #D9EDF7;
+  border: 1px solid #3596EE;
+  box-shadow: inset 0 0 0 10px rgba(217,237,247,1);
+}
+
+/* Normal Knob */
+input[type="checkbox"].ios-switch + div > div {
+  float: left;
+  width: 18px; height: 18px;
+  border-radius: inherit;
+  background: #ffffff;
+  -webkit-transition-timing-function: cubic-bezier(.54,1.85,.5,1);
+  -webkit-transition-duration: 0.4s;
+  -webkit-transition-property: transform, background-color, box-shadow;
+  -moz-transition-timing-function: cubic-bezier(.54,1.85,.5,1);
+  -moz-transition-duration: 0.4s;
+  -moz-transition-property: transform, background-color;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3), 0px 0px 0 1px rgba(0, 0, 0, 0.4);
+  pointer-events: none;
+}
+
+/* Checked Knob (Blue Style) */
+input[type="checkbox"].ios-switch:checked + div > div {
+  -webkit-transform: translate3d(21px, 0, 0);
+  -moz-transform: translate3d(20px, 0, 0);
+  background-color: #ffffff;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3), 0px 0px 0 1px rgba(8, 80, 172,1);
+}
+
+/* Switch code ends here, from now on it’s just bling for the demo page */
+
+label.ios-switch-label {
+  position: relative;
+  display: block;
+  padding: .8em;
+  border: 1px solid silver;
+  border-top-width: 0;
+  background: white;
+  font: bold 110% sans-serif;
+}
+
+label.ios-switch-label:first-of-type {
+  border-top-width: 1px;
+  border-radius: .6em .6em 0 0;
+}
+
+label.ios-switch-label:last-of-type {
+  border-radius: 0 0 .6em .6em;
+  box-shadow: 0 1px hsla(0,0%,100%,.8);
 }
 
 
+#map {
+  width: 100%;
+  height: 600px;
+}
+  /* = iphone style checkbox = */
 #account {
 	margin: 10px 0;
 }
@@ -85,3 +201,201 @@ body {
     text-align: center;
   }
 }
+
+/* = loading =*/
+#floatingBarsG {
+  position:relative;
+  width:44px;
+  height:55px;
+  margin: 0 auto;
+}
+.blockG {
+  position:absolute;
+  background-color:#FFFFFF;
+  width:7px;
+  height:17px;
+  -moz-border-radius:6px 6px 0 0;
+  -moz-transform:scale(0.4);
+  -moz-animation-name:fadeG;
+  -moz-animation-duration:1.52s;
+  -moz-animation-iteration-count:infinite;
+  -moz-animation-direction:linear;
+  -webkit-border-radius:6px 6px 0 0;
+  -webkit-transform:scale(0.4);
+  -webkit-animation-name:fadeG;
+  -webkit-animation-duration:1.52s;
+  -webkit-animation-iteration-count:infinite;
+  -webkit-animation-direction:linear;
+  -ms-border-radius:6px 6px 0 0;
+  -ms-transform:scale(0.4);
+  -ms-animation-name:fadeG;
+  -ms-animation-duration:1.52s;
+  -ms-animation-iteration-count:infinite;
+  -ms-animation-direction:linear;
+  -o-border-radius:6px 6px 0 0;
+  -o-transform:scale(0.4);
+  -o-animation-name:fadeG;
+  -o-animation-duration:1.52s;
+  -o-animation-iteration-count:infinite;
+  -o-animation-direction:linear;
+  border-radius:6px 6px 0 0;
+  transform:scale(0.4);
+  animation-name:fadeG;
+  animation-duration:1.52s;
+  animation-iteration-count:infinite;
+  animation-direction:linear;
+}
+#rotateG_01 {
+  left:0;
+  top:20px;
+  -moz-animation-delay:0.57s;
+  -moz-transform:rotate(-90deg);
+  -webkit-animation-delay:0.57s;
+  -webkit-transform:rotate(-90deg);
+  -ms-animation-delay:0.57s;
+  -ms-transform:rotate(-90deg);
+  -o-animation-delay:0.57s;
+  -o-transform:rotate(-90deg);
+  animation-delay:0.57s;
+  transform:rotate(-90deg);
+}
+#rotateG_02 {
+  left:6px;
+  top:7px;
+  -moz-animation-delay:0.76s;
+  -moz-transform:rotate(-45deg);
+  -webkit-animation-delay:0.76s;
+  -webkit-transform:rotate(-45deg);
+  -ms-animation-delay:0.76s;
+  -ms-transform:rotate(-45deg);
+  -o-animation-delay:0.76s;
+  -o-transform:rotate(-45deg);
+  animation-delay:0.76s;
+  transform:rotate(-45deg);
+}
+#rotateG_03 {
+  left:18px;
+  top:2px;
+  -moz-animation-delay:0.95s;
+  -moz-transform:rotate(0deg);
+  -webkit-animation-delay:0.95s;
+  -webkit-transform:rotate(0deg);
+  -ms-animation-delay:0.95s;
+  -ms-transform:rotate(0deg);
+  -o-animation-delay:0.95s;
+  -o-transform:rotate(0deg);
+  animation-delay:0.95s;
+  transform:rotate(0deg);
+}
+#rotateG_04 {
+  right:6px;
+  top:7px;
+  -moz-animation-delay:1.14s;
+  -moz-transform:rotate(45deg);
+  -webkit-animation-delay:1.14s;
+  -webkit-transform:rotate(45deg);
+  -ms-animation-delay:1.14s;
+  -ms-transform:rotate(45deg);
+  -o-animation-delay:1.14s;
+  -o-transform:rotate(45deg);
+  animation-delay:1.14s;
+  transform:rotate(45deg);
+}
+#rotateG_05 {
+  right:0;
+  top:20px;
+  -moz-animation-delay:1.3299999999999998s;
+  -moz-transform:rotate(90deg);
+  -webkit-animation-delay:1.3299999999999998s;
+  -webkit-transform:rotate(90deg);
+  -ms-animation-delay:1.3299999999999998s;
+  -ms-transform:rotate(90deg);
+  -o-animation-delay:1.3299999999999998s;
+  -o-transform:rotate(90deg);
+  animation-delay:1.3299999999999998s;
+  transform:rotate(90deg);
+}
+#rotateG_06 {
+  right:6px;
+  bottom:5px;
+  -moz-animation-delay:1.52s;
+  -moz-transform:rotate(135deg);
+  -webkit-animation-delay:1.52s;
+  -webkit-transform:rotate(135deg);
+  -ms-animation-delay:1.52s;
+  -ms-transform:rotate(135deg);
+  -o-animation-delay:1.52s;
+  -o-transform:rotate(135deg);
+  animation-delay:1.52s;
+  transform:rotate(135deg);
+}
+#rotateG_07 {
+  bottom:0;
+  left:18px;
+  -moz-animation-delay:1.7099999999999997s;
+  -moz-transform:rotate(180deg);
+  -webkit-animation-delay:1.7099999999999997s;
+  -webkit-transform:rotate(180deg);
+  -ms-animation-delay:1.7099999999999997s;
+  -ms-transform:rotate(180deg);
+  -o-animation-delay:1.7099999999999997s;
+  -o-transform:rotate(180deg);
+  animation-delay:1.7099999999999997s;
+  transform:rotate(180deg);
+}
+#rotateG_08 {
+  left:6px;
+  bottom:5px;
+  -moz-animation-delay:1.9s;
+  -moz-transform:rotate(-135deg);
+  -webkit-animation-delay:1.9s;
+  -webkit-transform:rotate(-135deg);
+  -ms-animation-delay:1.9s;
+  -ms-transform:rotate(-135deg);
+  -o-animation-delay:1.9s;
+  -o-transform:rotate(-135deg);
+  animation-delay:1.9s;
+  transform:rotate(-135deg);
+}
+@-moz-keyframes fadeG {
+  0% {
+      background-color:#1989ab
+  }
+  100% {
+      background-color:#FFFFFF
+  }
+}
+@-webkit-keyframes fadeG {
+  0% {
+      background-color:#1989ab
+  }
+  100% {
+      background-color:#FFFFFF
+  }
+}
+@-ms-keyframes fadeG {
+  0% {
+      background-color:#1989ab
+  }
+  100% {
+      background-color:#FFFFFF
+  }
+}
+@-o-keyframes fadeG {
+  0% {
+      background-color:#1989ab
+  }
+  100% {
+      background-color:#FFFFFF
+  }
+}
+@keyframes fadeG {
+  0% {
+      background-color:#1989ab
+  }
+  100% {
+      background-color:#FFFFFF
+  }
+}
+
+/* = loading =*/

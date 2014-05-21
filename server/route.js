@@ -23,6 +23,10 @@ RESTstop.add('event/add', {method: 'POST'}, function(){
   var end = this.params.end;
   var allDay = this.params.allDay;
   var ownerId = this.params.userId;
+  // advanced event fileds
+  var address = this.params.address;
+  var lat = this.params.lat;
+  var lng = this.params.lng;
   if (! title || ! desc || ! start || ! end || ! allDay) {
 	  return {
 	    is_loggedin: true,
@@ -38,7 +42,10 @@ RESTstop.add('event/add', {method: 'POST'}, function(){
   	end: new Date(end),
   	allDay: JSON.parse(allDay),
   	partnerIds: [],
-  	ownerId: ownerId
+  	ownerId: ownerId,
+    address: address,
+    lat: lat,
+    lng: lng
   };
   var eventId = Events.insert(evt);
 

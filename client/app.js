@@ -1,5 +1,4 @@
-
-this.App = {};
+if (!this.App) this.App = {};
 
 this.App.getEventsData = function() {
   var userId;
@@ -19,17 +18,13 @@ this.App.generateCalendar = function() {
       selectable: true,
       selectHelper: true,
       select: function (start, end, allDay) {
-        $("#current_evt_data").html();
-        $("#current_evt_action").html("add");
-        $('.modal-title').html('New Event');
-        $('#saveEvent').html('Add');
-        $('#deleteEvent').hide();
-        $('#shareEvent').hide();
-        $("#title").val("");
-        $("#msg").val("");
-        $("#eventStart").val(start);
-        $("#eventEnd").val(end);
-        $("#eventAllDay").val(allDay);
+        prepareModal('add', {
+          title: '',
+          desc: '',
+          start: start,
+          end: end,
+          allDay: allDay
+        });
         $("#myModal").modal();
       },
       editable: true,
@@ -37,14 +32,7 @@ this.App.generateCalendar = function() {
       eventClick: function(evt, jsEvt, view) {
         var cacheSource = evt.source;
         delete evt.source;
-        $("#title").val(evt.title);
-        $("#msg").val(evt.desc);
-        $('#myModal .modal-title').html('Edti Event');
-        $('#saveEvent').html('Update');
-        $('#deleteEvent').show();
-        $('#shareEvent').show();
-        $("#current_evt_data").html(JSON.stringify(evt));
-        $("#current_evt_action").html("edit");
+        prepareModal('edit', evt);
         $("#myModal").modal();
       },
       eventDrop: function( event, dayDelta, minuteDelta, allDay, revertFunc, jsEvent, ui, view){
@@ -61,6 +49,25 @@ this.App.generateCalendar = function() {
   }
   var viewName = Meteor.user().profile.calendarView || 'month';
   $('#calendar').fullCalendar('changeView', viewName);
+};
+
+var prepareModal = function(status, evt) {
+  if (status === 'add') {
+    $('#myModal .modal-title').html('New Event');
+    $('#saveEvent').html('Add');
+     $("#current_evt_data").html();
+    $("#current_evt_action").html("add");
+  } else {
+    $('#myModal .modal-title').html('Edti Event');
+    $('#saveEvent').html('Update');
+    $("#current_evt_data").html(JSON.stringify(evt));
+    $("#current_evt_action").html("edit");
+  }
+  $("#title").val(evt.title);
+  $("#msg").val(evt.desc);
+  $("#eventStart").val(evt.start);
+  $("#eventEnd").val(evt.end);
+  $("#eventAllDay").val(evt.allDay);
 };
 
 this.App.parseQueryString = function(queryString) {
@@ -80,7 +87,6 @@ this.App.parseQueryString = function(queryString) {
     return params;
   }
 };
-
 
 this.App.putPendingEventsIntoAccount = function(){
   if (Session.get('pendingEvents')) {
@@ -103,7 +109,7 @@ this.App.putPendingEventsIntoAccount = function(){
         Session.set('pendingEvents', null);
     }
   }
-}
+};
 
 this.App.login = function(params) {
   return Meteor.loginWithPassword(params.email, params.password, function(err) {
@@ -117,3 +123,16 @@ this.App.login = function(params) {
     }
   });
 };
+
+this.App.showMap = function(err, data) {
+    if (data.lbounds) {
+        App.map.fitBounds(data.lbounds);
+    } else if (data.latlng) {
+      if (App.mark) App.map.removeLayer(App.mark);
+      App.currentEvent.lat = data.latlng[0];
+      App.currentEvent.lng = data.latlng[1];
+      App.map.setView([data.latlng[0], data.latlng[1]], 13);
+      App.mark = L.marker([data.latlng[0], data.latlng[1]]).addTo(App.map);
+      App.mark.bindPopup(App.currentEvent.address);
+    }
+}

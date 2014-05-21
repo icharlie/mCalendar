@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>mCalendar</title>
     <link rel="icon" type="image/png" href="/imgs/calendar.png">
+    <script src='https://api.tiles.mapbox.com/mapbox.js/v1.6.3/mapbox.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox.js/v1.6.3/mapbox.css' rel='stylesheet' />
 </head>
 
 
@@ -223,14 +225,68 @@
       {{> emailModal}}
     {{/if}}
 </template>
-<!-- Advanced Add new event -->
+
 <template name="newEvent">
-  new Event
+    <div class="col-md-4">
+        <div class="panel panel-info">
+            <div class="panel-heading">New Event</div>
+            <div class="panel-body advancedEvent">
+                <div class="form-group">
+                    <input type="text" class="form-control event-title" name="title" id="title" placeholder="Title" value="" />
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control event-address" name="address" id="address" placeholder="Address" value="" />
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                    <div class="col-md-4 col-sm-4">
+                        <input type="text" class="form-control event-start" placeholder="00:00" name="eventStart" id="eventStart" disabled="true">
+                    </div>
+                    <div class="col-md-4 col-sm-4">
+                        <input type="text" class="form-control event-end" placeholder="00:00" name="eventEnd" id="eventEnd" disabled="true">
+                    </div>
+                    <div class="col-md-4 col-sm-4">
+                        <label clas="ios-switch-label">
+                            <input type="checkbox" class="ios-switch" value="true" name="allDay" id="allDay" checked>
+                            <div><div></div></div>
+                            All Day
+                        </label>
+                    </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <textarea name="desc" class="form-control event-msg" id="msg" rows="12" cols="30" placeholder="Message"></textarea>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control event-sharedEmail" name="sharedEmail" id="sharedEmail" placeholder="Email" value="" disabled="true" />
+                </div>
+                <label clas="ios-switch-label">
+                    <input type="checkbox" class="ios-switch" id="share">
+                    <div><div></div></div>
+                    Share
+                </label>
+                <button type="button" class="btn btn-primary pull-right" id="saveEvent">Add</button>
+                {{> eventInfoFields}}
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8">
+        {{> loading}}
+        <div id="map"></div>
+    </div>
+</template>
+
+<template name="eventInfoFields">
+    <input type="hidden" name="date" id="eventStart" value="" />
+    <input type="hidden" name="date" id="eventEnd" value="" />
+    <input type="hidden" name="date" id="eventAllDay" value="" />
+    <div id="current_evt_data" class="hidden-data"></div>
+    <div id="current_evt_action" class="hidden-data"></div>
 </template>
 
 <template name='modal'>
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-md">
+        <div class="modal-dialog modal-sm">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -238,23 +294,16 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <input type="text" class="form-control" name="title" id="title" placeholder="Title" value="" />
+                        <input type="text" class="form-control event-title" name="title" id="title" placeholder="Title" value="" />
                     </div>
                     <div class="form-group">
-                        <textarea name="desc" class="form-control" id="msg" rows="12" cols="40" placeholder="Message"></textarea>
+                        <textarea name="desc" class="form-control event-msg" id="msg" rows="12" cols="30" placeholder="Message"></textarea>
                     </div>
-
-                    <input type="hidden" name="date" id="eventStart" value="" />
-                    <input type="hidden" name="date" id="eventEnd" value="" />
-                    <input type="hidden" name="date" id="eventAllDay" value="" />
-                    <div id="current_evt_data" class="hidden-data"></div>
-                    <div id="current_evt_action" class="hidden-data"></div>
+                    {{> eventInfoFields}}
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal" id="deleteEvent">Delete</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-info" id="shareEvent">Share</button>
-                    <button type="button" class="btn btn-primary" id="saveEvent">Save</button>
+                    <button type="button" class="btn btn-danger pull-left" data-dismiss="modal" id="deleteEvent">Delete</button>
+                    <button type="button" class="btn btn-primary" id="saveEvent">Add</button>
                 </div>
             </div> <!-- /.modal-content -->
         </div> <!-- /.modal-dialog -->
@@ -324,7 +373,24 @@
 </template>
 
 <template name="loading">
-  <h4>Loading</h4>
+    <div id="floatingBarsG">
+        <div class="blockG" id="rotateG_01">
+        </div>
+        <div class="blockG" id="rotateG_02">
+        </div>
+        <div class="blockG" id="rotateG_03">
+        </div>
+        <div class="blockG" id="rotateG_04">
+        </div>
+        <div class="blockG" id="rotateG_05">
+        </div>
+        <div class="blockG" id="rotateG_06">
+        </div>
+        <div class="blockG" id="rotateG_07">
+        </div>
+        <div class="blockG" id="rotateG_08">
+        </div>
+    </div>
 </template>
 
 <template name="home">

@@ -20,14 +20,88 @@ Template.navBar.events({
   }
 });
 
-Template.calendar.rendered = function() {App.generateCalendar();
-  $('#myModal').on('show', function() {
-    $('#myModal').removeClass('hidden');
-  });
-  $('#myModal').on('hdie', function() {
-    $('#myModal').addClass('hidden');
-  });
+Template.calendar.rendered = function() {
+  if (Meteor.userId()) {
+    App.generateCalendar();
+    $('#myModal').on('show', function() {
+      $('#myModal').removeClass('hidden');
+    });
+    $('#myModal').on('hdie', function() {
+      $('#myModal').addClass('hidden');
+    });
+  }
 };
+
+Template.newEvent.rendered = function() {
+  App.geocoder = L.mapbox.geocoder(App.mapboxApiKey);
+  var acceptGeo = function(p){
+    App.map = L.mapbox.map('map');
+    L.mapbox.tileLayer(App.mapboxApiKey)
+    .on('ready', function () {
+      $('#floatingBarsG').remove();
+    }).addTo(App.map);
+    App.map.setView([p.coords.latitude, p.coords.longitude],13);
+  };
+  var defaultMapView = function() {
+    App.map = L.mapbox.map('map');
+    L.mapbox.tileLayer(App.mapboxApiKey)
+    .on('ready', function () {
+      $('#floatingBarsG').remove();
+    }).addTo(App.map);
+  };
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(acceptGeo, defaultMapView);
+  } else {
+    defaultMapView();
+  }
+};
+
+Template.newEvent.loadingMap = function() {
+  return Session.set('loadingMap', true);
+};
+
+Template.newEvent.events({
+  'click #share': function(e, t) {
+    if(e.target.checked) {
+      $('#sharedEmail').prop('disabled', false);
+    } else {
+      $('#sharedEmail').prop('disabled', true);
+    }
+  },
+  'click #allDay': function(e, t) {
+    if(e.target.checked) {
+      $('#eventStart').prop('disabled', true);
+      $('#eventEnd').prop('disabled', true);
+    } else {
+      $('#eventStart').prop('disabled', false);
+      $('#eventEnd').prop('disabled', false);
+    }
+  },
+  'keypress input#address': function(e, t) {
+    if (e.charCode == 13) {
+      if (e.target.value === '')
+        $(event.target.parentNode).addClass('has-error');
+      else
+        $(event.target.parentNode).removeClass('has-error');
+      if (!App.currentEvent)
+        App.currentEvent = {};
+      App.currentEvent.address = e.target.value;
+      App.geocoder.query(App.currentEvent.address, App.showMap);
+      e.stopPropagation();
+      return false;
+    }
+  },
+  'click #saveEvent': function(e, t) {
+    ["title","msg"].map(removeHasError);
+    ["title","msg"].map(checkEmpty);
+    if (!$('.form-group.has-error').length) {
+      // TODO: how to pass date time data.
+      var url = '/event/Create' + '?' + $('input.form-control, textarea.form-control, input:checkbox').serialize();
+      Router.go(url);
+    }
+    e.preventDefault();
+  }
+});
 
 Template.calendar.events({
   'click .fc-button-agendaDay': function() {
@@ -43,6 +117,12 @@ Template.calendar.events({
 
 Template.modal.events({
   'click #saveEvent': function(e, t) {
+      ["title","msg"].map(removeHasError);
+      ["title","msg"].map(checkEmpty);
+      if (!$('.form-group.has-error').length){
+        e.preventDefault();
+        return;
+      }
       var action = $("#current_evt_action").html();
       var event = void 0;
       var id = void 0;
@@ -153,4 +233,18 @@ var serialize = function(obj) {
       str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
     }
     return str.join("&");
+};
+
+var hasError = function (id) {
+
+}
+
+var checkEmpty = function(id) {
+  if ($('#'+id).val() === '') {
+    $('#'+id).parent().addClass('has-error')
+  }
+};
+
+var removeHasError = function (id) {
+  $('#'+id).parent().removeClass('has-error');
 };
