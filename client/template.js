@@ -54,6 +54,8 @@ Template.newEvent.rendered = function() {
   } else {
     defaultMapView();
   }
+  $('#date').datepicker({dateFormat: 'mm-dd-yy', showOn: "button"});
+  $('.ui-datepicker-trigger').addClass('btn btn-default');
 };
 
 Template.newEvent.loadingMap = function() {
@@ -61,6 +63,9 @@ Template.newEvent.loadingMap = function() {
 };
 
 Template.newEvent.events({
+  'click #calender-btn': function (e, t) {
+    $('#date').datepicker('show');
+  },
   'click #share': function(e, t) {
     if(e.target.checked) {
       $('#sharedEmail').prop('disabled', false);
@@ -72,9 +77,11 @@ Template.newEvent.events({
     if(e.target.checked) {
       $('#eventStart').prop('disabled', true);
       $('#eventEnd').prop('disabled', true);
+      e.target.value = 'true';
     } else {
       $('#eventStart').prop('disabled', false);
       $('#eventEnd').prop('disabled', false);
+      e.target.value = 'false';
     }
   },
   'keypress input#address': function(e, t) {
@@ -95,8 +102,21 @@ Template.newEvent.events({
     ["title","msg"].map(removeHasError);
     ["title","msg"].map(checkEmpty);
     if (!$('.form-group.has-error').length) {
-      // TODO: how to pass date time data.
-      var url = '/event/Create' + '?' + $('input.form-control, textarea.form-control, input:checkbox').serialize();
+      var lat, lng;
+      if (App.currentEvent) {
+        lat = App.currentEvent.lat;
+        lat = App.currentEvent.lng;
+      } else {
+        App.currentEvent = {};
+      }
+      [].reduce.call($('input.form-control, textarea.form-control, input:checkbox'), function(preEle, curEle, index, array){
+        if ($(preEle).attr('name'))
+          App.currentEvent[$(preEle).attr('name')] = $(preEle).val();
+        if ($(curEle).attr('name'))
+          App.currentEvent[$(curEle).attr('name')] = $(curEle).val();
+      });
+      var url = '/event/create' + '?' + serialize(App.currentEvent);
+      console.log(url);
       Router.go(url);
     }
     e.preventDefault();
@@ -119,7 +139,7 @@ Template.modal.events({
   'click #saveEvent': function(e, t) {
       ["title","msg"].map(removeHasError);
       ["title","msg"].map(checkEmpty);
-      if (!$('.form-group.has-error').length){
+      if ($('.form-group.has-error').length){
         e.preventDefault();
         return;
       }
@@ -237,7 +257,7 @@ var serialize = function(obj) {
 
 var hasError = function (id) {
 
-}
+};
 
 var checkEmpty = function(id) {
   if ($('#'+id).val() === '') {

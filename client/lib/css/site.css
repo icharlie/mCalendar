@@ -1,7 +1,7 @@
 /* CSS declarations go here */
 
 body {
-  padding-top: 60px;
+  padding-top: 40px;
   padding-bottom: 40px;
 }
 
@@ -38,8 +38,25 @@ body {
   border-radius: 0px;
   margin-bottom: 5px;
 }
-input.event-title {
+input.event-date {
   background: url('/imgs/calendar_icon.png') no-repeat 5px 8px;
+  background-color: #fff !important;
+  padding-left: 25px;
+  border-radius: 0px;
+}
+.form-group {
+  position: relative;
+}
+
+.ui-datepicker-trigger {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  height: 34px;
+}
+
+input.event-title {
+  background: url('/imgs/title_icon.png') no-repeat 5px 8px;
   padding-left: 25px;
   border-radius: 0px;
 }

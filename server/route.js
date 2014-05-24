@@ -17,27 +17,37 @@ RESTstop.add('event/add', {method: 'POST'}, function(){
   if (! this.user) {
     return {is_loggedin: false};
   }
-  var title = this.params.title;
-  var desc = this.params.desc;
-  var start = this.params.start;
-  var end = this.params.end;
-  var allDay = this.params.allDay;
-  var ownerId = this.params.userId;
-  // advanced event fileds
-  var address = this.params.address;
-  var lat = this.params.lat;
-  var lng = this.params.lng;
-  if (! title || ! desc || ! start || ! end || ! allDay) {
+  if (checkRequireField(this.params)) {
 	  return {
 	    is_loggedin: true,
 	    err: "Please provide enough event information. We need title, desc, start, end, allDay",
 	    data: this.params
 	  };
   }
-  // TODO: check date format
+  var title = this.params.title;
+  var desc = this.params.desc;
+  var start = this.params.start;
+  var end = this.params.end;
+  var allDay = this.params.allDay;
+  var date = this.params.date;
+  var ownerId = this.params.userId;
+  // advanced event fileds
+  var address = this.params.address;
+  var lat = this.params.lat;
+  var lng = this.params.lng;
+  if (allDay) {
+    if (start || end) {
+      start = this.params.date;
+      start = this.params.date;
+    }
+  } else {
+      start = this.params.date + ' '+start;
+      end = this.params.date + ' '+end;
+  }
   var evt = {
   	title: title,
   	desc: desc,
+    date: date,
   	start: new Date(start),
   	end: new Date(end),
   	allDay: JSON.parse(allDay),
@@ -54,3 +64,12 @@ RESTstop.add('event/add', {method: 'POST'}, function(){
     eventId: eventId
   };
 });
+
+var checkRequireField = function (params) {
+  if (! params.title || ! params.desc)
+    return false;
+  if (!params.allDay && (! params.start || ! params.end))
+    return false;
+  if (params.allDay && params.date)
+    return false;
+}

@@ -14,7 +14,7 @@
 </body>
 
 <template name="main">
-    {{> navBar}}
+  {{> navBar}}
   <div class="container">
         <div class="row">
             <div class="col-lg-12">
@@ -219,6 +219,7 @@
 
 <template name="calendar">
     {{#if currentUser}}
+      <a class="btn btn-primary" href="{{pathFor 'eventNew'}}">New Event!</a>
       <div id='calendar'>
       </div>
       {{> modal}}
@@ -232,6 +233,9 @@
             <div class="panel-heading">New Event</div>
             <div class="panel-body advancedEvent">
                 <div class="form-group">
+                    <input type="text" class="form-control event-date" name="date" id="date" value="" readonly />
+                </div>
+                <div class="form-group">
                     <input type="text" class="form-control event-title" name="title" id="title" placeholder="Title" value="" />
                 </div>
                 <div class="form-group">
@@ -240,10 +244,10 @@
                 <div class="form-group">
                     <div class="row">
                     <div class="col-md-4 col-sm-4">
-                        <input type="text" class="form-control event-start" placeholder="00:00" name="eventStart" id="eventStart" disabled="true">
+                        <input type="text" class="form-control event-start" placeholder="00:00" name="start" id="eventStart" disabled="true">
                     </div>
                     <div class="col-md-4 col-sm-4">
-                        <input type="text" class="form-control event-end" placeholder="00:00" name="eventEnd" id="eventEnd" disabled="true">
+                        <input type="text" class="form-control event-end" placeholder="00:00" name="end" id="eventEnd" disabled="true">
                     </div>
                     <div class="col-md-4 col-sm-4">
                         <label clas="ios-switch-label">

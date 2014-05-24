@@ -109,19 +109,30 @@ Router.map(function() {
       if (!Meteor.userId()) {
         return Router.go('login');
       }
+      Session.set('currentView', 'newEvent');
       this.render('newEvent');
     }
   });
   this.route('eventCreate', {
-    path: '/event/Create',
+    path: '/event/create',
     data: function () {
       if (!Meteor.userId()) {
         return Router.go('login');
       }
       var event = $.extend({}, this.params);
-      event.allDay = JSON.parse(event.allDay);
+      if (event.allDay)
+        event.allDay = JSON.parse(event.allDay);
       event.partnerIds = [];
       event.ownerId = Meteor.userId();
+      if (event.allDay) {
+        if (event.start || event.end) {
+          event.start = event.date;
+          event.end = event.date;
+        }
+      } else {
+          event.start = event.date + ' '+ event.start;
+          event.end = event.date + ' '+ event.end;
+      }
       Events.insert(event);
       Router.go('/calendar');
     }
