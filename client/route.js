@@ -124,8 +124,9 @@ Router.map(function() {
         event.allDay = JSON.parse(event.allDay);
       event.partnerIds = [];
       event.ownerId = Meteor.userId();
+      event.date = event.date ? new Date(event.date) : new Date();
       if (event.allDay) {
-        if (event.start || event.end) {
+        if (!event.start && !event.end && event.date) {
           event.start = event.date;
           event.end = event.date;
         }

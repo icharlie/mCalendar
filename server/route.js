@@ -26,10 +26,9 @@ RESTstop.add('event/add', {method: 'POST'}, function(){
   }
   var title = this.params.title;
   var desc = this.params.desc;
-  var start = this.params.start;
-  var end = this.params.end;
+  var start = this.params.start ? new Date(this.params.start) : new Data();
+  var end = this.params.end ? new Date(this.params.end) : new Data();
   var allDay = this.params.allDay;
-  var date = this.params.date;
   var ownerId = this.params.userId;
   // advanced event fileds
   var address = this.params.address;
@@ -48,8 +47,8 @@ RESTstop.add('event/add', {method: 'POST'}, function(){
   	title: title,
   	desc: desc,
     date: date,
-  	start: new Date(start),
-  	end: new Date(end),
+  	start: start,
+  	end: end,
   	allDay: JSON.parse(allDay),
   	partnerIds: [],
   	ownerId: ownerId,

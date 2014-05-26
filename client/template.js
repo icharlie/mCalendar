@@ -152,14 +152,14 @@ Template.modal.events({
         event = JSON.parse($("#current_evt_data").html());
         event.title = $("#title").val();
         event.desc = $("#msg").val();
-        url = '/event/Update'
+        url = '/event/update'
       } else {
         event.start = $("#eventStart").val();
         event.end = $("#eventEnd").val();
         event.allDay = $("#eventAllDay").val();
         event.title = $("#title").val();
         event.desc = $("#msg").val();
-        url = '/event/Create'
+        url = '/event/create'
       }
       url += '?' + serialize(event);
       Router.go(url);

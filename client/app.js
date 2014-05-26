@@ -51,25 +51,6 @@ this.App.generateCalendar = function() {
   $('#calendar').fullCalendar('changeView', viewName);
 };
 
-var prepareModal = function(status, evt) {
-  if (status === 'add') {
-    $('#myModal .modal-title').html('New Event');
-    $('#saveEvent').html('Add');
-     $("#current_evt_data").html();
-    $("#current_evt_action").html("add");
-  } else {
-    $('#myModal .modal-title').html('Edti Event');
-    $('#saveEvent').html('Update');
-    $("#current_evt_data").html(JSON.stringify(evt));
-    $("#current_evt_action").html("edit");
-  }
-  $("#title").val(evt.title);
-  $("#msg").val(evt.desc);
-  $("#eventStart").val(evt.start);
-  $("#eventEnd").val(evt.end);
-  $("#eventAllDay").val(evt.allDay);
-};
-
 this.App.parseQueryString = function(queryString) {
   var aux, ele, o, params, _i, _len, _ref;
   if (queryString) {
@@ -136,3 +117,22 @@ this.App.showMap = function(err, data) {
       App.mark.bindPopup(App.currentEvent.address);
     }
 }
+
+var prepareModal = function(status, evt) {
+  if (status === 'add') {
+    $('#myModal .modal-title').html('New Event');
+    $('#saveEvent').html('Add');
+     $("#current_evt_data").html();
+    $("#current_evt_action").html("add");
+  } else {
+    $('#myModal .modal-title').html('Edti Event');
+    $('#saveEvent').html('Update');
+    $("#current_evt_data").html(JSON.stringify(evt));
+    $("#current_evt_action").html("edit");
+  }
+  $("#title").val(evt.title);
+  $("#msg").val(evt.desc);
+  $("#eventStart").val(evt.start);
+  $("#eventEnd").val(evt.end);
+  $("#eventAllDay").val(evt.allDay);
+};
