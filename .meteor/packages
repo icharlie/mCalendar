@@ -6,7 +6,9 @@
 standard-app-packages
 accounts-base
 email
-iron-router
-blaze-layout
 accounts-password
-reststop2
+moment
+iron:router
+http
+accounts-meteor-developer
+

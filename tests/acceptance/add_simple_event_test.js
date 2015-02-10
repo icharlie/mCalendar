@@ -3,7 +3,6 @@
  * email: mcalendar@mailinator.com
  * pass: 123456
  */
-
 casper.options.viewportSize = {width: 1440, height: 600};
 
 casper.test.begin('mCalendar', function suite(test) {
@@ -36,7 +35,7 @@ casper.test.begin('mCalendar', function suite(test) {
     });
     // open modal to create a new event.
     casper.waitUntilVisible('#myModal[aria-hidden="false"]', function () {
-        this.echo('see the modal!', 'INFO');
+        this.echo('See the modal!', 'INFO');
         test.assertExists('input#title', 'Should see title input field')
         test.assertExists('textarea#msg', 'Should see message textarea')
     });

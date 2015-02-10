@@ -38,31 +38,29 @@ body {
   border-radius: 0px;
   margin-bottom: 5px;
 }
-input.event-date {
-  background: url('/imgs/calendar_icon.png') no-repeat 5px 8px;
-  background-color: #fff !important;
-  padding-left: 25px;
-  border-radius: 0px;
-}
+
 .form-group {
   position: relative;
 }
 
-.ui-datepicker-trigger {
-  position: absolute;
-  top: 0px;
-  right: 0px;
-  height: 34px;
+.event-input {
+  padding-left: 25px;
+  border-radius: 0px;
 }
 
-input.event-title {
-  background: url('/imgs/title_icon.png') no-repeat 5px 8px;
-  padding-left: 25px;
-  border-radius: 0px;
+.event-date {
+  background: url('/imgs/calendar_icon.png') no-repeat 5px 8px;
+  background-color: #fff !important;
 }
-textarea.event-msg {
-  border-radius: 0px;
-  padding-left: 25px;
+
+.event-date:hover {
+  cursor: pointer;
+}
+
+.event-title {
+  background: url('/imgs/title_icon.png') no-repeat 5px 8px;
+}
+.event-msg {
   background: url('/imgs/comments_icon.png') no-repeat 5px 8px;
   height: 300px;
   resize: vertical;
@@ -77,26 +75,17 @@ textarea.event-msg {
 .panel-body.advancedEvent {
   padding: 5px;
 }
-input.event-address {
+.event-address {
   background: url('/imgs/address_icon.png') no-repeat 5px 8px;
-  padding-left: 25px;
-  border-radius: 0px;
 }
-input.event-start {
+.event-start {
   background: url('/imgs/clock_icon.png') no-repeat 5px 8px;
-  padding-left: 25px;
-  border-radius: 0px;
 }
-input.event-end {
+.event-end {
   background: url('/imgs/clock_icon.png') no-repeat 5px 8px;
-  padding-left: 25px;
-  border-radius: 0px;
 }
-
-input.event-sharedEmail {
+.event-sharedEmail {
   background: url('/imgs/email_icon.png') no-repeat 5px 8px;
-  padding-left: 25px;
-  border-radius: 0px;
 }
 
 .form-group > .row .col-md-4{

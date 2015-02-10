@@ -1,179 +1,108 @@
 // client
 var deserialize = function(str) {
-  var data = {};
-  var params = str.split('&');
-  var _p;
-  for(var p in params) {
-    _p = params[p].split('=');
-    data[_p[0]] = _p[1];
-  }
-  return data;
+    var data = {};
+    var params = str.split('&');
+    var _p;
+    for(var p in params) {
+        _p = params[p].split('=');
+        data[_p[0]] = _p[1];
+    }
+    return data;
 };
 
 var emailTempate = function(event) {
-  return '<html>'+
-    '<head>'+
+    return '<html>'+
+        '<head>'+
         '<title>Email From TOM</title>'+
-    '</head>'+
-    '<body>'+
+        '</head>'+
+        '<body>'+
         'Click <a href="'+Meteor.absoluteUrl('event') +'/add/'+ event._id +'">'+ event.title +'</a> to add this event into your calendar.'+
-    '</body>'+
-  '</html>';
+        '</body>'+
+        '</html>';
 };
 
 var putPendingEvents = function(eventId) {
-  var pendingEvents = Session.get('pendingEvents');
-  if (!pendingEvents)
-    pendingEvents = [];
-  else
-    pendingEvents = JSON.parse(pendingEvents);
-  pendingEvents.push(eventId);
-  Session.set('pendingEvents', JSON.stringify(pendingEvents));
+    var pendingEvents = Session.get('pendingEvents');
+    if (!pendingEvents)
+        pendingEvents = [];
+    else
+        pendingEvents = JSON.parse(pendingEvents);
+    pendingEvents.push(eventId);
+    Session.set('pendingEvents', JSON.stringify(pendingEvents));
 };
 
 
 Router.configure({
-  layoutTemplate: 'main',
-  notFoundTemplate: 'notFound'
+    layoutTemplate: 'main',
+    notFoundTemplate: 'notFound'
 });
 
 Router.map(function() {
-  this.route('home', {
-    path: '/',
-    action: function() {
-      Session.set('currentView', 'home');
-      this.render('home');
-    }
-  });
-  this.route('about', {
-    path: '/about',
-    action: function() {
-      Session.set('currentView', 'about');
-      this.render('about');
-    }
-  });
-  this.route('calendar', {
-    waitOn: function() {
-      return Meteor.subscribe("events");
-    },
-    action: function() {
-      if (this.ready()) {
-        if (Meteor.user()) {
-          Session.set('currentView', 'calendar');
-          this.render('calendar');
-        } else {
-          Router.go('login');
+    this.route('home', {
+        path: '/',
+        action: function() {
+            Session.set('currentView', 'home');
+            this.render('home');
         }
-      } else {
-        this.render('loading');
-      }
-    },
-    onData: function() {
-      App.generateCalendar();
-    }
-  });
-  this.route('login', {
-    layoutTemplate: 'main',
-    template: 'loginForm',
-    action: function() {
-      if (Meteor.userId()) {
-        return Router.go('calendar');
-      } else {
-        Session.set('currentView', 'login');
-        return this.render('loginForm');
-      }
-    }
-  });
-  this.route('event', {
-    path: '/event/add/:id',
-    waitOn: function() {
-      return Meteor.subscribe("events");
-    },
-    action: function() {
-      if (!Meteor.userId()) {
-        putPendingEvents(this.params.id)
-        return Router.go('login');
-      }
-      if (this.ready()) {
-        putPendingEvents(this.params.id)
-        App.putPendingEventsIntoAccount();
-        Router.go('/calendar');
-      } else {
-        this.render('loading');
-      }
-    }
-  });
-  this.route('eventNew', {
-    path: '/event/new',
-    action: function () {
-      if (!Meteor.userId()) {
-        return Router.go('login');
-      }
-      Session.set('currentView', 'newEvent');
-      this.render('newEvent');
-    }
-  });
-  this.route('eventCreate', {
-    path: '/event/create',
-    data: function () {
-      if (!Meteor.userId()) {
-        return Router.go('login');
-      }
-      var event = $.extend({}, this.params);
-      if (event.allDay)
-        event.allDay = JSON.parse(event.allDay);
-      event.partnerIds = [];
-      event.ownerId = Meteor.userId();
-      event.date = event.date ? new Date(event.date) : new Date();
-      if (event.allDay) {
-        if (!event.start && !event.end && event.date) {
-          event.start = event.date;
-          event.end = event.date;
+    });
+    this.route('about', {
+        path: '/about',
+        action: function() {
+            Session.set('currentView', 'about');
+            this.render('about');
         }
-      } else {
-          event.start = event.date + ' '+ event.start;
-          event.end = event.date + ' '+ event.end;
-      }
-      Events.insert(event);
-      Router.go('/calendar');
-    }
-  });
-  this.route('eventUpdate', {
-    path: '/event/Update',
-    data: function() {
-      if (!Meteor.userId()) {
-        return this.reidrect('login');
-      }
-      var event = $.extend({}, this.params);
-      event.allDay = JSON.parse(event.allDay);
-      delete(event._action);
-      Events.update({_id: event._id}, {$set: { title: event.title, desc: event.desc}});
-      Router.go('/calendar');
-    }
-  });
-  this.route('share', {
-    path: '/share/:eventId',
-    action: function() {
-      if (!Meteor.user()) {
-        Router.go('/login');
-      }
+    });
+    this.route('calendar', {
+        waitOn: function() {
+            return Meteor.subscribe("events");
+        },
+        action: function() {
+            if (this.ready()) {
+                if (Meteor.user()) {
+                    Session.set('currentView', 'calendar');
+                    this.render('calendar');
+                } else {
+                    Router.go('login');
+                }
+            } else {
+                this.render('loading');
+            }
+        },
+        onData: function() {
+            App.generateCalendar();
+        }
+    });
+    this.route('eventNew', {
+        path: '/eventNew'
+    });
+    this.route('login', {
+        layoutTemplate: 'main',
+        template: 'loginForm',
+        action: function() {
+            if (Meteor.userId()) {
+                return Router.go('calendar');
+            } else {
+                Session.set('currentView', 'login');
+                return this.render('loginForm');
+            }
+        }
+    });
+    this.route('profile',{
+        path: '/profile/:_id',
+        waitOn: function () {
+            return Meteor.subscribe("users");
+        }
+    });
 
-      Events.update({_id: this.params.eventId},{$addToSet: {pendingEmail: this.params.to}});
-      var event = Events.find({"_id":this.params.eventId}).fetch()[0];
-      if (event) {
-        var from = Meteor.user().emails[0].address;
-        Meteor.call('sendShareEmail', {
-          from: from,
-          to: this.params.to,
-          subject: 'Someone shares an event',
-          html: emailTempate(event)
-        });
-      }
-      Router.go('/calendar');
-    }
-  });
-  this.route('notFound', {
-    path: '*',
-    layoutTemplate: ''
-  }); // 404
+    this.route('tom', {
+        path: '/tom',
+        waitOn: function () {
+            return Meteor.subscribe("users");
+        }
+    });
+
+    this.route('notFound', {
+        path: '*',
+        layoutTemplate: ''
+    }); // 404
 });
