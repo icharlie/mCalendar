@@ -37,10 +37,14 @@ Template.calendar.rendered = function() {
 };
 
 Template.eventNew.rendered = function() {
-  App.geocoder = L.mapbox.geocoder(App.mapboxApiKey);
+  App.geocoder = L.mapbox.geocoder('mapbox.places', {
+    accessToken: App.mapboxApiKey
+  });
   var acceptGeo = function(p){
     App.map = L.mapbox.map('map');
-    L.mapbox.tileLayer(App.mapboxApiKey)
+    L.mapbox.tileLayer(App.mapboxMapId, {
+      accessToken: App.mapboxApiKey
+    })
     .on('ready', function () {
       $('#floatingBarsG').remove();
     }).addTo(App.map);

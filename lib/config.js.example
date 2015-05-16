@@ -11,5 +11,6 @@ Meteor.startup(function () {
     }
     if (Meteor.isClient) {
         this.App.mapboxApiKey = 'MAPBOX_APIKEY'
+        this.App.mapboxMapId = 'MAPBOX_PROJECT_MAP_ID';
     }
 });
