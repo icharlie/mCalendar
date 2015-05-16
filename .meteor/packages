@@ -7,8 +7,9 @@ standard-app-packages
 accounts-base
 email
 accounts-password
-moment
 iron:router
 http
 accounts-meteor-developer
 
+twbs:bootstrap
+momentjs:moment
