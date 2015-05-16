@@ -9,8 +9,18 @@ Router.route('events', function(){
 });
 
 
+Router.route('/user/:user_id', function() {
+  if (this.user) {
+    return {
+      is_loggedin: true,
+      user: this.user
+    }
+  }
+  return {is_loggedin: false};
+});
+
+
 Router.route('/event/create').post(function(){
-    console.log('create');
     if (! this.user) {
         return {is_loggedin: false};
     }

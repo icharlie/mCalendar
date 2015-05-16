@@ -1,504 +1,507 @@
 <head>
 
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>mCalendar</title>
-    <link rel="icon" type="image/png" href="/imgs/calendar.png">
-    <script src='https://api.tiles.mapbox.com/mapbox.js/v2.1.9/mapbox.js'></script>
-    <link href='https://api.tiles.mapbox.com/mapbox.js/v2.1.9/mapbox.css' rel='stylesheet' />
-    <link rel="stylesheet" href="/css/style.css" type="text/css" media="screen" title="main" charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>mCalendar</title>
+	<link rel="icon" type="image/png" href="/imgs/calendar.png">
+	<script src='https://api.tiles.mapbox.com/mapbox.js/v2.1.9/mapbox.js'></script>
+	<link href='https://api.tiles.mapbox.com/mapbox.js/v2.1.9/mapbox.css' rel='stylesheet' />
+	<link rel="stylesheet" href="/css/style.css" type="text/css" media="screen" title="main" charset="utf-8">
 </head>
 
 <body>
 </body>
 
 <template name="main">
-  {{> navBar}}
-  <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                {{> yield}}
-             </div>
-        </div>
-  </div>
+	{{> navBar}}
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12">
+				{{> yield}}
+			</div>
+		</div>
+	</div>
 </template>
 
 <template name="navBar">
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <!-- You'll want to use a responsive image option so this logo looks good on devices - I recommend using something like retina.js (do a quick Google search for it and you'll find it) -->
-                <a class="navbar-brand logo-nav" href="{{pathFor 'home'}}">
-                    <img src="/imgs/calendar.png">
-                </a>
-            </div>
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<!-- You'll want to use a responsive image option so this logo looks good on devices - I recommend using something like retina.js (do a quick Google search for it and you'll find it) -->
+				<a class="navbar-brand logo-nav" href="{{pathFor 'home'}}">
+					<img src="/imgs/calendar.png">
+				</a>
+			</div>
 
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse navbar-ex1-collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="{{pathFor 'home'}}">Home</a>
-                    </li>
-                        {{#if isNotCalendarView}}
-                            <li>
-                                <a href="{{pathFor 'calendar'}}">My Calendar</a>
-                            </li>
-                        {{/if}}
-                        {{#if currentUser}}
-                        <li class="dropdown">
-                            <a href="#" data-toggle="dropdown">Account</a>
-                            <ul id="accountMenu" class="dropdown-menu" role="menu" aria-labelledby="account">
-                                <li><a href="#" id="profile">Profile</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#" id='logout'>Logout</a></li>
-                            </ul>
-                        </li>
-                        {{else}}
-                        <li>
-                            <a href="{{pathFor 'login'}}">Login</a>
-                        </li>
-                        {{/if}}
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container -->
-    </nav>
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse navbar-ex1-collapse">
+				<ul class="nav navbar-nav navbar-right">
+					<li>
+						<a href="{{pathFor 'home'}}">Home</a>
+					</li>
+					{{#if isNotCalendarView}}
+					<li>
+						<a href="{{pathFor 'calendar'}}">My Calendar</a>
+					</li>
+					{{/if}}
+					{{#if currentUser}}
+					<li class="dropdown">
+						<a href="#" data-toggle="dropdown">Account</a>
+						<ul id="accountMenu" class="dropdown-menu" role="menu" aria-labelledby="account">
+							<li><a href="#" id="profile">Profile</a></li>
+							<li class="divider"></li>
+							<li><a href="#" id='logout'>Logout</a></li>
+						</ul>
+					</li>
+					{{else}}
+					<li>
+						<a href="{{pathFor 'login'}}">Login</a>
+					</li>
+					{{/if}}
+				</ul>
+			</div>
+			<!-- /.navbar-collapse -->
+		</div>
+		<!-- /.container -->
+	</nav>
 </template>
 
 <template name="notFound">
-    <style>
-        ::-moz-selection {
-            background: #b3d4fc;
-            text-shadow: none;
-        }
+	<style>
+	::-moz-selection {
+		background: #b3d4fc;
+		text-shadow: none;
+	}
 
-        ::selection {
-            background: #b3d4fc;
-            text-shadow: none;
-        }
+	::selection {
+		background: #b3d4fc;
+		text-shadow: none;
+	}
 
-        html {
-            padding: 30px 10px;
-            font-size: 20px;
-            line-height: 1.4;
-            color: #737373;
-            background: #f0f0f0;
-            -webkit-text-size-adjust: 100%;
-            -ms-text-size-adjust: 100%;
-        }
+	html {
+		padding: 30px 10px;
+		font-size: 20px;
+		line-height: 1.4;
+		color: #737373;
+		background: #f0f0f0;
+		-webkit-text-size-adjust: 100%;
+		-ms-text-size-adjust: 100%;
+	}
 
-        html,
-        input {
-            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-        }
+	html,
+	input {
+		font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	}
 
-        body {
-            max-width: 500px;
-            _width: 500px;
-            padding: 30px 20px 50px;
-            border: 1px solid #b3b3b3;
-            border-radius: 4px;
-            margin: 0 auto;
-            box-shadow: 0 1px 10px #a7a7a7, inset 0 1px 0 #fff;
-            background: #fcfcfc;
-        }
+	body {
+		max-width: 500px;
+			_width: 500px;
+		padding: 30px 20px 50px;
+		border: 1px solid #b3b3b3;
+		border-radius: 4px;
+		margin: 0 auto;
+		box-shadow: 0 1px 10px #a7a7a7, inset 0 1px 0 #fff;
+		background: #fcfcfc;
+	}
 
-        h1 {
-            margin: 0 10px;
-            font-size: 50px;
-            text-align: center;
-        }
+	h1 {
+		margin: 0 10px;
+		font-size: 50px;
+		text-align: center;
+	}
 
-        h1 span {
-            color: #bbb;
-        }
+	h1 span {
+		color: #bbb;
+	}
 
-        h3 {
-            margin: 1.5em 0 0.5em;
-        }
+	h3 {
+		margin: 1.5em 0 0.5em;
+	}
 
-        p {
-            margin: 1em 0;
-        }
+	p {
+		margin: 1em 0;
+	}
 
-        ul {
-            padding: 0 0 0 40px;
-            margin: 1em 0;
-        }
+	ul {
+		padding: 0 0 0 40px;
+		margin: 1em 0;
+	}
 
-        .container {
-            max-width: 380px;
-            _width: 380px;
-            margin: 0 auto;
-        }
+	.container {
+		max-width: 380px;
+			_width: 380px;
+		margin: 0 auto;
+	}
 
-        /* google search */
+	/* google search */
 
-        #goog-fixurl ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
+	#goog-fixurl ul {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
 
-        #goog-fixurl form {
-            margin: 0;
-        }
+	#goog-fixurl form {
+		margin: 0;
+	}
 
-        #goog-wm-qt,
-        #goog-wm-sb {
-            border: 1px solid #bbb;
-            font-size: 16px;
-            line-height: normal;
-            vertical-align: top;
-            color: #444;
-            border-radius: 2px;
-        }
+	#goog-wm-qt,
+	#goog-wm-sb {
+		border: 1px solid #bbb;
+		font-size: 16px;
+		line-height: normal;
+		vertical-align: top;
+		color: #444;
+		border-radius: 2px;
+	}
 
-        #goog-wm-qt {
-            width: 220px;
-            height: 20px;
-            padding: 5px;
-            margin: 5px 10px 0 0;
-            box-shadow: inset 0 1px 1px #ccc;
-        }
+	#goog-wm-qt {
+		width: 220px;
+		height: 20px;
+		padding: 5px;
+		margin: 5px 10px 0 0;
+		box-shadow: inset 0 1px 1px #ccc;
+	}
 
-        #goog-wm-sb {
-            display: inline-block;
-            height: 32px;
-            padding: 0 10px;
-            margin: 5px 0 0;
-            white-space: nowrap;
-            cursor: pointer;
-            background-color: #f5f5f5;
-            background-image: -webkit-linear-gradient(rgba(255,255,255,0), #f1f1f1);
-            background-image: -moz-linear-gradient(rgba(255,255,255,0), #f1f1f1);
-            background-image: -ms-linear-gradient(rgba(255,255,255,0), #f1f1f1);
-            background-image: -o-linear-gradient(rgba(255,255,255,0), #f1f1f1);
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            appearance: none;
-            *overflow: visible;
-            *display: inline;
-            *zoom: 1;
-        }
+	#goog-wm-sb {
+		display: inline-block;
+		height: 32px;
+		padding: 0 10px;
+		margin: 5px 0 0;
+		white-space: nowrap;
+		cursor: pointer;
+		background-color: #f5f5f5;
+		background-image: -webkit-linear-gradient(rgba(255,255,255,0), #f1f1f1);
+		background-image: -moz-linear-gradient(rgba(255,255,255,0), #f1f1f1);
+		background-image: -ms-linear-gradient(rgba(255,255,255,0), #f1f1f1);
+		background-image: -o-linear-gradient(rgba(255,255,255,0), #f1f1f1);
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		appearance: none;
+								*overflow: visible;
+								*display: inline;
+								*zoom: 1;
+	}
 
-        #goog-wm-sb:hover,
-        #goog-wm-sb:focus {
-            border-color: #aaa;
-            box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
-            background-color: #f8f8f8;
-        }
+	#goog-wm-sb:hover,
+	#goog-wm-sb:focus {
+		border-color: #aaa;
+		box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+		background-color: #f8f8f8;
+	}
 
-        #goog-wm-qt:hover,
-        #goog-wm-qt:focus {
-            border-color: #105cb6;
-            outline: 0;
-            color: #222;
-        }
+	#goog-wm-qt:hover,
+	#goog-wm-qt:focus {
+		border-color: #105cb6;
+		outline: 0;
+		color: #222;
+	}
 
-        input::-moz-focus-inner {
-            padding: 0;
-            border: 0;
-        }
-    </style>
-      <div class="notFound">
-          <h1>Not found <span>:(</span></h1>
-          <p>Sorry, but the page you were trying to view does not exist.</p>
-          <p>It looks like this was the result of either:</p>
-          <ul>
-              <li>a mistyped address</li>
-              <li>an out-of-date link</li>
-          </ul>
-      </div>
-      <script>
-          var GOOG_FIXURL_LANG = (navigator.language || '').slice(0,2),GOOG_FIXURL_SITE = location.host;
-      </script>
-      <script src="//linkhelp.clients.google.com/tbproxy/lh/wm/fixurl.js"></script>
+	input::-moz-focus-inner {
+		padding: 0;
+		border: 0;
+	}
+	</style>
+	<div class="notFound">
+		<h1>Not found <span>:(</span></h1>
+		<p>Sorry, but the page you were trying to view does not exist.</p>
+		<p>It looks like this was the result of either:</p>
+		<ul>
+			<li>a mistyped address</li>
+			<li>an out-of-date link</li>
+		</ul>
+	</div>
+	<script>
+var GOOG_FIXURL_LANG = (navigator.language || '').slice(0,2),GOOG_FIXURL_SITE = location.host;
+	</script>
+	<script src="//linkhelp.clients.google.com/tbproxy/lh/wm/fixurl.js"></script>
 </template>
 
 <template name="calendar">
-    {{#if currentUser}}
-      <a class="btn btn-primary" href="{{pathFor 'eventNew'}}">New Event!</a>
-      <div id='calendar'>
-      </div>
-      {{> modal}}
-      {{> emailModal}}
-    {{/if}}
+	{{#if currentUser}}
+	<a class="btn btn-primary" href="{{pathFor 'eventNew'}}">New Event!</a>
+	<div id='calendar'>
+	</div>
+	{{> modal}}
+	{{> emailModal}}
+	{{/if}}
 </template>
 
 <template name="eventNew">
-  <div class="col-md-1">
-    <a href="{{ pathFor 'calendar'}}" class="btn btn-primary">Back</a>
-  </div>
-  {{> _eventForm}}
-  <div class="col-md-7">
-      {{> loading}}
-      <div id="map"></div>
-    </div>
+	<div class="col-md-1">
+		<a href="{{ pathFor 'calendar'}}" class="btn btn-primary">Back</a>
+	</div>
+	{{> _eventForm}}
+	<div class="col-md-7">
+		{{> loading}}
+		<div id="map"></div>
+	</div>
 </template>
 
 <template name="eventEdit">
-    <div class="col-md-4"></div>
-    {{> _eventForm}}
+	<div class="col-md-4"></div>
+	{{> _eventForm}}
 </template>
 
 <template name="_eventForm">
-  <div class="col-md-4">
-    <div class="panel panel-info">
-      <div class="panel-heading">New Event</div>
-      <div class="panel-body advancedEvent">
-        <div class="form-group">
-          <input type="text" class="form-control event-date event-input"  name="date" id="date" value="{{date}}" readonly />
-        </div>
-        <div class="form-group">
-          <input type="text" class="form-control event-title event-input" name="title" id="title" placeholder="Title" value="{{title}}" />
-        </div>
-        <div class="form-group">
-          <input type="text" class="form-control event-address event-input" name="address" id="address" placeholder="Address" value="{{address}}" />
-        </div>
-        <div class="form-group">
-          <div class="row">
-            <div class="col-md-4 col-sm-4">
-                <input type="text" class="form-control event-start dateTime event-input" placeholder="00:00" name="start" id="eventStart" disabled="{{allDay}}" data-value="{{start}}">
-            </div>
-            <div class="col-md-4 col-sm-4">
-                <input type="text" class="form-control event-end dateTime event-input" placeholder="00:00" name="end" id="eventEnd" disabled="{{allDay}}" data-value="{{end}}">
-            </div>
-            <div class="col-md-4 col-sm-4">
-                <label clas="ios-switch-label">
-                    <input type="checkbox" class="ios-switch" value="true" name="allDay" id="allDay" checked={{allDay}}>
-                    <div><div></div></div>
-                    All Day
-                </label>
-            </div>
-          </div>
-        </div>
-        <div class="form-group">
-          <textarea name="desc" class="form-control event-msg event-input" id="msg" rows="12" cols="30" placeholder="Message">{{desc}}</textarea>
-        </div>
-<!--         <div class="form-group">
-          <input type="text" class="form-control event-sharedEmail" name="sharedEmail" id="sharedEmail" placeholder="Email" value="" disabled="true" />
-        </div>
-        <label clas="ios-switch-label">
-          <input type="checkbox" class="ios-switch" id="share">
-          <div><div></div></div>
-          Share
-        </label> -->
-        <button type="button" class="btn btn-primary pull-right" id="saveEvent">Add</button>
-        {{> eventInfoFields}}
-      </div>
-    </div>
-  </div>
+	<div class="col-md-4">
+		<div class="panel panel-info">
+			<div class="panel-heading">New Event</div>
+			<div class="panel-body advancedEvent">
+				<div class="form-group">
+					<input type="text" class="form-control event-date event-input"  name="date" id="date" value="{{date}}" readonly />
+				</div>
+				<div class="form-group">
+					<input type="text" class="form-control event-title event-input" name="title" id="title" placeholder="Title" value="{{title}}" />
+				</div>
+				<div class="form-group">
+					<input type="text" class="form-control event-address event-input" name="address" id="address" placeholder="Address" value="{{address}}" />
+				</div>
+				<div class="form-group">
+					<div class="row">
+						<div class="col-md-4 col-sm-4">
+							<input type="text" class="form-control event-start dateTime event-input" placeholder="00:00" name="start" id="eventStart" disabled="{{allDay}}" data-value="{{start}}">
+						</div>
+						<div class="col-md-4 col-sm-4">
+							<input type="text" class="form-control event-end dateTime event-input" placeholder="00:00" name="end" id="eventEnd" disabled="{{allDay}}" data-value="{{end}}">
+						</div>
+						<div class="col-md-4 col-sm-4">
+							<label clas="ios-switch-label">
+								<input type="checkbox" class="ios-switch" value="true" name="allDay" id="allDay" checked={{allDay}}>
+								<div><div></div></div>
+								All Day
+							</label>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<textarea name="desc" class="form-control event-msg event-input" id="msg" rows="12" cols="30" placeholder="Message">{{desc}}</textarea>
+				</div>
+				<!--         <div class="form-group">
+			<input type="text" class="form-control event-sharedEmail" name="sharedEmail" id="sharedEmail" placeholder="Email" value="" disabled="true" />
+			</div>
+			<label clas="ios-switch-label">
+			<input type="checkbox" class="ios-switch" id="share">
+			<div><div></div></div>
+			Share
+			</label> -->
+			<button type="button" class="btn btn-primary pull-right" id="saveEvent">Add</button>
+			{{> eventInfoFields}}
+			</div>
+		</div>
+	</div>
 </template>
 
 <template name="eventInfoFields">
-    <input type="hidden" name="date" id="eventStart" value="" />
-    <input type="hidden" name="date" id="eventEnd" value="" />
-    <input type="hidden" name="date" id="eventAllDay" value="" />
-    <div id="current_evt_data" class="hidden-data"></div>
-    <div id="current_evt_action" class="hidden-data"></div>
+	<input type="hidden" name="date" id="eventStart" value="" />
+	<input type="hidden" name="date" id="eventEnd" value="" />
+	<input type="hidden" name="date" id="eventAllDay" value="" />
+	<div id="current_evt_data" class="hidden-data"></div>
+	<div id="current_evt_action" class="hidden-data"></div>
 </template>
 
 <template name='modal'>
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-sm">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">New Event</h4>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group">
-                        <input type="text" class="form-control event-title event-input" name="title" id="title" placeholder="Title" value="" />
-                    </div>
-                    <div class="form-group">
-                        <textarea name="desc" class="form-control event-msg event-input" id="msg" rows="12" cols="30" placeholder="Message"></textarea>
-                    </div>
-                    {{> eventInfoFields}}
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger pull-left" data-dismiss="modal" id="deleteEvent">Delete</button>
-                    <button type="button" class="btn btn-primary" id="saveEvent">Add</button>
-                </div>
-            </div> <!-- /.modal-content -->
-        </div> <!-- /.modal-dialog -->
-    </div> <!-- /.modal -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">New Event</h4>
+				</div>
+				<div class="modal-body">
+					<div class="form-group">
+						<input type="text" class="form-control event-title event-input" name="title" id="title" placeholder="Title" value="" />
+					</div>
+					<div class="form-group">
+						<textarea name="desc" class="form-control event-msg event-input" id="msg" rows="12" cols="30" placeholder="Message"></textarea>
+					</div>
+					{{> eventInfoFields}}
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-danger pull-left" data-dismiss="modal" id="deleteEvent">Delete</button>
+					<button type="button" class="btn btn-primary" id="saveEvent">Add</button>
+				</div>
+			</div> <!-- /.modal-content -->
+		</div> <!-- /.modal-dialog -->
+	</div> <!-- /.modal -->
 </template>
 
 <template name='emailModal'>
-    <div class="modal fade" id="myEmailModal" tabindex="-1" role="dialog" aria-labelledby="myEmailModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">Share Event</h4>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label for="email">Email: </label>
-                        <input type="email" name="email" id="email" class="form-control"  value="" />
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" id="backEvent">Back</button>
-                    <button type="button" class="btn btn-info" id="sendEmail">Send</button>
-                </div>
-            </div> <!-- /.modal-content -->
-        </div> <!-- /.modal-dialog -->
-    </div> <!-- /.modal -->
+	<div class="modal fade" id="myEmailModal" tabindex="-1" role="dialog" aria-labelledby="myEmailModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">Share Event</h4>
+				</div>
+				<div class="modal-body">
+					<div class="form-group">
+						<label for="email">Email: </label>
+						<input type="email" name="email" id="email" class="form-control"  value="" />
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" id="backEvent">Back</button>
+					<button type="button" class="btn btn-info" id="sendEmail">Send</button>
+				</div>
+			</div> <!-- /.modal-content -->
+		</div> <!-- /.modal-dialog -->
+	</div> <!-- /.modal -->
 </template>
 
 <template name="emailTemplate">
-    <html>
-        <head>
-            <title>Email From TOM</title>
-        </head>
-        <body>
-            Click <a href="{{pathFor 'share'}}/{{ event._id }}"> {{ event.title }}</a> to add this event into your calendar.
-        </body>
-    </html>
+	<html>
+		<head>
+			<title>Email From TOM</title>
+		</head>
+		<body>
+			Click <a href="{{pathFor 'share'}}/{{ event._id }}"> {{ event.title }}</a> to add this event into your calendar.
+		</body>
+	</html>
 </template>
 
 <template name="loginForm">
-    <div class="col-lg-4 col-lg-offset-4 col-md-4 col-md-offset-4">
-        <h1>Login</h1>
-        {{#if err}}
-          <div class="alert alert-danger">
-            {{ err.reason }}
-          </div>
-        {{/if}}
-        <form role="form" id="loginForm">
-          <div class="form-group {{#if isUserError}}has-error{{/if}}">
-            <label for="user_email">Email:</label>
-            <input type="email" class="form-control"  id="userEmail" name="user_email" />
-          </div>
-          <div class="form-group {{#if isPasswordError}}has-error{{/if}}">
-            <label for="user_password">Password:</label>
-            <input type="password" class="form-control"  id="userPassword" name="user_password" />
-          </div>
-          {{#if creatingAccount}}
-            <input id='creatingAccount' class="btn btn-default" type="submit" value="Create">
-            <a id="goLogin" href="#">(Login)</a>
-          {{else}}
-            <input id='login' class="btn btn-default" type="submit" value="Login">
-            <a id="goCreate" href="#">(Create Account)</a>
-          {{/if}}
-        </form>
-    </div>
+	<div class="col-lg-4 col-lg-offset-4 col-md-4 col-md-offset-4">
+		<h1>Login</h1>
+		{{#if err}}
+		<div class="alert alert-danger">
+			{{ err.reason }}
+		</div>
+		{{/if}}
+		<form role="form" id="loginForm">
+			<div class="form-group {{#if isUserError}}has-error{{/if}}">
+				<label for="user_email">Email:</label>
+				<input type="email" class="form-control"  id="userEmail" name="user_email" />
+			</div>
+			<div class="form-group {{#if isPasswordError}}has-error{{/if}}">
+				<label for="user_password">Password:</label>
+				<input type="password" class="form-control"  id="userPassword" name="user_password" />
+			</div>
+			{{#if creatingAccount}}
+			<input id='creatingAccount' class="btn btn-default" type="submit" value="Create">
+			<a id="goLogin" href="#">(Login)</a>
+			{{else}}
+			<input id='login' class="btn btn-default" type="submit" value="Login">
+			<a id="goCreate" href="#">(Create Account)</a>
+			{{/if}}
+		</form>
+	</div>
 </template>
 
 <template name="loading">
-    <div id="floatingBarsG">
-        <div class="blockG" id="rotateG_01">
-        </div>
-        <div class="blockG" id="rotateG_02">
-        </div>
-        <div class="blockG" id="rotateG_03">
-        </div>
-        <div class="blockG" id="rotateG_04">
-        </div>
-        <div class="blockG" id="rotateG_05">
-        </div>
-        <div class="blockG" id="rotateG_06">
-        </div>
-        <div class="blockG" id="rotateG_07">
-        </div>
-        <div class="blockG" id="rotateG_08">
-        </div>
-    </div>
+	<div id="floatingBarsG">
+		<div class="blockG" id="rotateG_01">
+		</div>
+		<div class="blockG" id="rotateG_02">
+		</div>
+		<div class="blockG" id="rotateG_03">
+		</div>
+		<div class="blockG" id="rotateG_04">
+		</div>
+		<div class="blockG" id="rotateG_05">
+		</div>
+		<div class="blockG" id="rotateG_06">
+		</div>
+		<div class="blockG" id="rotateG_07">
+		</div>
+		<div class="blockG" id="rotateG_08">
+		</div>
+	</div>
 </template>
 
 <template name="home">
-  <div id="mCalendar-show" class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2">
-    <div id="mCalendar-carousel" class="carousel slide" data-ride="carousel">
-      <!-- Indicators -->
-      <ol class="carousel-indicators">
-        <li data-target="#mCalendar-carousel" data-slide-to="0" class="active"></li>
-        <li data-target="#mCalendar-carousel" data-slide-to="1"></li>
-        <li data-target="#mCalendar-carousel" data-slide-to="2"></li>
-        <li data-target="#mCalendar-carousel" data-slide-to="3"></li>
-      </ol>
+	<div id="mCalendar-show" class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2">
+		<div id="mCalendar-carousel" class="carousel slide" data-ride="carousel">
+			<!-- Indicators -->
+			<ol class="carousel-indicators">
+				<li data-target="#mCalendar-carousel" data-slide-to="0" class="active"></li>
+				<li data-target="#mCalendar-carousel" data-slide-to="1"></li>
+				<li data-target="#mCalendar-carousel" data-slide-to="2"></li>
+				<li data-target="#mCalendar-carousel" data-slide-to="3"></li>
+			</ol>
 
-      <!-- Wrapper for slides -->
-      <div class="carousel-inner">
-        <div class="item active">
-          <img src="/imgs/calendar.jpg" alt="calendar">
-          <div class="carousel-caption">
-            <h3>
-              Calendar
-            </h3>
-          </div>
-        </div>
-        <div class="item">
-            <img src="/imgs/add_event.jpg" alt="add event">
-            <div class="carousel-caption">
-              <h3>
-                Add an Event
-              </h3>
-            </div>
-        </div>
-        <div class="item">
-            <img src="/imgs/edit_event.jpg" alt="edit event">
-            <div class="carousel-caption">
-              <h3>
-                Edit an Event
-              </h3>
-            </div>
-        </div>
-        <div class="item">
-            <img src="/imgs/email.jpg" alt="email">
-            <div class="carousel-caption">
-              <h3>
-                Share an Event via email
-              </h3>
-            </div>
-        </div>
-      </div>
-      <!-- Controls -->
-      <a class="left carousel-control" href="#mCalendar-carousel" data-slide="prev">
-        <span class="glyphicon glyphicon-chevron-left"></span>
-      </a>
-      <a class="right carousel-control" href="#mCalendar-carousel" data-slide="next">
-        <span class="glyphicon glyphicon-chevron-right"></span>
-      </a>
-    </div>
-  </div>
-  <div class="col-lg-4 col-lg-offset-4 col-md-4 col-md-offset-4">
-      <p>
-          <iframe src="http://ghbtns.com/github-btn.html?user=icharlie&repo=mCalendar&type=fork" allowtransparency="true" frameborder="0" scrolling="0" width="62" height="20"></iframe>
-          <iframe src="http://ghbtns.com/github-btn.html?user=icharlie&repo=mCalendar&type=watch" allowtransparency="true" frameborder="0" scrolling="0" width="62" height="20"></iframe>
-      </p>
-  </div>
+			<!-- Wrapper for slides -->
+			<div class="carousel-inner">
+				<div class="item active">
+					<img src="/imgs/calendar.jpg" alt="calendar">
+					<div class="carousel-caption">
+						<h3>
+							Calendar
+						</h3>
+					</div>
+				</div>
+				<div class="item">
+					<img src="/imgs/add_event.jpg" alt="add event">
+					<div class="carousel-caption">
+						<h3>
+							Add an Event
+						</h3>
+					</div>
+				</div>
+				<div class="item">
+					<img src="/imgs/edit_event.jpg" alt="edit event">
+					<div class="carousel-caption">
+						<h3>
+							Edit an Event
+						</h3>
+					</div>
+				</div>
+				<div class="item">
+					<img src="/imgs/email.jpg" alt="email">
+					<div class="carousel-caption">
+						<h3>
+							Share an Event via email
+						</h3>
+					</div>
+				</div>
+			</div>
+			<!-- Controls -->
+			<a class="left carousel-control" href="#mCalendar-carousel" data-slide="prev">
+				<span class="glyphicon glyphicon-chevron-left"></span>
+			</a>
+			<a class="right carousel-control" href="#mCalendar-carousel" data-slide="next">
+				<span class="glyphicon glyphicon-chevron-right"></span>
+			</a>
+		</div>
+	</div>
+	<div class="col-lg-4 col-lg-offset-4 col-md-4 col-md-offset-4">
+		<p>
+		<iframe src="http://ghbtns.com/github-btn.html?user=icharlie&repo=mCalendar&type=fork" allowtransparency="true" frameborder="0" scrolling="0" width="62" height="20"></iframe>
+		<iframe src="http://ghbtns.com/github-btn.html?user=icharlie&repo=mCalendar&type=watch" allowtransparency="true" frameborder="0" scrolling="0" width="62" height="20"></iframe>
+		</p>
+	</div>
 </template>
 
 
 <template name="profile">
-    <div class="col-md-4">
-        <form class="form-horizontal" role="form">
-            <div class="fomr-group">
-                <label for="email" class="col-sm-2 control-label">Email</label>
-                <div class="col-sm-10">
-                     {{#each users.emails}}
-                        {{id}}
-                        <input type="email" class="form-control" id="email" value="{{address}}" placeholder="Email">
-                     {{/each}}
-                </div>
-            </div>
-        </form>
-    </div>
-</template>
-
-<template name="tom">
-
-     {{#each users.emails}}
-        {{address}}
-     {{/each}}
+	<div class="col-md-4">
+		<form class="form-horizontal" role="form">
+			<div class="form-group">
+				<label for="name" class="col-sm-2 control-label">Name</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" name="name" value="{{name}}" placeholder="Username" id="name">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="email" class="col-sm-2 control-label">Email</label>
+				<div class="col-sm-10">
+					{{#each users.emails}}
+						<input type="email" class="form-control" id="email" value="{{address}}" placeholder="Email">
+					{{/each}}
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10">
+					<button class="btn btn-primary" tpye="submit">Update</button>
+				</div>
+			</div>
+		</form>
+	</div>
 </template>
