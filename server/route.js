@@ -9,6 +9,31 @@ Router.route('events', function(){
 });
 
 
+Router.route('/api/token', {where: 'server'}).get(function() {
+  var url = Npm.require('url');
+  var params = url.parse(this.request.url, true).query;
+  if (!params.email || !params.password) {
+    throw new Meteor.Error('Username and password have to be provided');
+  }
+
+  var user = Meteor.users.findOne({});
+  if (!user) {
+    throw new Error('User ' + username + ' not found');
+  }
+
+  var resultOfInvocation = Accounts._checkPassword(user, password);
+
+  return Meteor.loginWithPassword(params.email, params.password, function(err) {
+    if (err) {
+      this.response.statusCode = 401;
+      this.response.setHeader('WWW-Authenticate', 'Basic realm="mCalendar"');
+    return  this.response.end();
+    }
+    return  this.response.end(JSON.stringify(queryData));
+  });
+});
+
+
 Router.route('/user/:user_id', function() {
   if (this.user) {
     return {
