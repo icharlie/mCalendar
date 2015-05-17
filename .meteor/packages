@@ -13,3 +13,5 @@ accounts-meteor-developer
 
 twbs:bootstrap
 momentjs:moment
+sanjo:jasmine
+velocity:html-reporter
