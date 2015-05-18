@@ -1,13 +1,3 @@
-var removeHasError = function (id) {
-  $('#'+id).parent().removeClass('has-error');
-};
-
-var checkEmpty = function(id) {
-  if ($('#'+id).val() === '') {
-    $('#'+id).parent().addClass('has-error');
-  }
-};
-
 Template.modal.events({
   'click #saveEvent': function(e, t) {
     ["title","msg"].map(removeHasError);
