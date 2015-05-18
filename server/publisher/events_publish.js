@@ -1,4 +1,3 @@
-'use strict';
 Meteor.publish("events", function() {
   var users =  Meteor.users.find().fetch();
   if (users.length) {

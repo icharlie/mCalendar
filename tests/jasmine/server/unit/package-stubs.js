@@ -7183,7 +7183,7 @@ var packageMetadata = {
                 },
                 "version": {
                   "type": "constant",
-                  "value": "f28d91848ed0830dfd5b9b9ae89a1215673ae8ca"
+                  "value": "a1c4506973680de81291bcecbedb73ce531d351d"
                 },
                 "PUBLIC_SETTINGS": {
                   "type": "undefined"
@@ -8959,6 +8959,25 @@ var packageMetadata = {
         },
         "call": {
           "type": "function"
+        },
+        "methodsMaxDataLength": {
+          "type": "constant",
+          "value": 5242880
+        },
+        "defaultAuth": {
+          "type": "function"
+        },
+        "methods": {
+          "type": "function"
+        },
+        "publishFormats": {
+          "type": "function"
+        },
+        "publish": {
+          "type": "function"
+        },
+        "unpublish": {
+          "type": "function"
         }
       }
     },
@@ -10562,32 +10581,629 @@ var packageMetadata = {
     }
   },
   "velocity:html-reporter": {},
-  "reload": {},
-  "autoupdate": {
-    "Autoupdate": {
+  "cfs:standard-packages": {},
+  "cfs:base-package": {
+    "FS": {
       "type": "object",
       "members": {
-        "autoupdateVersion": {
-          "type": "constant",
-          "value": "fd75721b8fcdf03262fcea25a3d4cef55e7e8bd4"
+        "Store": {
+          "type": "object",
+          "members": {
+            "GridFS": {
+              "type": "function"
+            },
+            "FileSystem": {
+              "type": "function"
+            },
+            "S3": {
+              "type": "function"
+            }
+          }
         },
-        "autoupdateVersionRefreshable": {
-          "type": "constant",
-          "value": "95d62b54e7355174cbdd90a2456d16b36dce13ea"
+        "AccessPoint": {
+          "type": "object"
         },
-        "autoupdateVersionCordova": {
-          "type": "constant",
-          "value": "none"
+        "Utility": {
+          "type": "object",
+          "members": {
+            "cloneFileRecord": {
+              "type": "function"
+            },
+            "defaultCallback": {
+              "type": "function"
+            },
+            "handleError": {
+              "type": "function"
+            },
+            "noop": {
+              "type": "function"
+            },
+            "validateAction": {
+              "type": "function"
+            },
+            "getFileName": {
+              "type": "function"
+            },
+            "getFileExtension": {
+              "type": "function"
+            },
+            "setFileExtension": {
+              "type": "function"
+            },
+            "encodeParams": {
+              "type": "function"
+            },
+            "encodeString": {
+              "type": "function"
+            },
+            "btoa": {
+              "type": "function"
+            },
+            "atob": {
+              "type": "function"
+            },
+            "extend": {
+              "type": "function"
+            },
+            "each": {
+              "type": "function"
+            },
+            "isEmpty": {
+              "type": "function"
+            },
+            "indexOf": {
+              "type": "function"
+            },
+            "isArray": {
+              "type": "function"
+            },
+            "map": {
+              "type": "function"
+            },
+            "once": {
+              "type": "function"
+            },
+            "include": {
+              "type": "function"
+            },
+            "size": {
+              "type": "function"
+            },
+            "binaryToBuffer": {
+              "type": "function"
+            },
+            "bufferToBinary": {
+              "type": "function"
+            },
+            "safeCallback": {
+              "type": "function"
+            },
+            "safeStream": {
+              "type": "function"
+            },
+            "eachFileFromPath": {
+              "type": "function"
+            }
+          }
         },
-        "appId": {
-          "type": "constant",
-          "value": "18dat04aujgre14tasw"
+        "config": {
+          "type": "object"
+        },
+        "StorageAdapter": {
+          "type": "function",
+          "members": {
+            "super_": {
+              "type": "function",
+              "members": {
+                "listenerCount": {
+                  "type": "function"
+                },
+                "prototype": {
+                  "type": "object",
+                  "members": {
+                    "setMaxListeners": {
+                      "type": "function",
+                      "refID": 67
+                    },
+                    "emit": {
+                      "type": "function",
+                      "refID": 69
+                    },
+                    "addListener": {
+                      "type": "function",
+                      "refID": 71
+                    },
+                    "on": {
+                      "ref": 71
+                    },
+                    "once": {
+                      "type": "function",
+                      "refID": 73
+                    },
+                    "removeListener": {
+                      "type": "function",
+                      "refID": 75
+                    },
+                    "removeAllListeners": {
+                      "type": "function",
+                      "refID": 77
+                    },
+                    "listeners": {
+                      "type": "function",
+                      "refID": 79
+                    }
+                  }
+                }
+              }
+            },
+            "prototype": {
+              "type": "object",
+              "members": {
+                "setMaxListeners": {
+                  "ref": 67
+                },
+                "emit": {
+                  "ref": 69
+                },
+                "addListener": {
+                  "ref": 71
+                },
+                "on": {
+                  "ref": 71
+                },
+                "once": {
+                  "ref": 73
+                },
+                "removeListener": {
+                  "ref": 75
+                },
+                "removeAllListeners": {
+                  "ref": 77
+                },
+                "listeners": {
+                  "ref": 79
+                }
+              }
+            }
+          }
+        },
+        "Transform": {
+          "type": "function",
+          "members": {
+            "scope": {
+              "type": "object",
+              "members": {
+                "gm": {
+                  "type": "function"
+                }
+              }
+            },
+            "prototype": {
+              "type": "object",
+              "members": {
+                "createWriteStream": {
+                  "type": "function"
+                },
+                "createReadStream": {
+                  "type": "function"
+                }
+              }
+            }
+          }
+        },
+        "File": {
+          "type": "function",
+          "members": {
+            "prototype": {
+              "type": "object",
+              "members": {
+                "domain": {
+                  "type": "null",
+                  "value": null
+                },
+                "attachData": {
+                  "type": "function"
+                },
+                "uploadProgress": {
+                  "type": "function"
+                },
+                "controlledByDeps": {
+                  "type": "function"
+                },
+                "getCollection": {
+                  "type": "function",
+                  "refID": 99
+                },
+                "isMounted": {
+                  "ref": 99
+                },
+                "getFileRecord": {
+                  "type": "function"
+                },
+                "update": {
+                  "type": "function"
+                },
+                "remove": {
+                  "type": "function"
+                },
+                "getExtension": {
+                  "type": "function"
+                },
+                "isImage": {
+                  "type": "function"
+                },
+                "isVideo": {
+                  "type": "function"
+                },
+                "isAudio": {
+                  "type": "function"
+                },
+                "formattedSize": {
+                  "type": "function"
+                },
+                "isUploaded": {
+                  "type": "function"
+                },
+                "hasStored": {
+                  "type": "function",
+                  "refID": 119
+                },
+                "hasCopy": {
+                  "ref": 119
+                },
+                "getCopyInfo": {
+                  "type": "function"
+                },
+                "name": {
+                  "type": "function"
+                },
+                "extension": {
+                  "type": "function"
+                },
+                "size": {
+                  "type": "function"
+                },
+                "type": {
+                  "type": "function"
+                },
+                "updatedAt": {
+                  "type": "function"
+                },
+                "logCopyFailure": {
+                  "type": "function"
+                },
+                "failedPermanently": {
+                  "type": "function"
+                },
+                "createReadStream": {
+                  "type": "function"
+                },
+                "createWriteStream": {
+                  "type": "function"
+                },
+                "copy": {
+                  "type": "function"
+                },
+                "copyData": {
+                  "type": "function"
+                },
+                "moveData": {
+                  "type": "function"
+                },
+                "url": {
+                  "type": "function"
+                },
+                "setMaxListeners": {
+                  "ref": 67
+                },
+                "emit": {
+                  "ref": 69
+                },
+                "addListener": {
+                  "ref": 71
+                },
+                "on": {
+                  "ref": 71
+                },
+                "once": {
+                  "ref": 73
+                },
+                "removeListener": {
+                  "ref": 75
+                },
+                "removeAllListeners": {
+                  "ref": 77
+                },
+                "listeners": {
+                  "ref": 79
+                }
+              }
+            }
+          }
+        },
+        "TempStore": {
+          "type": "object",
+          "members": {
+            "domain": {
+              "type": "null",
+              "value": null
+            },
+            "Tracker": {
+              "type": "object",
+              "members": {
+                "find": {
+                  "type": "function"
+                },
+                "findOne": {
+                  "type": "function"
+                },
+                "insert": {
+                  "type": "function"
+                },
+                "update": {
+                  "type": "function"
+                },
+                "remove": {
+                  "type": "function"
+                },
+                "upsert": {
+                  "type": "function"
+                },
+                "rawCollection": {
+                  "type": "function"
+                },
+                "rawDatabase": {
+                  "type": "function"
+                },
+                "allow": {
+                  "type": "function"
+                },
+                "deny": {
+                  "type": "function"
+                }
+              }
+            },
+            "Storage": {
+              "type": "object",
+              "members": {
+                "name": {
+                  "type": "constant",
+                  "value": "_tempstore"
+                },
+                "typeName": {
+                  "type": "constant",
+                  "value": "storage.filesystem"
+                },
+                "adapter": {
+                  "type": "object",
+                  "members": {
+                    "fileKey": {
+                      "type": "function"
+                    },
+                    "createReadStreamForFileKey": {
+                      "type": "function"
+                    },
+                    "createReadStream": {
+                      "type": "function"
+                    },
+                    "createWriteStreamForFileKey": {
+                      "type": "function"
+                    },
+                    "createWriteStream": {
+                      "type": "function"
+                    },
+                    "remove": {
+                      "type": "function"
+                    }
+                  }
+                },
+                "remove": {
+                  "type": "function"
+                },
+                "setMaxListeners": {
+                  "ref": 67
+                },
+                "emit": {
+                  "ref": 69
+                },
+                "addListener": {
+                  "ref": 71
+                },
+                "on": {
+                  "ref": 71
+                },
+                "once": {
+                  "ref": 73
+                },
+                "removeListener": {
+                  "ref": 75
+                },
+                "removeAllListeners": {
+                  "ref": 77
+                },
+                "listeners": {
+                  "ref": 79
+                }
+              }
+            },
+            "exists": {
+              "type": "function"
+            },
+            "listParts": {
+              "type": "function"
+            },
+            "removeFile": {
+              "type": "function"
+            },
+            "removeAll": {
+              "type": "function"
+            },
+            "createWriteStream": {
+              "type": "function"
+            },
+            "createReadStream": {
+              "type": "function"
+            },
+            "setMaxListeners": {
+              "ref": 67
+            },
+            "emit": {
+              "ref": 69
+            },
+            "addListener": {
+              "ref": 71
+            },
+            "on": {
+              "ref": 71
+            },
+            "once": {
+              "ref": 73
+            },
+            "removeListener": {
+              "ref": 75
+            },
+            "removeAllListeners": {
+              "ref": 77
+            },
+            "listeners": {
+              "ref": 79
+            }
+          }
+        },
+        "HTTP": {
+          "type": "object",
+          "members": {
+            "uploadUrl": {
+              "type": "constant",
+              "value": "/cfs/files"
+            },
+            "setBaseUrl": {
+              "type": "function"
+            },
+            "Handlers": {
+              "type": "object",
+              "members": {
+                "Del": {
+                  "type": "function"
+                },
+                "GetList": {
+                  "type": "function"
+                },
+                "Get": {
+                  "type": "function"
+                },
+                "PutInsert": {
+                  "type": "function"
+                },
+                "PutUpdate": {
+                  "type": "function"
+                }
+              }
+            },
+            "setHeadersForGet": {
+              "type": "function"
+            },
+            "publish": {
+              "type": "function"
+            },
+            "unpublish": {
+              "type": "function"
+            },
+            "mount": {
+              "type": "function"
+            },
+            "unmount": {
+              "type": "function"
+            },
+            "now": {
+              "type": "function"
+            }
+          }
+        },
+        "Collection": {
+          "type": "function",
+          "members": {
+            "prototype": {
+              "type": "object",
+              "members": {
+                "domain": {
+                  "type": "null",
+                  "value": null
+                },
+                "insert": {
+                  "type": "function"
+                },
+                "update": {
+                  "type": "function"
+                },
+                "remove": {
+                  "type": "function"
+                },
+                "findOne": {
+                  "type": "function"
+                },
+                "find": {
+                  "type": "function"
+                },
+                "allow": {
+                  "type": "function"
+                },
+                "deny": {
+                  "type": "function"
+                },
+                "allowsFile": {
+                  "type": "function"
+                },
+                "filters": {
+                  "type": "function"
+                },
+                "setMaxListeners": {
+                  "ref": 67
+                },
+                "emit": {
+                  "ref": 69
+                },
+                "addListener": {
+                  "ref": 71
+                },
+                "on": {
+                  "ref": 71
+                },
+                "once": {
+                  "ref": 73
+                },
+                "removeListener": {
+                  "ref": 75
+                },
+                "removeAllListeners": {
+                  "ref": 77
+                },
+                "listeners": {
+                  "ref": 79
+                }
+              }
+            }
+          }
+        },
+        "FileWorker": {
+          "type": "object",
+          "members": {
+            "observe": {
+              "type": "function"
+            }
+          }
+        }
+      }
+    },
+    "_Utility": {
+      "type": "object",
+      "members": {
+        "defaultZero": {
+          "type": "function"
         }
       }
     }
   },
-  "meteor-platform": {},
-  "session": {},
   "livedata": {
     "DDP": {
       "type": "object",
@@ -10656,7 +11272,641 @@ var packageMetadata = {
     "LivedataTest": {
       "type": "undefined"
     }
-  }
+  },
+  "mongo-livedata": {},
+  "raix:eventemitter": {
+    "EventEmitter": {
+      "type": "function",
+      "members": {
+        "listenerCount": {
+          "type": "function"
+        },
+        "prototype": {
+          "type": "object",
+          "members": {
+            "setMaxListeners": {
+              "type": "function"
+            },
+            "emit": {
+              "type": "function"
+            },
+            "addListener": {
+              "type": "function",
+              "refID": 8
+            },
+            "on": {
+              "ref": 8
+            },
+            "once": {
+              "type": "function"
+            },
+            "removeListener": {
+              "type": "function"
+            },
+            "removeAllListeners": {
+              "type": "function"
+            },
+            "listeners": {
+              "type": "function"
+            }
+          }
+        }
+      }
+    }
+  },
+  "cfs:storage-adapter": {},
+  "cfs:filesystem": {},
+  "reload": {},
+  "autoupdate": {
+    "Autoupdate": {
+      "type": "object",
+      "members": {
+        "autoupdateVersion": {
+          "type": "constant",
+          "value": "639b9a3aa2702d38077d25064fd6bca79c5e7f70"
+        },
+        "autoupdateVersionRefreshable": {
+          "type": "constant",
+          "value": "95d62b54e7355174cbdd90a2456d16b36dce13ea"
+        },
+        "autoupdateVersionCordova": {
+          "type": "constant",
+          "value": "none"
+        },
+        "appId": {
+          "type": "constant",
+          "value": "18dat04aujgre14tasw"
+        }
+      }
+    }
+  },
+  "meteor-platform": {},
+  "cfs:data-man": {
+    "DataMan": {
+      "type": "function",
+      "members": {
+        "Buffer": {
+          "type": "function",
+          "members": {
+            "prototype": {
+              "type": "object",
+              "members": {
+                "getBuffer": {
+                  "type": "function"
+                },
+                "getDataUri": {
+                  "type": "function"
+                },
+                "createReadStream": {
+                  "type": "function"
+                },
+                "size": {
+                  "type": "function"
+                },
+                "type": {
+                  "type": "function"
+                }
+              }
+            }
+          }
+        },
+        "DataURI": {
+          "type": "function"
+        },
+        "FilePath": {
+          "type": "function",
+          "members": {
+            "prototype": {
+              "type": "object",
+              "members": {
+                "getBuffer": {
+                  "type": "function"
+                },
+                "getDataUri": {
+                  "type": "function"
+                },
+                "createReadStream": {
+                  "type": "function"
+                },
+                "size": {
+                  "type": "function"
+                },
+                "type": {
+                  "type": "function"
+                }
+              }
+            }
+          }
+        },
+        "URL": {
+          "type": "function",
+          "members": {
+            "prototype": {
+              "type": "object",
+              "members": {
+                "getBuffer": {
+                  "type": "function"
+                },
+                "getDataUri": {
+                  "type": "function"
+                },
+                "createReadStream": {
+                  "type": "function"
+                },
+                "size": {
+                  "type": "function"
+                },
+                "type": {
+                  "type": "function"
+                }
+              }
+            }
+          }
+        },
+        "ReadStream": {
+          "type": "function",
+          "members": {
+            "prototype": {
+              "type": "object",
+              "members": {
+                "getBuffer": {
+                  "type": "function"
+                },
+                "getDataUri": {
+                  "type": "function"
+                },
+                "createReadStream": {
+                  "type": "function"
+                },
+                "size": {
+                  "type": "function"
+                },
+                "type": {
+                  "type": "function"
+                }
+              }
+            }
+          }
+        },
+        "prototype": {
+          "type": "object",
+          "members": {
+            "getBuffer": {
+              "type": "function"
+            },
+            "saveToFile": {
+              "type": "function"
+            },
+            "getDataUri": {
+              "type": "function"
+            },
+            "createReadStream": {
+              "type": "function"
+            },
+            "size": {
+              "type": "function"
+            },
+            "type": {
+              "type": "function"
+            }
+          }
+        }
+      }
+    }
+  },
+  "cfs:file": {},
+  "cfs:tempstore": {},
+  "cfs:http-methods": {
+    "HTTP": {
+      "type": "object",
+      "members": {
+        "get": {
+          "type": "function"
+        },
+        "post": {
+          "type": "function"
+        },
+        "put": {
+          "type": "function"
+        },
+        "del": {
+          "type": "function"
+        },
+        "call": {
+          "type": "function"
+        },
+        "methodsMaxDataLength": {
+          "type": "constant",
+          "value": 5242880
+        },
+        "defaultAuth": {
+          "type": "function"
+        },
+        "methods": {
+          "type": "function"
+        },
+        "publishFormats": {
+          "type": "function"
+        },
+        "publish": {
+          "type": "function"
+        },
+        "unpublish": {
+          "type": "function"
+        }
+      }
+    },
+    "_methodHTTP": {
+      "type": "object",
+      "members": {
+        "methodHandlers": {
+          "type": "object",
+          "members": {
+            "/cfs/servertime/": {
+              "type": "object",
+              "members": {
+                "auth": {
+                  "type": "function",
+                  "refID": 3
+                },
+                "POST": {
+                  "type": "undefined"
+                },
+                "PUT": {
+                  "type": "undefined"
+                },
+                "GET": {
+                  "type": "function",
+                  "refID": 5
+                },
+                "DELETE": {
+                  "type": "undefined"
+                },
+                "HEAD": {
+                  "ref": 5
+                },
+                "OPTIONS": {
+                  "type": "function",
+                  "refID": 7
+                }
+              }
+            },
+            "/cfs/files/:value/:value/:value/": {
+              "type": "object",
+              "members": {
+                "auth": {
+                  "type": "function",
+                  "refID": 10
+                },
+                "POST": {
+                  "type": "function",
+                  "refID": 12
+                },
+                "PUT": {
+                  "type": "function",
+                  "refID": 14
+                },
+                "GET": {
+                  "type": "function",
+                  "refID": 16
+                },
+                "DELETE": {
+                  "type": "function",
+                  "refID": 18
+                },
+                "HEAD": {
+                  "ref": 16
+                },
+                "OPTIONS": {
+                  "ref": 7
+                }
+              }
+            },
+            "/cfs/files/:value/:value/": {
+              "type": "object",
+              "members": {
+                "auth": {
+                  "ref": 10
+                },
+                "POST": {
+                  "ref": 12
+                },
+                "PUT": {
+                  "ref": 14
+                },
+                "GET": {
+                  "ref": 16
+                },
+                "DELETE": {
+                  "ref": 18
+                },
+                "HEAD": {
+                  "ref": 16
+                },
+                "OPTIONS": {
+                  "ref": 7
+                }
+              }
+            },
+            "/cfs/files/:value/": {
+              "type": "object",
+              "members": {
+                "auth": {
+                  "ref": 10
+                },
+                "POST": {
+                  "ref": 12
+                },
+                "PUT": {
+                  "ref": 14
+                },
+                "GET": {
+                  "ref": 16
+                },
+                "DELETE": {
+                  "ref": 18
+                },
+                "HEAD": {
+                  "ref": 16
+                },
+                "OPTIONS": {
+                  "ref": 7
+                }
+              }
+            }
+          }
+        },
+        "methodTree": {
+          "type": "object",
+          "members": {
+            "cfs": {
+              "type": "object",
+              "members": {
+                "servertime": {
+                  "type": "object",
+                  "members": {
+                    ":ref": {
+                      "type": "object",
+                      "members": {
+                        "name": {
+                          "type": "constant",
+                          "value": "/cfs/servertime/"
+                        },
+                        "params": {
+                          "type": "array"
+                        }
+                      }
+                    }
+                  }
+                },
+                "files": {
+                  "type": "object",
+                  "members": {
+                    ":value": {
+                      "type": "object",
+                      "members": {
+                        ":value": {
+                          "type": "object",
+                          "members": {
+                            ":value": {
+                              "type": "object",
+                              "members": {
+                                ":ref": {
+                                  "type": "object",
+                                  "members": {
+                                    "name": {
+                                      "type": "constant",
+                                      "value": "/cfs/files/:value/:value/:value/"
+                                    },
+                                    "params": {
+                                      "type": "array"
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            ":ref": {
+                              "type": "object",
+                              "members": {
+                                "name": {
+                                  "type": "constant",
+                                  "value": "/cfs/files/:value/:value/"
+                                },
+                                "params": {
+                                  "type": "array"
+                                }
+                              }
+                            }
+                          }
+                        },
+                        ":ref": {
+                          "type": "object",
+                          "members": {
+                            "name": {
+                              "type": "constant",
+                              "value": "/cfs/files/:value/"
+                            },
+                            "params": {
+                              "type": "array"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "nameFollowsConventions": {
+          "type": "function"
+        },
+        "getNameList": {
+          "type": "function"
+        },
+        "createObject": {
+          "type": "function"
+        },
+        "addToMethodTree": {
+          "type": "function"
+        },
+        "getMethod": {
+          "type": "function"
+        },
+        "getUserId": {
+          "ref": 3
+        },
+        "defaultOptionsHandler": {
+          "ref": 7
+        }
+      }
+    }
+  },
+  "cfs:http-publish": {
+    "_publishHTTP": {
+      "type": "object",
+      "members": {
+        "currentlyPublished": {
+          "type": "array"
+        },
+        "getPublishScope": {
+          "type": "function"
+        },
+        "formatHandlers": {
+          "type": "object",
+          "members": {
+            "json": {
+              "type": "function"
+            },
+            "fileRecordFormat": {
+              "type": "function"
+            }
+          }
+        },
+        "formatResult": {
+          "type": "function"
+        },
+        "error": {
+          "type": "function"
+        },
+        "getMethodHandler": {
+          "type": "function"
+        },
+        "unpublishList": {
+          "type": "function"
+        },
+        "unpublish": {
+          "type": "function"
+        }
+      }
+    }
+  },
+  "cfs:access-point": {},
+  "cfs:reactive-property": {
+    "ReactiveProperty": {
+      "type": "function"
+    }
+  },
+  "cfs:reactive-list": {
+    "ReactiveList": {
+      "type": "function",
+      "members": {
+        "prototype": {
+          "type": "object",
+          "members": {
+            "length": {
+              "type": "function"
+            },
+            "reset": {
+              "type": "function"
+            },
+            "update": {
+              "type": "function"
+            },
+            "insert": {
+              "type": "function"
+            },
+            "remove": {
+              "type": "function"
+            },
+            "getLastItem": {
+              "type": "function"
+            },
+            "getFirstItem": {
+              "type": "function"
+            },
+            "forEach": {
+              "type": "function"
+            },
+            "forEachReverse": {
+              "type": "function"
+            },
+            "fetch": {
+              "type": "function"
+            }
+          }
+        }
+      }
+    }
+  },
+  "cfs:power-queue": {
+    "PowerQueue": {
+      "type": "function",
+      "members": {
+        "prototype": {
+          "type": "object",
+          "members": {
+            "processingList": {
+              "type": "function"
+            },
+            "isHalted": {
+              "type": "function"
+            },
+            "length": {
+              "type": "function"
+            },
+            "progress": {
+              "type": "function"
+            },
+            "usage": {
+              "type": "function"
+            },
+            "reset": {
+              "type": "function"
+            },
+            "add": {
+              "type": "function"
+            },
+            "updateThrottleUp": {
+              "type": "function"
+            },
+            "updateThrottleDown": {
+              "type": "function"
+            },
+            "next": {
+              "type": "function"
+            },
+            "runTaskDone": {
+              "type": "function"
+            },
+            "runTask": {
+              "type": "function"
+            },
+            "queueTaskHandler": {
+              "type": "function"
+            },
+            "taskHandler": {
+              "type": "function"
+            },
+            "errorHandler": {
+              "type": "function"
+            },
+            "pause": {
+              "type": "function"
+            },
+            "resume": {
+              "type": "function"
+            },
+            "run": {
+              "type": "function"
+            },
+            "stop": {
+              "type": "function"
+            },
+            "cancel": {
+              "type": "function"
+            }
+          }
+        }
+      }
+    }
+  },
+  "cfs:upload-http": {},
+  "cfs:collection": {},
+  "cfs:collection-filters": {},
+  "cfs:worker": {},
+  "session": {}
 }
 var globalContext = (typeof global !== 'undefined') ? global : window
 

@@ -33,16 +33,31 @@ Router.route('/api/token', {where: 'server'}).get(function() {
   });
 });
 
-
-Router.route('/user/:user_id', function() {
-  if (this.user) {
-    return {
-      is_loggedin: true,
-      user: this.user
+Router.route('/user/:user_id', {where: 'server'})
+  .get(function() {
+    return this.response.end(JSON.stringify(Meteor.users.findOne(this.params.user_id)));
+  })
+  .put(function() {
+    var userId = this.params.user_id;
+    var body = this.request.body;
+    var newObj = {};
+    if (body.email) {
+      newObj['emails'] = [{address: body.email}];
+      delete body.email;
     }
-  }
-  return {is_loggedin: false};
-});
+    for(var ele in body) {
+      newObj[ele] = body[ele];
+    }
+    var user = Meteor.users.update({_id: userId}, {$set: newObj});
+    if (user) {
+      return this.response.end(JSON.stringify({msg: 'update success'}));
+    } else {
+      this.response.statusCode = 404;
+      return this.response.end(JSON.stringify({msg: 'update failed. Can\'t find matched user'}));
+    }
+  });
+
+
 
 
 Router.route('/event/create').post(function(){
