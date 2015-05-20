@@ -35,7 +35,10 @@ Template.profile.events({
       data: {username: userName, email: email}
     }, function(error, resp) {
       if (!error) {
-        Router.go('/calendar');
+        Session.set('err', null);
+        Session.set('msg', 'Updated Success');
+      } else {
+        Session.set('err', error);
       }
     });
   }
