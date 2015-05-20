@@ -5,6 +5,7 @@ Template.profile.helpers({
   },
   profileImage: function() {
     var user = Meteor.user();
+    var photoId = Session.get('photoId') || user.profile.photoId;
     var photo = Images.findOne({_id: user.profile.photo});
     return photo.url();
   },
@@ -17,7 +18,7 @@ Template.profile.events({
   'click .profile-photos': function(e, t) {
     var userId = Meteor.userId();
     var photoId = $(e.target).data('id');
-    Meteor.users.update({_id: userId}, {$set: {'profile.photo': photoId}});
+    Session.set('photoId', photoId);
   },
   'change #image': function(e, t) {
     var photo = new FS.File(e.target.files[0]);
@@ -31,6 +32,11 @@ Template.profile.events({
     var userId = Meteor.userId();
     var userName = $('#name').val();
     var email = $('#email').val();
+    var photoId = Session.get('photoId');
+    if (photoId) {
+      Meteor.users.update({_id: userId}, {$set: {'profile.photo': photoId}});
+      Session.set('photoId', null);
+    }
     HTTP.put('/user/' + userId, {
       data: {username: userName, email: email}
     }, function(error, resp) {

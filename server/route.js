@@ -9,7 +9,8 @@ Router.route('events', function(){
 });
 
 
-Router.route('/api/token', {where: 'server'}).get(function() {
+var token = Router.route('/api/token', {where: 'server'});
+token.get(function() {
   var url = Npm.require('url');
   var params = url.parse(this.request.url, true).query;
   if (!params.email || !params.password) {
@@ -33,46 +34,35 @@ Router.route('/api/token', {where: 'server'}).get(function() {
   });
 });
 
-Router.route('/user/:user_id', {where: 'server'})
-  .get(function() {
-    return this.response.end(JSON.stringify(Meteor.users.findOne(this.params.user_id)));
-  })
-  .put(function() {
-    var userId = this.params.user_id;
-    var body = this.request.body;
-    var newObj = {};
-    if (body.email) {
-      newObj['emails'] = [{address: body.email}];
-      delete body.email;
-    }
-    for(var ele in body) {
-      newObj[ele] = body[ele];
-    }
-    try {
-      var user = Meteor.users.update({_id: userId}, {$set: newObj});
-      if (user) {
-        return this.response.end(EJSON.stringify({msg: 'update success'}));
-      } else {
-        this.response.statusCode = 404;
-        return this.response.end(EJSON.stringify({msg: 'update failed. Can\'t find matched user'}));
-      }
-    } catch (e) {
-      this.response.statusCode = 400;
-      console.log(e);
-      if (e.message.match(/duplicate.+username.*/ig)) {
-        this.response.end(EJSON.stringify({msg: 'duplicated username'}));
-      }
-      if (e.message.match(/duplicate.+email.*/ig)) {
-        this.response.end(EJSON.stringify({msg: 'duplicated email'}));
-      }
-      this.response.end(EJSON.stringify({msg: e.message}));
-    }
-  });
+var user = Router.route('/user/:user_id', {where: 'server'});
+
+user.get(function() {
+  return this.response.end(JSON.stringify(Meteor.users.findOne(this.params.user_id)));
+});
+
+user.put(function() {
+  var userId = this.params.user_id;
+  var body = this.request.body;
+  var newObj = {};
+  if (body.email) {
+    newObj['emails'] = [{address: body.email}];
+    delete body.email;
+  }
+  for(var ele in body) {
+    newObj[ele] = body[ele];
+  }
+  var user = Meteor.users.update({_id: userId}, {$set: newObj});
+  if (user) {
+    return this.response.end(JSON.stringify({msg: 'update success'}));
+  } else {
+    this.response.statusCode = 404;
+    return this.response.end(JSON.stringify({msg: 'update failed. Can\'t find matched user'}));
+  }
+});
 
 
-
-
-Router.route('/event/create').post(function(){
+var event = Router.route('/event/create')
+event.post(function(){
     if (! this.user) {
         return {is_loggedin: false};
     }
