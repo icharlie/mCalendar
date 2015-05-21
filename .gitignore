@@ -2,3 +2,5 @@ config.js
 .DS_Store
 .reports
 design
+tests/jasmine/server/unit/package-stubs.js
+tests/jasmine/server/unit/packageMocksSpec.js
