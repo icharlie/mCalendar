@@ -1,12 +1,17 @@
 'use strict';
+var userId = Meteor.userId();
+
 Template.profile.helpers({
+	isDisplayUploadImageButton: function() {
+    return Images.find({owner: Meteor.userId()}).fetch().length < 2;
+  },
   user: function(){
     return Meteor.user();
   },
   profileImage: function() {
     var user = Meteor.user();
     var photoId = Session.get('photoId') || user.profile.photoId;
-    var photo = Images.findOne({_id: user.profile.photo});
+    var photo = Images.findOne({_id: photoId});
     return photo.url();
   },
   profileImages: function() {
@@ -34,7 +39,7 @@ Template.profile.events({
     var email = $('#email').val();
     var photoId = Session.get('photoId');
     if (photoId) {
-      Meteor.users.update({_id: userId}, {$set: {'profile.photo': photoId}});
+      Meteor.users.update({_id: userId}, {$set: {'profile.photoId': photoId}});
       Session.set('photoId', null);
     }
     HTTP.put('/user/' + userId, {
@@ -47,5 +52,17 @@ Template.profile.events({
         Session.set('err', error);
       }
     });
-  }
+  },
+	'click #delete-image': function(e, t) {
+    debugger;
+    e.preventDefault();
+    var user = Meteor.user();
+    var photoId = Session.get('photoId') || user.profile.photoId;
+    if (photoId) {
+      var photo = Images.findOne({_id: photoId});
+      photo.remove();
+      user.profile.photoId = null;
+      Session.set('photoId', null)
+    }
+	}
 });
