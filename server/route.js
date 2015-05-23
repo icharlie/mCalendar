@@ -9,7 +9,8 @@ Router.route('events', function(){
 });
 
 
-Router.route('/api/token', {where: 'server'}).get(function() {
+var token = Router.route('/api/token', {where: 'server'});
+token.get(function() {
   var url = Npm.require('url');
   var params = url.parse(this.request.url, true).query;
   if (!params.email || !params.password) {
@@ -33,19 +34,35 @@ Router.route('/api/token', {where: 'server'}).get(function() {
   });
 });
 
+var user = Router.route('/user/:user_id', {where: 'server'});
 
-Router.route('/user/:user_id', function() {
-  if (this.user) {
-    return {
-      is_loggedin: true,
-      user: this.user
-    }
+user.get(function() {
+  return this.response.end(JSON.stringify(Meteor.users.findOne(this.params.user_id)));
+});
+
+user.put(function() {
+  var userId = this.params.user_id;
+  var body = this.request.body;
+  var newObj = {};
+  if (body.email) {
+    newObj['emails'] = [{address: body.email}];
+    delete body.email;
   }
-  return {is_loggedin: false};
+  for(var ele in body) {
+    newObj[ele] = body[ele];
+  }
+  var user = Meteor.users.update({_id: userId}, {$set: newObj});
+  if (user) {
+    return this.response.end(JSON.stringify({msg: 'update success'}));
+  } else {
+    this.response.statusCode = 404;
+    return this.response.end(JSON.stringify({msg: 'update failed. Can\'t find matched user'}));
+  }
 });
 
 
-Router.route('/event/create').post(function(){
+var event = Router.route('/event/create')
+event.post(function(){
     if (! this.user) {
         return {is_loggedin: false};
     }

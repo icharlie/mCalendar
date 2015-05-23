@@ -15,3 +15,5 @@ twbs:bootstrap
 momentjs:moment
 sanjo:jasmine
 velocity:html-reporter
+cfs:standard-packages
+cfs:filesystem

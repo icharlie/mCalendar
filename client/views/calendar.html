@@ -1,0 +1,11 @@
+<template name="calendar">
+	{{#if currentUser}}
+	<a class="btn btn-primary" href="{{pathFor 'eventNew'}}">New Event!</a>
+	<div id='calendar'>
+	</div>
+	{{> modal}}
+	{{> emailModal}}
+	{{/if}}
+</template>
+
+
