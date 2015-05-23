@@ -1,5 +1,5 @@
 /**
- * Test Account:
+ * Test Account
  * email: mcalendar@mailinator.com
  * pass: 123456
  */
