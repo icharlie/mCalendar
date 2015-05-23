@@ -37,10 +37,10 @@ this.App.generateCalendar = function() {
       },
       eventDrop: function( event, dayDelta, minuteDelta, allDay, revertFunc, jsEvent, ui, view){
         event.end = event.start.clone().add('hours', 2);
-        Events.update({_id: event._id}, {$set: { title: event.title, desc: event.desc, start: event.start.format('ddd MMM DD YYYY HH:mm:ss zZZ'), end: event.end.format('ddd MMM DD YYYY HH:mm:ss zZZ'), allDay: EJSON.parse(event.allDay)}});
+        Events.update({_id: event._id}, {$set: { title: event.title, desc: event.desc, start: event.start.format('ddd MMM DD YYYY HH:mm:ss zZZ'), end: event.end.format('ddd MMM DD YYYY HH:mm:ss zZZ'), allDay: event.allDay}});
       },
       eventResize: function( event, dayDelta, minuteDelta, revertFunc, jsEvent, ui, view)  {
-        Events.update({_id: event._id}, {$set: { title: event.title, desc: event.desc, start: event.start.format('ddd MMM DD YYYY HH:mm:ss zZZ'), end: event.end.format('ddd MMM DD YYYY HH:mm:ss zZZ'), allDay: EJSON.parse(event.allDay)}});
+        Events.update({_id: event._id}, {$set: { title: event.title, desc: event.desc, start: event.start.format('ddd MMM DD YYYY HH:mm:ss zZZ'), end: event.end.format('ddd MMM DD YYYY HH:mm:ss zZZ'), allDay: event.allDay}});
       }
     });
   } else {
