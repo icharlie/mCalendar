@@ -1,18 +1,18 @@
-Template.loginForm.err = function () {
-  return Session.get('err');
-};
-
-Template.loginForm.isPasswordError = function () {
-  if (Session.get('err')) {
-    return Session.get('err').reason.match(/password/ig);
+Template.loginForm.helpers({
+  err: function () {
+    return Session.get('err');
+  },
+  isPasswordError: function () {
+    if (Session.get('err')) {
+      return Session.get('err').reason.match(/password/ig);
+    }
+  },
+  isUserError: function () {
+    if (Session.get('err')) {
+      return Session.get('err').reason.match(/user/ig);
+    }
   }
-};
-
-Template.loginForm.isUserError = function () {
-  if (Session.get('err')) {
-    return Session.get('err').reason.match(/user/ig);
-  }
-};
+});
 
 Template.loginForm.events({
   'submit': function(e, t) {
