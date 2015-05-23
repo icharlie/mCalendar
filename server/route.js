@@ -9,8 +9,60 @@ Router.route('events', function(){
 });
 
 
-Router.route('/event/create').post(function(){
-    console.log('create');
+var token = Router.route('/api/token', {where: 'server'});
+token.get(function() {
+  var url = Npm.require('url');
+  var params = url.parse(this.request.url, true).query;
+  if (!params.email || !params.password) {
+    throw new Meteor.Error('Username and password have to be provided');
+  }
+
+  var user = Meteor.users.findOne({});
+  if (!user) {
+    throw new Error('User ' + username + ' not found');
+  }
+
+  var resultOfInvocation = Accounts._checkPassword(user, password);
+
+  return Meteor.loginWithPassword(params.email, params.password, function(err) {
+    if (err) {
+      this.response.statusCode = 401;
+      this.response.setHeader('WWW-Authenticate', 'Basic realm="mCalendar"');
+    return  this.response.end();
+    }
+    return  this.response.end(JSON.stringify(queryData));
+  });
+});
+
+var user = Router.route('/user/:user_id', {where: 'server'});
+
+user.get(function() {
+  return this.response.end(JSON.stringify(Meteor.users.findOne(this.params.user_id)));
+});
+
+user.put(function() {
+  var userId = this.params.user_id;
+  var body = this.request.body;
+  var newObj = {};
+  if (body.email) {
+    newObj['emails'] = [{address: body.email}];
+    delete body.email;
+  }
+  for(var ele in body) {
+    newObj[ele] = body[ele];
+  }
+  var user = Meteor.users.update({_id: userId}, {$set: newObj});
+  if (user) {
+    return this.response.end(JSON.stringify({msg: 'update success'}));
+  } else {
+    this.response.statusCode = 404;
+    return this.response.end(JSON.stringify({msg: 'update failed. Can\'t find matched user'}));
+  }
+});
+
+
+var event = Router.route('/event/create')
+event.post(function(){
     if (! this.user) {
         return {is_loggedin: false};
     }
