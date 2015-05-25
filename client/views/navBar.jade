@@ -1,0 +1,31 @@
+template(name='navBar')
+  nav.navbar.navbar-inverse.navbar-fixed-top(role='navigation')
+    .container
+      .navbar-header
+        button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-ex1-collapse')
+          span.sr-only Toggle navigation
+          span.icon-bar
+          span.icon-bar
+          span.icon-bar
+        // You'll want to use a responsive image option so this logo looks good on devices - I recommend using something like retina.js (do a quick Google search for it and you'll find it)
+        a.navbar-brand.logo-nav(href="{{pathFor 'home'}}")
+          img(src='/imgs/calendar.png')
+      .collapse.navbar-collapse.navbar-ex1-collapse
+        ul.nav.navbar-nav.navbar-right
+          li
+            a(href="{{pathFor 'home'}}") Home
+          if isNotCalendarView
+            li
+              a(href="{{pathFor 'calendar'}}") My Calendar
+          if currentUser}}
+            li.dropdown
+              a(href='#', data-toggle='dropdown') Account
+              ul#accountMenu.dropdown-menu(role='menu', aria-labelledby='account')
+                li
+                  a#profile(href='#') Profile
+                li.divider
+                li
+                  a#logout(href='#') Logout
+          else
+            li
+              a(href="{{pathFor route='atSignIn'}}") Log in

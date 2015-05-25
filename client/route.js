@@ -33,12 +33,6 @@ var putPendingEvents = function(eventId) {
   Session.set('pendingEvents', JSON.stringify(pendingEvents));
 };
 
-
-Router.configure({
-  layoutTemplate: 'main',
-  notFoundTemplate: 'notFound'
-});
-
 Router.map(function() {
   this.route('home', {
     path: '/',
@@ -64,7 +58,7 @@ Router.map(function() {
           Session.set('currentView', 'calendar');
           this.render('calendar');
         } else {
-          Router.go('login');
+          Router.go('sign-in');
         }
       } else {
         this.render('loading');
@@ -79,42 +73,19 @@ Router.map(function() {
     path: '/eventNew'
   });
 
-  this.route('/login', {
-    layoutTemplate: 'main',
-    template: 'loginForm',
-    action: function() {
-      if (Meteor.userId()) {
-        return Router.go('calendar');
-      } else {
-        Session.set('currentView', 'login');
-        return this.render('loginForm');
-      }
-    }
-  });
-
-
-  this.route('/profile/:_id',{
-    template: 'profile',
-    waitOn: function() {
-      return Meteor.subscribe('user', this.params._id);
-    },
-    action: function () {
-      if (this.ready()) {
-        if (Meteor.user()) {
-          Session.set('currentView', 'profile');
-          this.render('profile');
-        } else {
-          Router.go('login');
-        }
-      } else {
-        this.render('loading');
-      }
-    },
-    onData: function(){
-      debugger;
-      return Meteor.users.find()
-    }
-  });
+  // this.route('/login', {
+  //   layoutTemplate: 'main',
+  //   template: 'loginForm',
+  //   action: function() {
+  //     if (Meteor.userId()) {
+  //       return Router.go('calendar');
+  //     } else {
+  //       Session.set('currentView', 'login');
+  //       return this.render('loginForm');
+  //     }
+  //   }
+  // });
+  //
 
   this.route('notFound', {
     path: '*',

@@ -1,0 +1,1 @@
+this.Users = Meteor.users;

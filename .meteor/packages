@@ -17,3 +17,8 @@ sanjo:jasmine
 velocity:html-reporter
 cfs:standard-packages
 cfs:filesystem
+mquandalle:jade
+aldeed:collection2
+useraccounts:core
+useraccounts:unstyled
+fourseven:scss

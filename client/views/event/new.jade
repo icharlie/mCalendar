@@ -1,0 +1,8 @@
+template(name="eventNew")
+  .col-md-1
+    a(href="{{ pathFor 'calendar' }}" class="btn btn-primary")
+      | Back
+  +_eventForm  
+  .col-md-7
+    +loading
+    #map

@@ -1,0 +1,6 @@
+template(name='calendar')
+  if currentUser
+    a.btn.btn-primary(href="{{pathFor 'eventNew'}}") New Event!
+    #calendar
+    +modal
+    +emailModal

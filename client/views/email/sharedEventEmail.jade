@@ -1,0 +1,9 @@
+template(name="emailTemplate")
+  html
+    head
+      title Email From mCalendar
+    body
+      | Click 
+      a(href="{{pathFor 'share'}}/{{ event._id }}") 
+        = event.title
+      |to add this event into your calendar.
