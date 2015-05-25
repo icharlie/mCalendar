@@ -1,58 +1,47 @@
 template(name='notFound')
   style.
     ::-moz-selection {
-    background: #b3d4fc;
-    text-shadow: none;
+      background: #b3d4fc;
+      text-shadow: none;
     }
     ::selection {
-    background: #b3d4fc;
-    text-shadow: none;
+      background: #b3d4fc;
+      text-shadow: none;
     }
     html {
-    padding: 30px 10px;
-    font-size: 20px;
-    line-height: 1.4;
-    color: #737373;
-    background: #f0f0f0;
-    -webkit-text-size-adjust: 100%;
-    -ms-text-size-adjust: 100%;
+      padding: 30px 10px;
+      font-size: 20px;
+      line-height: 1.4;
+      color: #737373;
+      background: #f0f0f0;
+      -webkit-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
     }
     html,
     input {
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     }
     body {
-    max-width: 500px;
-    _width: 500px;
-    padding: 30px 20px 50px;
-    border: 1px solid #b3b3b3;
-    border-radius: 4px;
-    margin: 0 auto;
-    box-shadow: 0 1px 10px #a7a7a7, inset 0 1px 0 #fff;
-    background: #fcfcfc;
+      padding: 60px 20px 50px;
+      background-color: transparent;
     }
     h1 {
-    margin: 0 10px;
-    font-size: 50px;
-    text-align: center;
+      margin: 0 10px;
+      font-size: 50px;
+      text-align: center;
     }
     h1 span {
-    color: #bbb;
+      color: #bbb;
     }
     h3 {
-    margin: 1.5em 0 0.5em;
+      margin: 1.5em 0 0.5em;
     }
     p {
-    margin: 1em 0;
+      margin: 1em 0;
     }
     ul {
-    padding: 0 0 0 40px;
-    margin: 1em 0;
-    }
-    .container {
-    max-width: 380px;
-    _width: 380px;
-    margin: 0 auto;
+      padding: 0 0 0 40px;
+      margin: 1em 0;
     }
     /* google search */
     #goog-fixurl ul {
@@ -106,15 +95,21 @@ template(name='notFound')
     }
     #goog-wm-qt:hover,
     #goog-wm-qt:focus {
-    border-color: #105cb6;
-    outline: 0;
-    color: #222;
+      border-color: #105cb6;
+      outline: 0;
+      color: #222;
     }
     input::-moz-focus-inner {
-    padding: 0;
-    border: 0;
+      padding: 0;
+      border: 0;
     }
-  | &#x9;
+    .notFound {
+      max-width: 380px;
+      width: 380px;
+      margin: 0 auto;
+      padding: 40px 15px;
+      background-color: #fff;
+    }
   .notFound
     h1
       | Not found 

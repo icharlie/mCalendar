@@ -1,5 +1,5 @@
 // navbar
-Template.navBar.helpers({
+Template.headerNavbar.helpers({
   userEmail: function() {
     return Meteor.user().emails[0].address;
   },
@@ -8,15 +8,14 @@ Template.navBar.helpers({
   }
 })
 
-Template.navBar.events({
+Template.headerNavbar.events({
   'click a#logout': function() {
     Meteor.logout(function() {
       Router.go('/');
     });
   },
   'click a#profile': function (e) {
-    Router.go('/profile/'+Meteor.userId());
-    e.preventDefault();
+    Router.go('/profile/' + Meteor.userId());
   }
 });
 

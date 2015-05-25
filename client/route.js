@@ -58,7 +58,7 @@ Router.map(function() {
           Session.set('currentView', 'calendar');
           this.render('calendar');
         } else {
-          Router.go('sign-in');
+          Router.go('atSignIn');
         }
       } else {
         this.render('loading');
@@ -73,22 +73,14 @@ Router.map(function() {
     path: '/eventNew'
   });
 
-  // this.route('/login', {
-  //   layoutTemplate: 'main',
-  //   template: 'loginForm',
-  //   action: function() {
-  //     if (Meteor.userId()) {
-  //       return Router.go('calendar');
-  //     } else {
-  //       Session.set('currentView', 'login');
-  //       return this.render('loginForm');
-  //     }
-  //   }
-  // });
-  //
-
   this.route('notFound', {
     path: '*',
     layoutTemplate: ''
   }); // 404
+});
+
+
+// page title
+Router.onAfterAction(function(){
+  document.title = [App.name, ' - ', this.route.getName()].join('');
 });

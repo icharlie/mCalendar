@@ -19,7 +19,7 @@ Router.route('/profile/:_id',{
         Session.set('currentView', 'profile');
         this.render('profile');
       } else {
-        Router.go('signIn');
+        Router.go('atSignIn');
       }
     } else {
       this.render('loading');
