@@ -3,7 +3,7 @@ template(name='calendar')
     .col-sm-3.col-md-2.sidebar
       ul.nav.nav-sidebar
         li.nav-sidebar-header
-          img(src='/imgs/calendar.png')
+          img(src='{{profileImage}}')
         li
           a(href="{{pathFor 'eventNew'}}") 
             i.fa.fa-plus

@@ -13,8 +13,12 @@ Template.profile.helpers({
   profileImage: function() {
     var user = Meteor.user();
     var photoId = Session.get('photoId') || user.profile.photoId;
-    var photo = Images.findOne({_id: photoId});
-    return photo.url();
+    if (photoId) {
+      var photo = Images.findOne({_id: photoId});
+      return photo.url();
+    }
+
+    return App.defaultProfileImage;
   },
 
   profileImages: function() {
