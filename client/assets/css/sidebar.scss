@@ -4,6 +4,16 @@
 .sidebar {
   display: none;
 }
+
+.nav-sidebar-header {
+  text-align: center;
+  margin-bottom: 10px;
+  img {
+    width: 100%;
+    height: auto;
+  }
+}
+
 @media (min-width: 768px) {
   .sidebar {
     position: fixed;
