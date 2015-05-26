@@ -1,6 +1,14 @@
 template(name='calendar')
   if currentUser
-    a.btn.btn-primary(href="{{pathFor 'eventNew'}}") New Event!
-    #calendar
+    .col-sm-3.col-md-2.sidebar
+      ul.nav.nav-sidebar
+        li.nav-sidebar-header
+          img(src='/imgs/calendar.png')
+        li
+          a(href="{{pathFor 'eventNew'}}") 
+            i.fa.fa-plus
+            |New Event!
+    .col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
+      #calendar
     +modal
     +emailModal
