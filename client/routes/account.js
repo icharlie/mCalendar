@@ -7,13 +7,13 @@
   });
 });
 
-
-Router.route('/profile/:_id',{
+Router.route('/profile/:_id', {
   template: 'profile',
   waitOn: function() {
     return Meteor.subscribe('user', this.params._id);
   },
-  action: function () {
+
+  action: function() {
     if (this.ready()) {
       if (Meteor.user()) {
         Session.set('currentView', 'profile');
@@ -25,10 +25,8 @@ Router.route('/profile/:_id',{
       this.render('loading');
     }
   },
-  onData: function(){
-    debugger;
+
+  onData: function() {
     return Meteor.users.find()
   }
 });
-
-

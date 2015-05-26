@@ -3,6 +3,7 @@ Template.headerNavbar.helpers({
   userEmail: function() {
     return Meteor.user().emails[0].address;
   },
+
   isNotCalendarView: function() {
     return (Meteor.userId() && Session.get('currentView') !== 'calendar');
   }
@@ -14,9 +15,9 @@ Template.headerNavbar.events({
       Router.go('/');
     });
   },
-  'click a#profile': function (e) {
+
+  'click a#profile': function(e) {
+    e.preventDefault();
     Router.go('/profile/' + Meteor.userId());
   }
 });
-
-
