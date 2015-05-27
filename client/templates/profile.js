@@ -44,24 +44,33 @@ Template.profile.events({
   'click #update': function(e) {
     e.preventDefault();
     var userId = Meteor.userId();
-    var userName = $('#name').val();
+    var username = $('#name').val();
     var email = $('#email').val();
     var photoId = Session.get('photoId');
-    if (photoId) {
-      Meteor.users.update({_id: userId}, {$set: {'profile.photoId': photoId}});
-      Session.set('photoId', null);
-    }
+    var newProfile = {
+      username: username,
+      emails: [
+        {
+          address: email
+        }
+      ]
+    };
 
-    HTTP.put('/user/' + userId, {
-      data: {username: userName, email: email}
-    }, function(error, resp) {
-      if (!error) {
-        Session.set('err', null);
-        Session.set('msg', 'Updated Success');
-      } else {
-        Session.set('err', error);
+    if (photoId) {
+      newProfile.profile = {
+        photoId: photoId
+      };
+    }
+    Meteor.call('updateProfile', userId, newProfile, function(error, result) {
+      // TODO: handle error(highlight error field)
+      if (error) {
+        console.log(error);
       }
+
+      // TODO: success updaet info
     });
+
+    Session.set('photoId', null);
   },
 
   'click #delete-image': function(e, t) {
