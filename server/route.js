@@ -16,16 +16,22 @@ Router.onBeforeAction(
   }
 );
 
-Router.route('events', function() {
-  if (!this.user) {
-    return {isLoggedIn: false};
-  }
+Router.route('api/events',
+  function() {
+    if (!this.user) {
+      return {isLoggedIn: false};
+    }
 
-  return {
-    isLoggedIn: true,
-    events: Events.find({$or: [{partnerIds: this.user._id}, {ownerId: this.user._id}]}).fetch()
-  };
-});
+    return {
+      isLoggedIn: true,
+      events: Events.find({$or: [{partnerIds: this.user._id}, {ownerId: this.user._id}]}).fetch()
+    };
+  },
+
+  {
+    where: 'server'
+  }
+);
 
 var user = Router.route('/user/:userId', {where: 'server'});
 
@@ -70,6 +76,7 @@ event.post(function() {
   }
 
   if (checkRequireField(this.params)) {
+    // TODO: HTTP status code and more description.
     return {
       isLoggedIn: true,
       err: 'Please provide enough event information. We need title, desc, start, end, allDay',
@@ -77,40 +84,27 @@ event.post(function() {
     };
   }
 
-  var title = this.params.title;
-  var desc = this.params.desc;
-  var start = this.params.start ? new Date(this.params.start) : new Data();
-  var end = this.params.end ? new Date(this.params.end) : new Data();
-  var allDay = this.params.allDay;
-  var ownerId = this.params.userId;
+  var evt = {};
+  var keys = ['title', 'desc', 'start', 'end', 'date', 'allDay', 'ownerId', 'address', 'lat', 'lng'];
 
-  // advanced event fileds
-  var address = this.params.address;
-  var lat = this.params.lat;
-  var lng = this.params.lng;
-  if (allDay) {
-    if (start || end) {
-      start = this.params.date;
-      start = this.params.date;
-    }
+  keys.forEach(function(key) {
+    evt[key] = this.params[key];
+  });
+
+  if (evt.allDay) {
+    evt.allDay = EJSON.parse(allDay);
   } else {
-    start = this.params.date + ' ' + start;
-    end = this.params.date + ' ' + end;
+    evt.allDay = false;
   }
 
-  var evt = {
-    title: title,
-    desc: desc,
-    date: date,
-    start: start,
-    end: end,
-    allDay: JSON.parse(allDay),
-    partnerIds: [],
-    ownerId: ownerId,
-    address: address,
-    lat: lat,
-    lng: lng
-  };
+  if (allDay) {
+    evt.start = moment(evt.date).toDate();
+    evt.end = moment(evt.date).toDate();
+  } else {
+    evt.start = moment(evt.start).toDate();
+    evt.end = moment(evt.start).toDate();
+  }
+
   var eventId = Events.insert(evt);
 
   return {
@@ -128,7 +122,7 @@ var checkRequireField = function(params) {
     return false;
   }
 
-  if (params.allDay && params.date) {
+  if (params.allDay && !params.date) {
     return false;
   }
 
