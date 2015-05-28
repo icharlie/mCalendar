@@ -5,19 +5,21 @@ template(name='profile')
         img(src='{{profileImage}}')
       //- TODO: user manage
   .col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
-    .col-md-6.col-md-offset-2
+    .col-md-3.col-sm-3
+      .row.mframe
+        .row.profile-row
+          a.thumbnail.prfoile-thumbnail(href='#')
+            img(src='{{profileImage}}', alt='profile image')
+          if isDisplayUploadImageButton
+            input#image(type='file', name='image', value='')
+          else
+            button#delete-image-btn.btn.btn-danger Delete    
+        .row.profile-row
+          each profileImages
+            a.profile-photos(href='#')
+              img(src='{{this.url}}', data-id='{{this._id}}', alt='profile image')
+    .col-md-6.col-sm-6
       form.form-horizontal(role='form', enctype='multipart/form-data')
-        .form-group
-          .col-sm-offset-2.col-sm-10
-            a.thumbnail(href='#')
-              img(src='{{profileImage}}', alt='profile image')
-            if isDisplayUploadImageButton
-              input#image(type='file', name='image', value='')
-            else
-              button#delete-image.btn.btn-danger Delete
-        each profileImages
-          a.profile-photos(href='#')
-            img(src='{{this.url}}', data-id='{{this._id}}', alt='profile image')
         .form-group
           label.col-sm-2.control-label(for='name') Name
           .col-sm-10
@@ -29,4 +31,4 @@ template(name='profile')
               input#email.form-control(type='email', value='{{address}}', placeholder='Email')
         .form-group
           .col-sm-offset-2.col-sm-10
-            button#update.btn.btn-primary(tpye='submit') Update
+            button#update-btn.btn.btn-primary(tpye='submit') Update

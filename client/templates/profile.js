@@ -41,7 +41,7 @@ Template.profile.events({
     Meteor.users.update({_id: userId}, {$set: {'profile.photo': fileObj._id}});
   },
 
-  'click #update': function(e) {
+  'click #update-btn': function(e) {
     e.preventDefault();
     var userId = Meteor.userId();
     var username = $('#name').val();
@@ -73,7 +73,7 @@ Template.profile.events({
     Session.set('photoId', null);
   },
 
-  'click #delete-image': function(e, t) {
+  'click #delete-image-btn': function(e, t) {
     e.preventDefault();
     var user = Meteor.user();
     var photoId = Session.get('photoId') || user.profile.photoId;
