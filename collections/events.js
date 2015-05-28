@@ -2,10 +2,10 @@ Events = new Mongo.Collection('events');
 
 Events.attachSchema(new SimpleSchema({
   start: {
-    type: Date
+    type: String // Date string
   },
   end: {
-    type: Date
+    type: String // Date string
   },
   allDay: {
     type: Boolean

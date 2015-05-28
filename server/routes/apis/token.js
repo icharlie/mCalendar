@@ -2,6 +2,7 @@ var token = Router.route('/api/token', {
   name: 'api.token',
   where: 'server'
 });
+
 token.get(function() {
   var url = Npm.require('url');
   var params = url.parse(this.request.url, true).query;
@@ -32,7 +33,7 @@ token.get(function() {
   var expired;
   if (userApi) {
     var expectedExpired = moment(userApi.expired);
-    var total = (userApi.total ? userApi.total : 1 ) + 1;
+    var total = (userApi.total ? userApi.total : 1) + 1;
     if (expectedExpired.isAfter(moment())) {
       token = userApi.token
       period = userApi.period + 1;
@@ -97,8 +98,8 @@ token.get(function() {
       }
     );
   }
+
   resultOfInvocation.token = token;
 
   this.response.end(EJSON.stringify(resultOfInvocation));
 });
-
