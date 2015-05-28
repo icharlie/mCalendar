@@ -2,18 +2,25 @@
 var userId = Meteor.userId();
 
 Template.profile.helpers({
-	isDisplayUploadImageButton: function() {
+  isDisplayUploadImageButton: function() {
     return Images.find({owner: Meteor.userId()}).fetch().length < 2;
   },
-  user: function(){
+
+  user: function() {
     return Meteor.user();
   },
+
   profileImage: function() {
     var user = Meteor.user();
     var photoId = Session.get('photoId') || user.profile.photoId;
-    var photo = Images.findOne({_id: photoId});
-    return photo.url();
+    if (photoId) {
+      var photo = Images.findOne({_id: photoId});
+      return photo.url();
+    }
+
+    return App.defaultProfileImage;
   },
+
   profileImages: function() {
     return Images.find({owner: Meteor.userId()});
   }
@@ -25,6 +32,7 @@ Template.profile.events({
     var photoId = $(e.target).data('id');
     Session.set('photoId', photoId);
   },
+
   'change #image': function(e, t) {
     var photo = new FS.File(e.target.files[0]);
     photo.owner = Meteor.userId();
@@ -32,29 +40,40 @@ Template.profile.events({
     var userId = Meteor.userId();
     Meteor.users.update({_id: userId}, {$set: {'profile.photo': fileObj._id}});
   },
-  'click #update': function(e) {
+
+  'click #update-btn': function(e) {
     e.preventDefault();
     var userId = Meteor.userId();
-    var userName = $('#name').val();
+    var username = $('#name').val();
     var email = $('#email').val();
     var photoId = Session.get('photoId');
+    var newProfile = {
+      username: username,
+      emails: [
+        {
+          address: email
+        }
+      ]
+    };
+
     if (photoId) {
-      Meteor.users.update({_id: userId}, {$set: {'profile.photoId': photoId}});
-      Session.set('photoId', null);
+      newProfile.profile = {
+        photoId: photoId
+      };
     }
-    HTTP.put('/user/' + userId, {
-      data: {username: userName, email: email}
-    }, function(error, resp) {
-      if (!error) {
-        Session.set('err', null);
-        Session.set('msg', 'Updated Success');
-      } else {
-        Session.set('err', error);
+    Meteor.call('updateProfile', userId, newProfile, function(error, result) {
+      // TODO: handle error(highlight error field)
+      if (error) {
+        console.log(error);
       }
+
+      // TODO: success updaet info
     });
+
+    Session.set('photoId', null);
   },
-	'click #delete-image': function(e, t) {
-    debugger;
+
+  'click #delete-image-btn': function(e, t) {
     e.preventDefault();
     var user = Meteor.user();
     var photoId = Session.get('photoId') || user.profile.photoId;
@@ -64,5 +83,5 @@ Template.profile.events({
       user.profile.photoId = null;
       Session.set('photoId', null)
     }
-	}
+  }
 });

@@ -1,0 +1,40 @@
+template(name='home')
+  #mCalendar-show.col-lg-8.col-lg-offset-2.col-md-8.col-md-offset-2
+    #mCalendar-carousel.carousel.slide(data-ride='carousel')
+      // Indicators
+      ol.carousel-indicators
+        li.active(data-target='#mCalendar-carousel', data-slide-to='0')
+        li(data-target='#mCalendar-carousel', data-slide-to='1')
+        li(data-target='#mCalendar-carousel', data-slide-to='2')
+        li(data-target='#mCalendar-carousel', data-slide-to='3')
+      // Wrapper for slides
+      .carousel-inner
+        .item.active
+          img(src='/imgs/calendar.jpg', alt='calendar')
+          .carousel-caption
+            h3
+              | Calendar
+        .item
+          img(src='/imgs/add_event.jpg', alt='add event')
+          .carousel-caption
+            h3
+              | Add an Event
+        .item
+          img(src='/imgs/edit_event.jpg', alt='edit event')
+          .carousel-caption
+            h3
+              | Edit an Event
+        .item
+          img(src='/imgs/email.jpg', alt='email')
+          .carousel-caption
+            h3
+              | Share an Event via email
+      // Controls
+      a.left.carousel-control(href='#mCalendar-carousel', data-slide='prev')
+        span.glyphicon.glyphicon-chevron-left
+      a.right.carousel-control(href='#mCalendar-carousel', data-slide='next')
+        span.glyphicon.glyphicon-chevron-right
+  .col-lg-4.col-lg-offset-4.col-md-4.col-md-offset-4
+    p
+      iframe(src='http://ghbtns.com/github-btn.html?user=icharlie&repo=mCalendar&type=fork', allowtransparency='true', frameborder='0', scrolling='0', width='62', height='20')
+      iframe(src='http://ghbtns.com/github-btn.html?user=icharlie&repo=mCalendar&type=watch', allowtransparency='true', frameborder='0', scrolling='0', width='62', height='20')

@@ -9,7 +9,7 @@ this.App.getEventsData = function() {
 this.App.generateCalendar = function() {
   if(!$('#calendar').children().length) {
     $("#calendar").fullCalendar({
-      theme: true,
+      theme: false,
       header: {
         left: "prev,next today",
         center: "title",
@@ -17,13 +17,13 @@ this.App.generateCalendar = function() {
       },
       selectable: true,
       selectHelper: true,
-      select: function (start, end, allDay) {
+      select: function (start, end, jsEvent, view) {
         prepareModal('add', {
           title: '',
           desc: '',
           start: start,
           end: end,
-          allDay: allDay
+          allDay: !start.hasTime() // use hasTime to check allDay event ref: http://fullcalendar.io/docs/selection/select_callback/
         });
         $("#myModal").modal();
       },
@@ -93,18 +93,18 @@ this.App.putPendingEventsIntoAccount = function(){
   }
 };
 
-this.App.login = function(params) {
-  return Meteor.loginWithPassword(params.email, params.password, function(err) {
-    if (err) {
-      Session.set('err', err);
-      return Router.go('login');
-    } else {
-      Session.set('err', null);
-      App.putPendingEventsIntoAccount();
-      return Router.go('calendar');
-    }
-  });
-};
+// this.App.login = function(params) {
+//   return Meteor.loginWithPassword(params.email, params.password, function(err) {
+//     if (err) {
+//       Session.set('err', err);
+//       return Router.go('sign-in');
+//     } else {
+//       Session.set('err', null);
+//       App.putPendingEventsIntoAccount();
+//       return Router.go('calendar');
+//     }
+//   });
+// };
 
 this.App.showMap = function(err, data) {
     if (data.lbounds) {

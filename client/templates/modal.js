@@ -19,26 +19,10 @@ Template.modal.events({
     } else {
       event.start = $("#eventStart").val();
       event.end = $("#eventEnd").val();
-      event.allDay = $("#eventAllDay").val();
+      event.allDay = EJSON.parse($("#eventAllDay").val());
       event.title = $("#title").val();
       event.desc = $("#msg").val();
       event.ownerId = Meteor.userId();
-      if (event.allDay) {
-        if (event.date) {
-          event.start = event.date;
-          event.end = event.date;
-        }
-      } else {
-        var start = event.start.split(':'),
-          end = event.end.split(':'),
-          startHours = parseInt(start[0], 10),
-          startSeconds = parseInt(start[1], 10),
-          endHours = parseInt(end[0], 10),
-          endSeconds = parseInt(end[1], 10);
-
-        event.start = moment(event.date).add('hours', startHours).add('seconds', startSeconds).format('MM-DD-YYYY HH:ss');
-        event.end = moment(event.date).add('hours', endHours).add('seconds', endSeconds).format('MM-DD-YYYY HH:ss');
-      }
       Events.insert(event);
     }
     $("#myModal").modal("hide");
@@ -47,7 +31,7 @@ Template.modal.events({
     $("#calendar").fullCalendar("refetchEvents");
   },
   'click #deleteEvent': function(e, t) {
-    event = JSON.parse($("#current_evt_data").html());
+    event = EJSON.parse($("#current_evt_data").html());
     if (event.ownerId === Meteor.userId()) {
       Events.remove({_id: event._id});
     } else {

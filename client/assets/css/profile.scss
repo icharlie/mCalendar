@@ -1,0 +1,49 @@
+@import "variables.scss";
+
+.profile-row {
+  display: inline-block;
+  width: 100%;
+  margin: 0;
+  float: left;
+  &:last-of-type {
+    padding: 5px;
+  }
+}
+
+.profile-photos {
+  display: inline-block;
+  width: 50%;
+  padding: 5px;
+  img {
+    width: 100%;
+  }
+}
+
+.prfoile-thumbnail img {
+  width: 100%;
+}
+
+#delete-image-btn, #update-btn {
+  width: 100%;
+}
+
+
+@media screen and (max-width: $screen-sm) {
+  .profile-row {
+    width: 50%;
+  }
+
+  .prfoile-thumbnail img {
+    width: 50%;
+  }
+
+}
+
+@media screen and (max-width: $screen-xs) {
+  .profile-row {
+    width: 100%;
+  }
+  .prfoile-thumbnail img {
+    width: 100%;
+  }
+}

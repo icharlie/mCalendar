@@ -1,0 +1,19 @@
+template(name='emailModal')
+  #myEmailModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myEmailModalLabel', aria-hidden='true')
+    .modal-dialog
+      .modal-content
+        .modal-header
+          button.close(type='button', data-dismiss='modal', aria-hidden='true') 
+            |&times;
+          h4.modal-title 
+            |Share Event
+        .modal-body
+          .form-group
+            label(for='email') 
+              |Email: 
+            input#email.form-control(type='email', name='email', value='')
+        .modal-footer
+          button#backEvent.btn.btn-primary(type='button') 
+            |Back
+          button#sendEmail.btn.btn-info(type='button') 
+            |Send
