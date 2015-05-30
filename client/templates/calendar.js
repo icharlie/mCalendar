@@ -11,17 +11,6 @@ Template.calendar.rendered = function() {
   }
 };
 
-Template.calendar.helpers({
-  profileImage: function() {
-    var photoId = Meteor.user().profile.photoId;
-    if (photoId) {
-      var img = Images.findOne({_id: photoId});
-      return img.url();
-    }
-    return App.defaultProfileImage;
-  }
-});
-
 Template.calendar.events({
   'click .fc-button-agendaDay': function() {
     Meteor.users.update({_id:Meteor.userId()}, {$set:{'profile.calendarView': 'agendaDay'}});

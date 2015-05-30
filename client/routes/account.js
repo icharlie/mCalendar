@@ -9,6 +9,7 @@
 
 Router.route('/profile/:_id', {
   template: 'profile',
+  name: 'profile',
   waitOn: function() {
     return Meteor.subscribe('user', this.params._id);
   },

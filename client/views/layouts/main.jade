@@ -8,7 +8,11 @@ head
 body
 
 template(name='main')
-    +headerNavbar
-    .container-fluid
-      .row
-        +yield
+    .container-fluid.mFluid
+      .mRow
+        .sidebar
+          +sidebar
+        .main
+          +headerNavbar
+          .mRow
+            +yield

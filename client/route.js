@@ -1,42 +1,3 @@
-// client
-'use srtict';
-
-var deserialize = function(str) {
-  var data = {};
-  var params = str.split('&');
-  var _p;
-
-  for (var p in params) {
-    _p = params[p].split('=');
-    data[_p[0]] = _p[1];
-  }
-
-  return data;
-};
-
-var emailTempate = function(event) {
-  return ['<html>',
-    '<head>',
-    '<title>Email From TOM</title>',
-    '</head>',
-    '<body>',
-    'Click <a href="', Meteor.absoluteUrl('event'), '/add/', event._id, '">',
-     event.title, '</a> to add this event into your calendar.',
-    '</body>',
-    '</html>'
-  ].join('');
-};
-
-var putPendingEvents = function(eventId) {
-  var pendingEvents = Session.get('pendingEvents');
-  if (!pendingEvents)
-    pendingEvents = [];
-  else
-    pendingEvents = JSON.parse(pendingEvents);
-  pendingEvents.push(eventId);
-  Session.set('pendingEvents', JSON.stringify(pendingEvents));
-};
-
 Router.map(function() {
   this.route('home', {
     path: '/',
@@ -45,6 +6,7 @@ Router.map(function() {
       this.render('home');
     }
   });
+
   this.route('about', {
     path: '/about',
     action: function() {
@@ -52,6 +14,7 @@ Router.map(function() {
       this.render('about');
     }
   });
+
   this.route('calendar', {
     waitOn: function() {
       return Meteor.subscribe('events');
@@ -76,7 +39,18 @@ Router.map(function() {
   });
 
   this.route('/eventNew', {
-    path: '/eventNew'
+    path: '/eventNew',
+    waitOn: function() {
+      return Meteor.subscribe('events');
+    },
+    action: function() {
+      if (this.ready()) {
+        Session.set('currentView', 'eventNew');
+        this.render('eventNew')
+      } else {
+        this.render('loading');
+      }
+    }
   });
 
   this.route('notFound', {

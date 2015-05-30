@@ -1,5 +1,5 @@
 template(name='headerNavbar')
-  nav.navbar.navbar-inverse.navbar-fixed-top(role='navigation')
+  nav.navbar.navbar-inverse(role='navigation')
     .container
       .navbar-header
         button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-ex1-collapse')
@@ -7,9 +7,6 @@ template(name='headerNavbar')
           span.icon-bar
           span.icon-bar
           span.icon-bar
-        // You'll want to use a responsive image option so this logo looks good on devices - I recommend using something like retina.js (do a quick Google search for it and you'll find it)
-        a.navbar-brand.logo-nav(href="{{pathFor 'home'}}")
-          img(src='/imgs/calendar.png')
       .collapse.navbar-collapse.navbar-ex1-collapse
         ul.nav.navbar-nav.navbar-right
           li

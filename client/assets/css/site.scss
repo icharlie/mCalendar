@@ -1,11 +1,6 @@
-/* CSS declarations go here */
-#calendar {
-  width: auto;
-  max-width: 900px;
-  z-index: 10;
-  margin: 0 auto;
-}
+@import "variables.scss";
 
+/* CSS declarations go here */
 .logo-nav img {
   width: 45px;
 }
@@ -86,11 +81,7 @@
   padding-right: 0px;
 }
 
-@media (max-width: 767px) {
-  .form-group > .row .col-md-4{
-    padding: 5px 15px;
-  }
-}
+
 
 /* from http://lea.verou.me/2013/03/ios-6-switch-style-checkboxes-with-pure-css/ */
 /* = iphone style checkbox  = */
@@ -165,7 +156,7 @@ label.ios-switch-label:last-of-type {
   box-shadow: 0 1px hsla(0,0%,100%,.8);
 }
 
-
+/* map */
 #map {
   width: 100%;
   height: 600px;
@@ -175,6 +166,7 @@ label.ios-switch-label:last-of-type {
 	margin: 10px 0;
 }
 
+/* calendar */
 #mCalendar-show .item {
   height: 450px;
 }
@@ -192,13 +184,22 @@ label.ios-switch-label:last-of-type {
   color: #9E1313;
 }
 
-.fc-header-title h2 {
-  white-space: normal;
-}
-@media (max-width: 480px) {
-  .fc-header-left, .fc-header-center, .fc-header-right {
-    display: block;
-    width: 100%;
-    text-align: center;
+@media (max-width: $screen-sm) {
+
+  .form-group > .row .col-md-4{
+    padding: 5px 15px;
   }
+}
+
+
+/* elements */
+.mFluid {
+  padding: 0;
+}
+
+.mRow {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  width: 100%;
 }

@@ -1,0 +1,11 @@
+template(name='calendar')
+  if currentUser
+    #calendar
+    +modal
+    +emailModal
+
+
+template(name="calendarSidebarLinks")
+  a(href="{{pathFor 'eventNew'}}") 
+    i.fa.fa-plus
+    |New
