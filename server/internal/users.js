@@ -2,7 +2,7 @@ Meteor.methods({
   updateProfile: function(userId, profile) {
     if (profile.username) {
       var userByUsername = Meteor.users.findOne({username: profile.username});
-      if (userId !== userByUsername._id) {
+      if (userByUsername && userId !== userByUsername._id) {
         throw new Meteor.Error(409, 'Duplicated username');
       }
     }
