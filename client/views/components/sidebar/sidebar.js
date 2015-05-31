@@ -4,7 +4,7 @@ Template.sidebar.helpers({
 			var photoId = Meteor.user().profile.photoId;
 			if (photoId) {
 				var img = Images.findOne({_id: photoId});
-				return img.url();
+				return img ? img.url() : App.defaultProfileImage;
 			}
 		}
     return App.defaultProfileImage;

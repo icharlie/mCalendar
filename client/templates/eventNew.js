@@ -69,6 +69,7 @@ Template.locationEvent.events({
     }
   },
   'click #saveEvent': function(e, t) {
+    e.preventDefault();
     ["title","msg"].map(removeHasError);
     ["title","msg"].map(checkEmpty);
     if (!$('.form-group.has-error').length) {
@@ -88,7 +89,6 @@ Template.locationEvent.events({
       Events.insert(generateEvent(App.currentEvent));
       Router.go('/calendar');
     }
-    e.preventDefault();
   }
 });
 
