@@ -2,20 +2,16 @@
 var userId = Meteor.userId();
 
 Template.profile.helpers({
-  isDisplayUploadImageButton: function() {
-    return Images.find({owner: Meteor.userId()}).fetch().length < 2;
-  },
-
   user: function() {
     return Meteor.user();
   },
 
   profileImage: function() {
     var user = Meteor.user();
-    var photoId = Session.get('photoId') || user.profile.photoId;
+    var photoId = user.profile.photoId;
     if (photoId) {
       var photo = Images.findOne({_id: photoId});
-      return photo.url();
+      return photo ?  photo.url() : App.defaultProfileImage;
     }
 
     return App.defaultProfileImage;
@@ -27,18 +23,17 @@ Template.profile.helpers({
 });
 
 Template.profile.events({
-  'click .profile-photos': function(e, t) {
-    var userId = Meteor.userId();
-    var photoId = $(e.target).data('id');
-    Session.set('photoId', photoId);
-  },
-
   'change #image': function(e, t) {
+    var user = Meteor.user();
     var photo = new FS.File(e.target.files[0]);
-    photo.owner = Meteor.userId();
+    photo.owner = user._id;
     var fileObj = Images.insert(photo);
-    var userId = Meteor.userId();
-    Meteor.users.update({_id: userId}, {$set: {'profile.photo': fileObj._id}});
+    // clean old image
+    var oldPhoto = Images.findOne({_id: user.profile.photoId});
+    if (oldPhoto) {
+      oldPhoto.remove();
+    }
+    Meteor.users.update({_id: userId}, {$set: {'profile.photoId': fileObj._id}});
   },
 
   'click #update-btn': function(e) {
@@ -46,7 +41,6 @@ Template.profile.events({
     var userId = Meteor.userId();
     var username = $('#name').val();
     var email = $('#email').val();
-    var photoId = Session.get('photoId');
     var newProfile = {
       username: username,
       emails: [
@@ -56,32 +50,24 @@ Template.profile.events({
       ]
     };
 
-    if (photoId) {
-      newProfile.profile = {
-        photoId: photoId
-      };
-    }
     Meteor.call('updateProfile', userId, newProfile, function(error, result) {
       // TODO: handle error(highlight error field)
       if (error) {
         console.log(error);
       }
-
       // TODO: success updaet info
     });
-
-    Session.set('photoId', null);
   },
 
   'click #delete-image-btn': function(e, t) {
     e.preventDefault();
     var user = Meteor.user();
-    var photoId = Session.get('photoId') || user.profile.photoId;
+    var photoId = user.profile.photoId;
     if (photoId) {
       var photo = Images.findOne({_id: photoId});
       photo.remove();
       user.profile.photoId = null;
-      Session.set('photoId', null)
+      Meteor.users.update({_id: user.id}, user);
     }
   }
 });
