@@ -1,5 +1,5 @@
 // advanced new event
-Template.eventNew.rendered = function() {
+Template.locationEvent.rendered = function() {
   App.geocoder = L.mapbox.geocoder('mapbox.places', {
     accessToken: App.mapboxApiKey
   });
@@ -28,11 +28,11 @@ Template.eventNew.rendered = function() {
   $('#date').datepicker({dateFormat: 'mm-dd-yy'});
 };
 
-Template.eventNew.loadingMap = function() {
+Template.locationEvent.loadingMap = function() {
   return Session.set('loadingMap', true);
 };
 
-Template.eventNew.events({
+Template.locationEvent.events({
   'click #calender-btn': function (e, t) {
     $('#date').datepicker('show');
   },
