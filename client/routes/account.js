@@ -26,8 +26,4 @@ Router.route('/profile/:_id', {
       this.render('loading');
     }
   },
-
-  onData: function() {
-    return Meteor.users.find()
-  }
 });

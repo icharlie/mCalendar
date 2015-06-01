@@ -14,10 +14,6 @@ Router.route('calendar', {
     } else {
       this.render('loading');
     }
-  },
-
-  onData: function() {
-    App.generateCalendar();
   }
 });
 
