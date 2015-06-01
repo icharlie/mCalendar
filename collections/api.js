@@ -7,6 +7,7 @@ Api.attachSchema(new SimpleSchema({
   },
   token: {
     type: String,
+    unique: true,
     optional: true
   },
   start: {

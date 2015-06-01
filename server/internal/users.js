@@ -1,4 +1,8 @@
 Meteor.methods({
+  updatePhoto: function(userId, photoId) {
+    Meteor.users.update(userId, {$set: {'profile.photoId': photoId}});
+  },
+
   updateProfile: function(userId, profile) {
     if (profile.username) {
       var userByUsername = Meteor.users.findOne({username: profile.username});
@@ -6,6 +10,6 @@ Meteor.methods({
         throw new Meteor.Error(409, 'Duplicated username');
       }
     }
-    Meteor.users.update({_id: userId}, {$set: profile});
+    Meteor.users.update(userId, {$set: profile});
   }
 });

@@ -5,7 +5,8 @@ template(name='profile')
         a.thumbnail.prfoile-thumbnail(href='#')
           img(src='{{profileImage}}', alt='profile image')
         input#image(type='file', name='image', value='')
-        button#delete-image-btn.btn.btn-danger Delete    
+        if displayDeleteButton 
+          button#delete-image-btn.btn.btn-danger Delete    
   .col-md-6.col-sm-6
     form.form-horizontal(role='form', enctype='multipart/form-data')
       .form-group
@@ -23,6 +24,6 @@ template(name='profile')
 
 
 template(name="profileSidebarLinks")
-  a(href="{{ pathFor 'calendar' }}" class="btn btn-defaut")
+  a(href="{{ pathFor 'calendar' }}")
     i.fa.fa-chevron-left
     | Back

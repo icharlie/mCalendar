@@ -13,12 +13,11 @@ Template.profile.helpers({
       var photo = Images.findOne({_id: photoId});
       return photo ?  photo.url() : App.defaultProfileImage;
     }
-
     return App.defaultProfileImage;
   },
 
-  profileImages: function() {
-    return Images.find({owner: Meteor.userId()});
+  displayDeleteButton: function() {
+    return Meteor.user().profile.photoId;
   }
 });
 
@@ -33,7 +32,7 @@ Template.profile.events({
     if (oldPhoto) {
       oldPhoto.remove();
     }
-    Meteor.users.update({_id: userId}, {$set: {'profile.photoId': fileObj._id}});
+    Meteor.call('updatePhoto', userId, fileObj._id);
   },
 
   'click #update-btn': function(e) {

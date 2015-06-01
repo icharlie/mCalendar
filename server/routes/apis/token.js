@@ -5,11 +5,16 @@ var token = Router.route('/api/token', {
 
 token.get(function() {
   var url = Npm.require('url');
+
   var params = url.parse(this.request.url, true).query;
 
-  if (!params.email || !params.password) {
-    throw new Meteor.Error('Username and password have to be provided');
-  }
+  var required = ['email', 'password'];
+
+  _.each(required, function(field) {
+    if (! params[field]) {
+      throw new Meteor.Error( Utils.capitalize(field) + ' has to be provided');
+    }
+  });
 
   // check email exist
   var user = Meteor.users.findOne({emails: {$elemMatch: {address: params.email}}});
@@ -21,75 +26,31 @@ token.get(function() {
 
   // check password
   var resultOfInvocation = Accounts._checkPassword(user, params.password);
+
   if (resultOfInvocation.error) {
     this.response.statusCode = resultOfInvocation.error.error; // http status code
     this.response.end(EJSON.stringify({msg: resultOfInvocation.error.reason}));
   }
 
-  // generate temp auth token
-  var userApi = Api.findOne({userId: resultOfInvocation.userId});
-  var token;
-  var start;
-  var expired;
-  if (userApi) {
-    var expectedExpired = moment(userApi.expired);
-    var total = (userApi.total ? userApi.total : 1) + 1;
-    if (expectedExpired.isAfter(moment())) {
-      token = userApi.token
-      period = userApi.period + 1;
-      Api.update(
-        {
-          userId: resultOfInvocation.userId
-        },
-        {
-          $set: {
-            period: period,
-            total: total
-          }
-        },
-        {
-          validate: false
-        }
-      );
-    } else {
-      token = Accounts._generateStampedLoginToken().token;
-      start = moment();
-      expired = moment().add(10, 'm');
+  var token = user.token;
 
-      Api.update(
-        {
-          userId: resultOfInvocation.userId
-        },
-        {
-          $set: {
-            token: token,
-            start: start.toDate(),
-            expired: expired.toDate(),
-            period: 1,
-            total: total
-          }
-        },
-        {
-          validate: false
-        }
-      );
-    }
-  } else {
-    token = Accounts._generateStampedLoginToken().token;
-    start = moment();
-    expired = moment().add(10, 'm');
+  if (! token) {
+    // generate api token
+    var token = Accounts._generateStampedLoginToken().token;
+    user.token = token
+
+    // update user with new token
+    Users.update({_id: user._id}, {$set: user});
 
     Api.update(
       {
-        userId: resultOfInvocation.userId
+        userId: user._id
       },
       {
         $set: {
-          userId: resultOfInvocation.userId,
+          userId: user._id,
           token: token,
-          start: start,
-          expired: expired,
-          period: 1
+          amount: 0
         }
       },
       {
@@ -97,9 +58,9 @@ token.get(function() {
         validate: false
       }
     );
+
   }
 
-  resultOfInvocation.token = token;
 
-  this.response.end(EJSON.stringify(resultOfInvocation));
+  this.response.end(EJSON.stringify({token: token}));
 });
