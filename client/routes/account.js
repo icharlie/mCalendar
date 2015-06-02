@@ -25,5 +25,5 @@ Router.route('/profile/:_id', {
     } else {
       this.render('loading');
     }
-  },
+  }
 });

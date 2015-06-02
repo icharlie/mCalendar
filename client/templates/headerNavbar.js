@@ -11,9 +11,7 @@ Template.headerNavbar.helpers({
 
 Template.headerNavbar.events({
   'click a#logout': function() {
-    Meteor.logout(function() {
-      Router.go('/');
-    });
+    Meteor.logout();
   },
 
   'click a#profile': function(e) {
