@@ -8,16 +8,15 @@ Template.profile.helpers({
 
   profileImage: function() {
     var user = Meteor.user();
-    var photoId = user.profile.photoId;
-    if (photoId) {
-      var photo = Images.findOne({_id: photoId});
+    if (user && user.profile.photoId) {
+      var photo = Images.findOne({_id: user.profile.photoId});
       return photo ?  photo.url() : App.defaultProfileImage;
     }
     return App.defaultProfileImage;
   },
 
   displayDeleteButton: function() {
-    return Meteor.user().profile.photoId;
+    return Meteor.user() && Meteor.user().profile.photoId;
   }
 });
 
