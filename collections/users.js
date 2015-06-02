@@ -52,7 +52,12 @@ Schema.UserProfile = new SimpleSchema({
     photoId: {
       type: String,
       optional: true
-    }
+    },
+		calendarView: {
+			type: String,
+			optional: true,
+			defaultValue: 'month'
+		}
 });
 
 Users.attachSchema(new SimpleSchema({
