@@ -1,8 +1,4 @@
 Meteor.methods({
-  updatePhoto: function(userId, photoId) {
-    Meteor.users.update(userId, {$set: {'profile.photoId': photoId}});
-  },
-
   updateProfile: function(userId, profile) {
     if (profile.username) {
       var userByUsername = Meteor.users.findOne({username: profile.username});
