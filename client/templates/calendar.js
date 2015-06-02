@@ -12,15 +12,15 @@ Template.calendar.rendered = function() {
 };
 
 Template.calendar.events({
-  'click .fc-button-agendaDay': function() {
-    Meteor.users.update({_id:Meteor.userId()}, {$set:{'profile.calendarView': 'agendaDay'}});
+  'click .fc-agendaDay-button': function() {
+		Meteor.call('updateProfile', Meteor.userId(), {'profile.calendarView': 'agendaDay'});
   },
 
-  'click .fc-button-agendaWeek': function(e, t) {
-    Meteor.users.update({_id:Meteor.userId()}, {$set:{'profile.calendarView':'agendaWeek'}});
+  'click .fc-agendaWeek-button': function(e, t) {
+		Meteor.call('updateProfile', Meteor.userId(), {'profile.calendarView': 'agendaWeek'})
   },
 
-  'click .fc-button-month': function() {
-    Meteor.users.update({_id:Meteor.userId()}, {$set:{'profile.calendarView':'month'}});
+  'click .fc-month-button': function() {
+		Meteor.call('updateProfile', Meteor.userId(), {'profile.calendarView': 'month'});
   }
 });
