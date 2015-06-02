@@ -31,7 +31,7 @@ Template.profile.events({
     if (oldPhoto) {
       oldPhoto.remove();
     }
-    Meteor.call('updatePhoto', userId, fileObj._id);
+    Meteor.call('updateProfile', userId, {'profile.photoId': fileObj._id});
   },
 
   'click #update-btn': function(e) {
@@ -65,7 +65,7 @@ Template.profile.events({
       var photo = Images.findOne({_id: photoId});
       photo.remove();
       user.profile.photoId = null;
-      Meteor.users.update({_id: user.id}, user);
+			Meteor.call('updateProfile', user);
     }
   }
 });
