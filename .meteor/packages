@@ -7,14 +7,10 @@ standard-app-packages
 accounts-base
 email
 accounts-password
-iron:router
 http
 accounts-meteor-developer
 
-twbs:bootstrap
 momentjs:moment
-sanjo:jasmine
-velocity:html-reporter
 cfs:standard-packages
 cfs:filesystem
 mquandalle:jade
@@ -25,3 +21,7 @@ fourseven:scss
 houston:admin
 fortawesome:fontawesome
 digilord:faker
+iron:router
+fezvrasta:bootstrap-material-design
+sanjo:jasmine
+velocity:html-reporter

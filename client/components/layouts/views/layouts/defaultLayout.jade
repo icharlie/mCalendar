@@ -1,0 +1,9 @@
+template(name='defaultLayout')
+	.container-fluid.mFluid
+		.mRow
+			.sidebar
+				+sidebar
+			.main
+				+headerNavbar
+				.mRow
+					+yield

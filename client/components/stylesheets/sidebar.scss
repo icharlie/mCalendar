@@ -1,0 +1,52 @@
+@import "zindex.scss";
+@import "variables.scss";
+
+/* Hide for mobile, show later in CSS file */
+.sidebar {
+  display: none;
+}
+.sidebar-log {
+  text-align: center;
+  height: 50px;
+  img {
+    height: 100%;
+  }
+}
+
+.nav-sidebar-header {
+  text-align: center;
+  margin: 10px auto;
+  img {
+    border-radius: 50%;
+    width: 100%;
+    height: auto;
+  }
+}
+
+.sidebar-list {
+	box-shadow: rgba(255, 255, 255, 0.15) 0 1px 0 0;
+	border-bottom: rgba(255, 255, 255, 0.5) 1px solid;
+	 a.sidebar-list-link {
+		&:active, &:focus, &:hover {
+			background-color: rgba(238, 238, 238, 0.75);
+			font-size: 1.1em;
+		}
+	}
+}
+
+@media (min-width: 768px) {
+  .sidebar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    max-width: $sidebar-width;
+    height: 100%;
+    z-index: $sidebar-z-index;
+    display: block;
+    padding: 0 5px;
+    overflow-x: hidden;
+    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+		background-color: #0F495C;
+    background-attachment: fixed;
+  }
+}

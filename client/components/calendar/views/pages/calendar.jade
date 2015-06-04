@@ -1,0 +1,12 @@
+template(name='calendar')
+	if currentUser
+		#calendar
+		+modal
+		+emailModal
+
+
+template(name="calendarSidebarLinks")
+	li.sidebar-list
+		a.sidebar-list-link(href="{{pathFor 'locationEvent'}}") 
+			i.fa.fa-plus
+			|New
