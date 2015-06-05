@@ -24,14 +24,15 @@
 }
 
 .sidebar-list {
-	box-shadow: rgba(255, 255, 255, 0.15) 0 1px 0 0;
-	border-bottom: rgba(255, 255, 255, 0.5) 1px solid;
-	 a.sidebar-list-link {
-		&:active, &:focus, &:hover {
-			background-color: rgba(238, 238, 238, 0.75);
-			font-size: 1.1em;
-		}
-	}
+  box-shadow: rgba(255, 255, 255, 0.15) 0 1px 0 0;
+  border-bottom: rgba(255, 255, 255, 0.5) 1px solid;
+  a.sidebar-list-link {
+    color: #fff;
+    &:active, &:focus, &:hover {
+      background-color: rgba(238, 238, 238, 0.75);
+      font-size: 1.1em;
+    }
+  }
 }
 
 @media (min-width: 768px) {
@@ -46,7 +47,7 @@
     padding: 0 5px;
     overflow-x: hidden;
     overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
-		background-color: #0F495C;
+    background-color: #0F495C;
     background-attachment: fixed;
   }
 }

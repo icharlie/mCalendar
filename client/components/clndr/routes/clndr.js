@@ -1,4 +1,4 @@
-Router.route('calendar', {
+Router.route('clndr', {
   waitOn: function() {
     return Meteor.subscribe('events');
   },
@@ -6,8 +6,7 @@ Router.route('calendar', {
   action: function() {
     if (this.ready()) {
       if (Meteor.user()) {
-        Session.set('currentView', 'calendar');
-        this.render('calendar');
+        this.render('clndr');
       } else {
         Router.go('atSignIn');
       }

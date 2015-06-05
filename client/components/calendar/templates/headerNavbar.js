@@ -2,7 +2,7 @@
 Template.headerNavbar.helpers({
   userEmail: function() {
     return Meteor.user().emails[0].address;
-  },
+	},
 
 	userId: function() {
 		return Meteor.userId();

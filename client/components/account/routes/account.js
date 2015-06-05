@@ -7,6 +7,13 @@
   });
 });
 
+
+Router.route('logout', {
+  action: function() {
+    Meteor.logout();
+  }
+});
+
 Router.route('/profile/:_id', {
   template: 'profile',
   name: 'profile',

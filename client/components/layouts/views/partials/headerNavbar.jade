@@ -1,27 +1,27 @@
 template(name='headerNavbar')
   nav.navbar.navbar-inverse(role='navigation')
-    .container
-      .navbar-header
-        button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-ex1-collapse')
-          span.sr-only Toggle navigation
-          span.icon-bar
-          span.icon-bar
-          span.icon-bar
-      .collapse.navbar-collapse.navbar-ex1-collapse
-        ul.nav.navbar-nav.navbar-right
+    .navbar-header
+      button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-ex1-collapse')
+        span.icon-bar
+        span.icon-bar
+        span.icon-bar
+    .collapse.navbar-collapse.navbar-inverse-collapse
+      ul.nav.navbar-nav.navbar-right
+        li
+          a(href="{{pathFor 'home'}}") Home
+        if currentUser
           li
-            a(href="{{pathFor 'home'}}") Home
-          if currentUser
-            li
-              a(href="{{pathFor 'calendar'}}") My Calendar
-            li.dropdown
-              a(href='#', data-toggle='dropdown') Account
-              ul#accountMenu.dropdown-menu(role='menu', aria-labelledby='account')
-                li
-                  a(href="{{pathFor 'profile' _id=userId}}") Profile
-                li.divider
-                li
-                  a(href="{{pathFor 'atSignOut'}}") Logout
-          else
-            li
-              a(href="{{pathFor route='atSignIn'}}") Log in
+            a(href="{{pathFor 'calendar'}}") My Calendar
+          li.dropdown
+            a(href='#', data-toggle='dropdown') 
+              | Account
+              b.caret
+            ul#accountMenu.dropdown-menu(role='menu', aria-labelledby='account')
+              li
+                a(href="{{pathFor 'profile' _id=userId}}") Profile
+              li.divider
+              li
+                a(href="{{pathFor 'logout'}}") Logout
+        else
+          li
+            a(href="{{pathFor route='atSignIn'}}") Log in
