@@ -1,7 +1,10 @@
 template(name='defaultLayout')
   .container-fluid.mFluid
     .mRow
-      +sidebarComponent(position='left')
+      +sidebarComponent(
+        sidebarSize='xs'
+        sidebarType="primary"
+        location='left')
       .main(class="{{#if isLeftSidebarOpen}}left-sidebar-open{{/if}}")
         +headerNavbar
         .mRow

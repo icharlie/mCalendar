@@ -1,12 +1,13 @@
 template(name='calendar')
-	if currentUser
-		#calendar
-		+modal
-		+emailModal
+  if currentUser
+    .col-md-11.col-sm-10.col-md-offset-1.col-sm-offset-2
+      #calendar
+    +modal
+    +emailModal
 
 
 template(name="calendarSidebarLinks")
-	li.sidebar-list
-		a.sidebar-list-link(href="{{pathFor 'locationEvent'}}") 
-			i.fa.fa-plus
-			|New
+  li.sidebar-list
+    a.sidebar-list-link(href="{{pathFor 'locationEvent'}}") 
+      i.fa.fa-plus
+      |New

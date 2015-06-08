@@ -4,8 +4,8 @@ Sidebar = BlazeComponent.extendComponent({
   },
 
   onCreated: function () {
-    var position = this.data().position ? this.data().position : 'left';
-    var key = 'is' + Utils.capitalize(position) + 'SidebarOpen';
+    var location = this.data().location ? this.data().location : 'left';
+    var key = 'is' + Utils.capitalize(location) + 'SidebarOpen';
     this._isOpen = new ReactiveVar(Session.get(key))
   },
 
@@ -35,8 +35,17 @@ Sidebar = BlazeComponent.extendComponent({
     }];
   },
 
+  getPosition: function() {
+    var position = this.data().position ? this.data().position : 'fixed';
+    return 'position-' + position;
+  },
+
   getViewTemplate: function () {
-    // TODO: dynamic
-    return 'homeSidebar';
+    var viewTemplate = 'home';
+    var _viewTemplate = this.data().view;
+    if (_.isString(_viewTemplate)) {
+      viewTemplate  = _viewTemplate;
+    }
+    return viewTemplate + 'Sidebar';
   }
 }).register('sidebarComponent');
