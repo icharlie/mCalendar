@@ -1,7 +1,7 @@
 template(name='headerNavbar')
   nav.navbar.navbar-inverse(role='navigation')
     .navbar-header
-      button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-ex1-collapse')
+      button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-inverse-collapse')
         span.icon-bar
         span.icon-bar
         span.icon-bar
@@ -13,7 +13,7 @@ template(name='headerNavbar')
           li
             a(href="{{pathFor 'calendar'}}") My Calendar
           li.dropdown
-            a(href='#', data-toggle='dropdown') 
+            a(href='#', data-toggle='dropdown')
               | Account
               b.caret
             ul#accountMenu.dropdown-menu(role='menu', aria-labelledby='account')

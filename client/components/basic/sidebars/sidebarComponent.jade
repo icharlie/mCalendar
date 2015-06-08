@@ -1,0 +1,7 @@
+template(name="sidebarComponent")
+  .sidebar(
+    class="{{position}}"
+    class="{{#if isOpen}}is-open{{/if}}")
+    a.sidebar-tongue.js-toogle-sidebar(class="{{position}}")
+      i.fa(class="fa-angle-{{position}}")
+    +Template.dynamic(template=getViewTemplate)

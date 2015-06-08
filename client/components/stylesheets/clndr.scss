@@ -85,10 +85,13 @@
 #full-clndr .clndr-grid .days .empty.adjacent-month .day-number {
   opacity: 0.3;
 }
-#full-clndr .clndr-grid .days .today {
-  background-color: white;
-  background-image: none;
+#full-clndr .clndr-grid .days {
+  .today, .selected {
+    background-color: white;
+    background-image: none;
+  }
 }
+
 #full-clndr .event-listing {
   float: left;
   width: 25%;

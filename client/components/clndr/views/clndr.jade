@@ -1,6 +1,7 @@
 template(name="clndr")
   #full-clndr
     script(type='text/template' id="full-clndr-template").
+
       <div class="clndr-controls">
         <div class="clndr-previous-button">&lt;</div>
         <div class="clndr-next-button">&gt;</div>
@@ -26,4 +27,12 @@ template(name="clndr")
               <div class="event-item-location"><%= event.location %></div>
             </div>
           <% }); %>
+      </div>
+      <div class="right-sidebar">
+        <div class="col-md-offset-4 col-md-4">
+          <div class="inputs">
+            <input type="newEvent" value="" placeholder="new event" class="form-control">
+            <a href="#" id="addNewEvent" class="btn btn-default btn-primary">Add</a>
+          </div>
+        </div>
       </div>

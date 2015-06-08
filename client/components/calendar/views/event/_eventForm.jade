@@ -1,0 +1,29 @@
+template(name='_eventForm')
+  .col-sm-4.col-md-4.col-md-offset-2.col-sm-offset-2
+    .panel.panel-info
+      .panel-heading
+        |New Event
+      .panel-body.advancedEvent
+        .form-group
+          input#date.form-control.form-control-success(type='text', name='date', value='{{date}}', placeholder='{{today}}' readonly='')
+        .form-group
+          input#title.form-control.form-control-success(type='text', name='title', placeholder='Title', value='{{title}}')
+        .form-group
+          input#address.form-control.form-control-danger(type='text', name='address', placeholder='Address', value='{{address}}')
+        .form-group
+          .row
+            .col-md-4.col-sm-4
+              input#eventStart.form-control(type='text', placeholder='00:00', name='start', disabled='{{allDay}}', data-value='{{start}}')
+            .col-md-4.col-sm-4
+              input#eventEnd.form-control(type='text', placeholder='00:00', name='end', disabled='{{allDay}}', data-value='{{end}}')
+            .col-md-4.col-sm-4
+              .checkbox
+                label(clas='ios-switch-label')
+                  input#allDay(type='checkbox', value='{{allDay}}', name='allDay', checked='{{allDay}}')
+                  |All Day
+        .form-group
+          textarea#msg.form-control.event-msg.event-input(name='desc', rows='12', cols='30', placeholder='Message')
+            = desc
+        button#saveEvent.btn.btn-primary.pull-right(type='button')
+          |Add
+        +eventInfoFields

@@ -6,7 +6,8 @@ Router.route('calendar', {
   action: function() {
     if (this.ready()) {
       if (Meteor.user()) {
-        Session.set('currentView', 'calendar');
+        Session.set('isLeftSidebarOpen', true);
+        Session.set('isRightSidebarOpen', true);
         this.render('calendar');
       } else {
         Router.go('atSignIn');

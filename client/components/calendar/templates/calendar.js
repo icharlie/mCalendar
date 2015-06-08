@@ -16,7 +16,7 @@ Template.calendar.events({
 		Meteor.call('updateProfile', Meteor.userId(), {'profile.calendarView': 'agendaDay'});
   },
 
-  'click .fc-agendaWeek-button': function(e, t) {
+  'click .fc-agendaWeek-button': function() {
 		Meteor.call('updateProfile', Meteor.userId(), {'profile.calendarView': 'agendaWeek'})
   },
 

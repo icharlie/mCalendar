@@ -1,10 +1,9 @@
 @import "zindex.scss";
 @import "variables.scss";
-
-/* Hide for mobile, show later in CSS file */
 .sidebar {
   display: none;
 }
+/* Hide for mobile, show later in CSS file */
 .sidebar-log {
   text-align: center;
   height: 50px;
@@ -38,16 +37,58 @@
 @media (min-width: 768px) {
   .sidebar {
     position: fixed;
+    display: block;
     bottom: 0;
-    left: 0;
+    width: $sidebar-width;
     max-width: $sidebar-width;
     height: 100%;
     z-index: $sidebar-z-index;
-    display: block;
     padding: 0 5px;
-    overflow-x: hidden;
-    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
     background-color: #0F495C;
     background-attachment: fixed;
+    &.left {
+      left: -$sidebar-width;
+    }
+    &.left.is-open {
+      left: 0;
+    }
+    &.right {
+      right: -$sidebar-width;
+    }
+    &.right.is-open {
+      right: 0;
+    }
+    .sidebar-tongue {
+      display: block;
+      width: 30px;
+      height: 30px;
+      position: absolute;
+      top: 10px;
+      background: #fff;
+      &:hover {
+        cursor: pointer;
+      }
+      &.left {
+        border-top-right-radius: 3px;
+        border-bottom-right-radius: 3px;
+        left: $sidebar-width;
+      }
+      &.right {
+        border-top-left-radius: 3px;
+        border-bottom-left-radius: 3px;
+        right: $sidebar-width
+      }
+      i.fa {
+        padding: 3px 9px;
+        font-size: 24px;
+        -webkit-transition: transform 0.5s;
+        -moz-transition: transform 0.5s;
+        transform: rotate(180deg);
+        transition: transform 0.5s;
+      }
+    }
+    &.is-open .sidebar-tongue i.fa {
+      transform: rotate(0deg);
+    }
   }
 }
