@@ -8,6 +8,7 @@ Router.map(function() {
   this.route('home', {
     path: '/',
     action: function() {
+      Session.set('layout', 'defaultLayout');
       this.render('home');
     }
   });
@@ -26,6 +27,7 @@ Router.onBeforeAction(function () {
   // each service decides how to show left/right sidebars
   Session.set('isLeftSidebarOpen', false);
   Session.set('isRightSidebarOpen', false);
+  Session.set('layout', 'defaultAdminLayout');
   this.next();
 });
 

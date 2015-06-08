@@ -1,6 +1,10 @@
-template(name='defaultLayout')
+template(name='defaultAdminLayout')
   .container-fluid.mFluid
     .mRow
+      +sidebarComponent(
+        sidebarSize='xs'
+        sidebarType="primary"
+        location='left')
       .main(class="{{#if isLeftSidebarOpen}}left-sidebar-open{{/if}}")
         +headerNavbar
         .mRow

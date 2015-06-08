@@ -7,7 +7,6 @@ Router.route('calendar', {
     if (this.ready()) {
       if (Meteor.user()) {
         Session.set('isLeftSidebarOpen', true);
-        Session.set('isRightSidebarOpen', true);
         this.render('calendar');
       } else {
         Router.go('atSignIn');

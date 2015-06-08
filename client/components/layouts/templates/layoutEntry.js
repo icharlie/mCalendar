@@ -6,7 +6,8 @@ Template.layoutEntry.helpers({
   getLayout: function() {
     var user = Meteor.user()
 
-    var layout = App.layout ? App.layout : 'defaultLayout';
+    var layout = Session.get('layout');
+    layout = layout ? layout : 'defaultAdminLayout';
 
     return layout;
   }

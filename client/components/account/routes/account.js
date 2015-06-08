@@ -10,7 +10,9 @@
 
 Router.route('logout', {
   action: function() {
+    Session.set('isLeftSidebarOpen', false);
     Meteor.logout();
+    Router.go('/');
   }
 });
 
