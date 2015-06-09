@@ -7,7 +7,13 @@ Meteor.call('getenv', function(err, env) {
 this.App.getEventsData = function() {
   var userId;
   userId = (Meteor.userId() === null ? "" : Meteor.userId());
-  return Events.find({$or: [{partnerIds: userId}, {ownerId: userId}]}).fetch();
+  var events = Events.find({$or: [{partnerIds: userId}, {ownerId: userId}]}).fetch();
+  events = events.map(function(event) {
+    event.start = moment.utc(event.start);
+    event.end = moment.utc(event.end);
+    return event;
+  });
+  return events;
 };
 
 this.App.generateCalendar = function() {
@@ -56,23 +62,23 @@ this.App.generateCalendar = function() {
   $('#calendar').fullCalendar('changeView', viewName);
 };
 
-this.App.parseQueryString = function(queryString) {
-  var aux, ele, o, params, _i, _len, _ref;
-  if (queryString) {
-    params = {};
-    _ref = decodeURI(queryString).split("&");
-    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-      ele = _ref[_i];
-      aux = ele.split('=');
-      o = {};
-      if (aux.length >= 1) {
-        o[aux[0]] = aux[1];
-        _.extend(params, o);
-      }
-    }
-    return params;
-  }
-};
+// this.App.parseQueryString = function(queryString) {
+//   var aux, ele, o, params, _i, _len, _ref;
+//   if (queryString) {
+//     params = {};
+//     _ref = decodeURI(queryString).split("&");
+//     for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+//       ele = _ref[_i];
+//       aux = ele.split('=');
+//       o = {};
+//       if (aux.length >= 1) {
+//         o[aux[0]] = aux[1];
+//         _.extend(params, o);
+//       }
+//     }
+//     return params;
+//   }
+// };
 
 this.App.showMap = function(err, data) {
     if (data.lbounds) {
