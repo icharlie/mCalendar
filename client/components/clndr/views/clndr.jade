@@ -22,21 +22,14 @@ template(name="clndr")
         <div class="event-listing-title">EVENTS THIS MONTH</div>
         <% _.each(eventsThisMonth, function(event) { %>
             <div class="event-item">
-              <div class="event-item-name"><%= event.title %></div>
+              <div class="event-item-name"><%= moment(event.start).format('MMM-DD') %>: <%= event.title %></div>
               <div class="event-item-location"><%= event.location %></div>
             </div>
           <% }); %>
       </div>
   +sidebarComponent(
-    sidebarSize='sm'
-    sidebarType="info"
+    sidebarSize='md'
+    sidebarType='default'
     location='right' 
     view='clndrEvent' 
     position='absolute')
-
-
-template(name='clndrEventSidebar')
-  .mRow
-    .inputs
-      input.form-control(type="newEvent" value="" placeholder="new event")
-      a#addNewEvent.btn.btn-default.btn-primary Add

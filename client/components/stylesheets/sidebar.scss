@@ -44,14 +44,6 @@
     padding: 0 5px;
     background-attachment: fixed;
 
-    &.sidebar-primary {
-      background-color: #009688;
-    }
-
-    &.sidebar-info {
-      background-color: #03a9f4;
-    }
-
     .sidebar-tongue {
       display: block;
       width: 30px;
@@ -83,6 +75,34 @@
     &.is-open .sidebar-tongue i.fa {
       transform: rotate(0deg);
     }
+
+
+    // size
+    &.sidebar-xs {
+      width: $sidebar-xs;
+      max-width: $sidebar-xs;
+      &.left {
+        left: -$sidebar-xs;
+      }
+      &.right {
+        right: -$sidebar-xs;
+      }
+      &.left.is-open {
+        left: 0;
+      }
+      &.right.is-open {
+        right: 0;
+      }
+      .sidebar-tongue {
+        &.left {
+          left: $sidebar-xs;
+        }
+        &.right{
+          right: $sidebar-xs
+        }
+      }
+    }
+    
     &.sidebar-sm {
       width: $sidebar-sm;
       max-width: $sidebar-sm;
@@ -109,14 +129,14 @@
       }
     }
 
-    &.sidebar-xs {
-      width: $sidebar-xs;
-      max-width: $sidebar-xs;
+    &.sidebar-md {
+      width: $sidebar-md;
+      max-width: $sidebar-md;
       &.left {
-        left: -$sidebar-xs;
+        left: -$sidebar-md;
       }
       &.right {
-        right: -$sidebar-xs;
+        right: -$sidebar-md;
       }
       &.left.is-open {
         left: 0;
@@ -126,12 +146,38 @@
       }
       .sidebar-tongue {
         &.left {
-          left: $sidebar-xs;
+          left: $sidebar-md;
         }
         &.right{
-          right: $sidebar-xs
+          right: $sidebar-md
         }
       }
+    }
+
+
+    // color
+    &.sidebar-default {
+      background-color: transparent;
+    }
+
+    &.sidebar-primary {
+      background-color: #009688;
+    }
+    
+    &.sidebar-success {
+      background-color: #4caf50;
+    }
+
+    &.sidebar-info {
+      background-color: #03a9f4;
+    }
+
+    &.sidebar-warning {
+      background-color: #ff57ee;
+    }
+
+    &.sidebar-danger {
+      background-color: #f44336;
     }
   }
 }
