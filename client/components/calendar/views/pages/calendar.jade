@@ -2,12 +2,16 @@ template(name='calendar')
   if currentUser
     .col-md-11.col-sm-10.col-md-offset-1.col-sm-offset-2
       #calendar
-    +modal
-    +emailModal
+    +sidebarComponent(
+      sidebarSize='md'
+      sidebarType='default'
+      location='right'
+      view='fullCalendarEvent'
+      position='absolute')
 
 
 template(name="calendarSidebarLinks")
   li.sidebar-list
-    a.sidebar-list-link(href="{{pathFor 'locationEvent'}}") 
+    a.sidebar-list-link(href="{{pathFor 'locationEvent'}}")
       i.fa.fa-plus
       |New

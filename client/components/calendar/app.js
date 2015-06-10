@@ -28,14 +28,10 @@ this.App.generateCalendar = function() {
       selectable: true,
       selectHelper: true,
       select: function (start, end, jsEvent, view) {
-        prepareModal('add', {
-          title: '',
-          desc: '',
-          start: start,
-          end: end,
-          allDay: !start.hasTime() // use hasTime to check allDay event ref: http://fullcalendar.io/docs/selection/select_callback/
-        });
-        $("#myModal").modal();
+        debugger;
+        Session.set('currentStart', start.toString());
+        Session.set('currentEnd', end.toString());
+        Sidebar.stack.fullCalendarEvent.open();
       },
       editable: true,
       events: App.getEventsData(),
