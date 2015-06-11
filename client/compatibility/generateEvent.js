@@ -1,7 +1,10 @@
 var generateEvent = function(data) {
   var event = $.extend({}, data);
-  if (event.allDay)
+  if (event.allDay) {
     event.allDay = EJSON.parse(event.allDay);
+  } else {
+    event.allDay = true;
+  }
   event.partnerIds = [];
   event.ownerId = Meteor.userId();
   event.date = event.date ? moment.utc(event.date) : moment.utc();

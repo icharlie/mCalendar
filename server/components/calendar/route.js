@@ -51,7 +51,7 @@ user.put(function() {
 });
 
 var checkRequireField = function(params) {
-  if (!params.title || !params.desc) {
+  if (!params.title || !params.description) {
     return false;
   }
 

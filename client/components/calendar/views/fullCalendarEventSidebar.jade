@@ -9,15 +9,17 @@ template(name='fullCalendarEventSidebar')
             label.col-md-3.control-label
               | Titile
             .col-md-9
-              input.form-control(type='text' value='' placeholder='new event' name='title')
+              input.form-control(type='text' placeholder='new event' name='title' value="{{title}}")
           .form-group
             label.col-md-3.control-label
               | Description
             .col-md-9
-              textarea.form-control(rows='4' placeholder='description' name='desc')
+              textarea.form-control(rows='4' placeholder='description' name='description')
+                =description
           .form-group
             .col-md-4.col-md-offset-2
               button#deleteEvent.btn.btn-danger(type='button') Delete
             .col-md-4.col-md-offset-2
-              button#saveEvent.btn.btn-primary(type='submit') Add
+              button#saveEvent.btn.btn-primary(type='submit')
+                =type
 

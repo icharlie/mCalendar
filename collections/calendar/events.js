@@ -8,12 +8,14 @@ Events.attachSchema(new SimpleSchema({
     type: Date
   },
   allDay: {
-    type: Boolean
+    type: Boolean,
+    defaultValue: true,
+    optional: true
   },
   title: {
     type: String
   },
-  desc: {
+  description: {
     type: String
   },
   ownerId: {
