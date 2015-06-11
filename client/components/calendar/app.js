@@ -1,7 +1,17 @@
 if (!this.App) this.App = {};
 
+// TODO: use schema
+App.eventVars = ['eventStart', 'eventEnd', 'eventType', 'eventTitle', 
+  'eventDescription'];
+
+var clearEventSessionVars = function() {
+  _.each(App.eventVars, function(e) {
+    Session.set(e, null);
+  });
+};
+
 Meteor.call('getenv', function(err, env) {
-	this.App.env = env;
+  this.App.env = env;
 }.bind(this))
 
 this.App.getEventsData = function() {
@@ -28,18 +38,24 @@ this.App.generateCalendar = function() {
       selectable: true,
       selectHelper: true,
       select: function (start, end, jsEvent, view) {
-        debugger;
-        Session.set('currentStart', start.toString());
-        Session.set('currentEnd', end.toString());
+        clearEventSessionVars();
+        Session.set('eventStart', start.toString());
+        Session.set('eventEnd', end.toString());
+        Session.set('eventType', 'add');
         Sidebar.stack.fullCalendarEvent.open();
       },
       editable: true,
       events: App.getEventsData(),
       eventClick: function(evt, jsEvt, view) {
+        clearEventSessionVars();
+        Session.set('eventStart', evt.start.toString());
+        Session.set('eventEnd', evt.end.toString());
+        Session.set('eventTitle', evt.title);
+        Session.set('eventDescription', evt.desc);
+        Session.set('eventType', 'edit');
         var cacheSource = evt.source;
         delete evt.source;
-        prepareModal('edit', evt);
-        $("#myModal").modal();
+        Sidebar.stack.fullCalendarEvent.open();
       },
       eventDrop: function( event, dayDelta, minuteDelta, allDay, revertFunc, jsEvent, ui, view){
         event.end = event.start.clone().add('hours', 2);
