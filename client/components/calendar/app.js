@@ -80,12 +80,14 @@ this.App.generateCalendar = function() {
 
     Events.find().observeChanges({
       added: function(id, event) {
-        console.log('aded');
+        eventsDep.changed();
+      },
+
+      changed: function() {
         eventsDep.changed();
       },
 
       removed: function() {
-        console.log('removed');
         eventsDep.changed();
       }
     });
