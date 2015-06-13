@@ -1,4 +1,8 @@
 Template.fullCalendarEventSidebar.helpers({
+  eventId: function() {
+    return Session.get('eventId');
+  },
+
   type: function() {
     var type = Session.get('eventType');
 
@@ -54,6 +58,14 @@ Template.fullCalendarEventSidebar.events({
      Session.set('eventDescription', e.currentTarget.value);   
   },
 
+  'click #deleteEvent': function(e) {
+    var eventId = Session.get('eventId');
+    Events.remove(eventId);
+    Session.set('eventId', null);
+    Sidebar.stack.fullCalendarEvent.toggle()
+  },
+
+
   'click #saveEvent': function(e) {
     e.preventDefault();
     var eventType = Session.get('eventType');
@@ -69,9 +81,6 @@ Template.fullCalendarEventSidebar.events({
 
     if (eventType === 'add') {
       Events.insert(event)
-      $("#calendar").fullCalendar("removeEvents");
-      $("#calendar").fullCalendar("addEventSource", App.getEventsData());
-      $("#calendar").fullCalendar("refetchEvents");
       Sidebar.stack.fullCalendarEvent.toggle()
     } 
   }

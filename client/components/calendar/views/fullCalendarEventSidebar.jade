@@ -18,7 +18,8 @@ template(name='fullCalendarEventSidebar')
                 =description
           .form-group
             .col-md-4.col-md-offset-2
-              button#deleteEvent.btn.btn-danger(type='button') Delete
+              if eventId
+                button#deleteEvent.btn.btn-danger(type='button') Delete
             .col-md-4.col-md-offset-2
               button#saveEvent.btn.btn-primary(type='submit')
                 =type

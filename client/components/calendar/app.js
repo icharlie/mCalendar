@@ -4,6 +4,16 @@ if (!this.App) this.App = {};
 App.eventVars = ['eventStart', 'eventEnd', 'eventType', 'eventTitle', 
   'eventDescription'];
 
+var eventsDep = new Tracker.Dependency;
+
+App.reloadEvents = function() {
+  eventsDep.depend();
+  $("#calendar").fullCalendar("removeEvents");
+  $("#calendar").fullCalendar("addEventSource", App.getEventsData());
+  $("#calendar").fullCalendar("refetchEvents");
+};
+
+
 var clearEventSessionVars = function() {
   _.each(App.eventVars, function(e) {
     Session.set(e, null);
@@ -39,6 +49,7 @@ this.App.generateCalendar = function() {
       selectHelper: true,
       select: function (start, end, jsEvent, view) {
         clearEventSessionVars();
+        Session.set('eventId', null);
         Session.set('eventStart', start.toString());
         Session.set('eventEnd', end.toString());
         Session.set('eventType', 'add');
@@ -48,6 +59,7 @@ this.App.generateCalendar = function() {
       events: App.getEventsData(),
       eventClick: function(evt, jsEvt, view) {
         clearEventSessionVars();
+        Session.set('eventId', evt._id);
         Session.set('eventStart', evt.start.toString());
         Session.set('eventEnd', evt.end.toString());
         Session.set('eventTitle', evt.title);
@@ -65,32 +77,29 @@ this.App.generateCalendar = function() {
         Events.update({_id: event._id}, {$set: { title: event.title, desc: event.desc, start: event.start.format('ddd MMM DD YYYY HH:mm:ss zZZ'), end: event.end.format('ddd MMM DD YYYY HH:mm:ss zZZ'), allDay: event.allDay}});
       }
     });
+
+    Events.find().observeChanges({
+      added: function(id, event) {
+        console.log('aded');
+        eventsDep.changed();
+      },
+
+      removed: function() {
+        console.log('removed');
+        eventsDep.changed();
+      }
+    });
+
+    App.eventsReloadHandle = Tracker.autorun(function(){
+      App.reloadEvents();
+    });
   } else {
-    $("#calendar").fullCalendar("removeEvents");
-    $("#calendar").fullCalendar("addEventSource", App.getEventsData());
-    $("#calendar").fullCalendar("refetchEvents");
+    App.reloadEvents();
   }
+
   var viewName = Meteor.user().profile.calendarView || 'month';
   $('#calendar').fullCalendar('changeView', viewName);
 };
-
-// this.App.parseQueryString = function(queryString) {
-//   var aux, ele, o, params, _i, _len, _ref;
-//   if (queryString) {
-//     params = {};
-//     _ref = decodeURI(queryString).split("&");
-//     for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-//       ele = _ref[_i];
-//       aux = ele.split('=');
-//       o = {};
-//       if (aux.length >= 1) {
-//         o[aux[0]] = aux[1];
-//         _.extend(params, o);
-//       }
-//     }
-//     return params;
-//   }
-// };
 
 this.App.showMap = function(err, data) {
     if (data.lbounds) {
