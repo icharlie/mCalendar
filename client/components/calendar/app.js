@@ -63,7 +63,7 @@ this.App.generateCalendar = function() {
         Session.set('eventStart', evt.start.toString());
         Session.set('eventEnd', evt.end.toString());
         Session.set('eventTitle', evt.title);
-        Session.set('eventDescription', evt.desc);
+        Session.set('eventDescription', evt.description);
         Session.set('eventType', 'edit');
         var cacheSource = evt.source;
         delete evt.source;
