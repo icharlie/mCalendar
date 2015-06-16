@@ -19,7 +19,6 @@ Template.fullCalendarEventSidebar.helpers({
 
   description: function() {
     var description = Session.get('eventDescription');
-
     return description ? description : '';
   },
 
@@ -75,7 +74,11 @@ Template.fullCalendarEventSidebar.events({
       event[key] = Session.get(e);
     });
 
-    if (! event.allDay) event.allDay = true;
+    if (! event.allDay && Meteor.user().profile.calendarView === 'month') {
+      event.allDay = true;
+    } else {
+      event.allDay = false;
+    }
 
     event.ownerId = Meteor.userId();
 
