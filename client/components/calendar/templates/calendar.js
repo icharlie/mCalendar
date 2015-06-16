@@ -1,13 +1,6 @@
 Template.calendar.rendered = function() {
   if (Meteor.userId()) {
     App.generateCalendar();
-    $('#myModal').on('show', function() {
-      $('#myModal').removeClass('hidden');
-    });
-
-    $('#myModal').on('hdie', function() {
-      $('#myModal').addClass('hidden');
-    });
   }
 };
 
