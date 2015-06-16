@@ -1,0 +1,8 @@
+template(name="homeSidebar")
+  .center-block
+    a.center-block.sidebar-log(href="{{pathFor 'home'}}")
+      img(src='/imgs/calendar.png')
+  ul.nav.nav-sidebar
+    li.nav-sidebar-header
+      img(src='{{profileImage}}')
+    +Template.dynamic(template=getViewSidebarLinksTemplate)

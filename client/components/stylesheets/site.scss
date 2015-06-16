@@ -1,0 +1,63 @@
+@import "variables.scss";
+
+/* CSS declarations go here */
+.logo-nav img {
+  width: 45px;
+}
+
+.media-object {
+    width: 250px;
+}
+
+.hidden-data {
+  display: none;
+}
+
+/* map */
+#map {
+  width: 100%;
+  height: 600px;
+}
+  /* = iphone style checkbox = */
+#account {
+	margin: 10px 0;
+}
+
+/* calendar */
+#mCalendar-show .item {
+  height: 450px;
+}
+#mCalendar-show img {
+  padding: 0 45px;
+  margin: 0 auto;
+}
+
+#mCalendar-show .carousel-caption {
+  color: #000;
+}
+
+#mCalendar-show .carousel-control {
+  background-image: none;
+  color: #9E1313;
+}
+
+@media (max-width: $screen-sm) {
+
+  .form-group > .row .col-md-4{
+    padding: 5px 15px;
+  }
+}
+
+
+/* elements */
+.mFluid {
+  padding: 0;
+}
+
+.mRow {
+  display: inline-block;
+  position: relative;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}

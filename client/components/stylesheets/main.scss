@@ -1,0 +1,13 @@
+@import "variables.scss";
+
+.main {
+  width: 100%;
+}
+
+@media (min-width: $screen-sm + 1) {
+  .main {
+    .navbar {
+      border-radius: 0;
+    }
+  }
+}

@@ -1,0 +1,31 @@
+template(name='profile')
+  .col-md-3.col-sm-3.col-md-offset-2.col-sm-offset-2
+    .container-fluid
+      .mframe
+        .row
+          a.thumbnail.profile-thumbnail(href='#')
+            img(src='{{profileImage}}', alt='profile image')
+          input#image(type='file', name='image', value='')
+          if displayDeleteButton
+            button#delete-image-btn.btn.btn-danger Delete
+  .col-md-6.col-sm-6
+    form.form-horizontal(role='form', enctype='multipart/form-data')
+      .form-group
+        label.col-sm-2.control-label(for='name') Name
+        .col-sm-10
+          input#name.form-control(type='text', name='name', value='{{user.username}}', placeholder='Username')
+      .form-group
+        label.col-sm-2.control-label(for='email') Email
+        .col-sm-10
+          each user.emails
+            input#email.form-control(type='email', value='{{address}}', placeholder='Email')
+      .form-group
+        .col-sm-offset-2.col-sm-10
+          button#update-btn.btn.btn-primary(tpye='submit') Update
+
+
+template(name="profileSidebarLinks")
+  li
+    a(href="{{ pathFor 'calendar' }}")
+      i.fa.fa-chevron-left
+      | Back

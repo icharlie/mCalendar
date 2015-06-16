@@ -3,18 +3,13 @@
 # 'meteor add' and 'meteor remove' will edit this file for you,
 # but you can also edit it by hand.
 
-standard-app-packages
 accounts-base
 email
 accounts-password
-iron:router
 http
 accounts-meteor-developer
 
-twbs:bootstrap
 momentjs:moment
-sanjo:jasmine
-velocity:html-reporter
 cfs:standard-packages
 cfs:filesystem
 mquandalle:jade
@@ -24,3 +19,9 @@ useraccounts:unstyled
 fourseven:scss
 houston:admin
 fortawesome:fontawesome
+digilord:faker
+iron:router
+fezvrasta:bootstrap-material-design
+meteor-platform
+peerlibrary:blaze-components
+reactive-var

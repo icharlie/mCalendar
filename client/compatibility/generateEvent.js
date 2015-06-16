@@ -1,25 +1,28 @@
 var generateEvent = function(data) {
   var event = $.extend({}, data);
-  if (event.allDay)
-    event.allDay = JSON.parse(event.allDay);
+  if (event.allDay) {
+    event.allDay = EJSON.parse(event.allDay);
+  } else {
+    event.allDay = true;
+  }
   event.partnerIds = [];
   event.ownerId = Meteor.userId();
-  event.date = event.date ? new Date(event.date) : new Date();
+  event.date = event.date ? moment.utc(event.date) : moment.utc();
   if (event.allDay) {
     if (event.date) {
-      event.start = event.date;
-      event.end = event.date;
+      event.start = event.date.toString();
+      event.end = event.date.toString();
     }
   } else {
-    var start = event.start.split(':'),
-      end = event.end.split(':'),
-      startHours = parseInt(start[0], 10),
-      startSeconds = parseInt(start[1], 10),
-      endHours = parseInt(end[0], 10),
-      endSeconds = parseInt(end[1], 10);
+    var start = event.start.split(':');
+    var  end = event.end.split(':');
+    var  startHours = parseInt(start[0], 10);
+    var  startSeconds = parseInt(start[1], 10);
+    var  endHours = parseInt(end[0], 10);
+    var  endSeconds = parseInt(end[1], 10);
 
-    event.start = moment(event.date).add('hours', startHours).add('seconds', startSeconds).format('MM-DD-YYYY HH:ss');
-    event.end = moment(event.date).add('hours', endHours).add('seconds', endSeconds).format('MM-DD-YYYY HH:ss');
+    event.start = moment.utc(event.date).add(startHours, 'hours').add(startSeconds, 'seconds').toString();
+    event.end = moment.utc(event.date).add(endHours, 'hours').add(endSeconds, 'seconds').toString();
   }
   return event;
 };

@@ -1,0 +1,9 @@
+template(name="locationEvent")
+  .col-sm-12.col-md-12
+    +_eventForm  
+    +map
+
+template(name="locationEventSidebarLinks")
+  a(href="{{ pathFor 'calendar' }}")
+    i.fa.fa-chevron-left
+    | Back

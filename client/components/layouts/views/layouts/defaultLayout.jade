@@ -1,0 +1,7 @@
+template(name='defaultLayout')
+  .container-fluid.mFluid
+    .mRow
+      .main(class="{{#if isLeftSidebarOpen}}left-sidebar-open{{/if}}")
+        +headerNavbar
+        .mRow
+          +yield
