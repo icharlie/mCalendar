@@ -4,23 +4,22 @@ Router.configure({
   loadingTemplate: 'loading'
 });
 
-Router.map(function() {
-  this.route('home', {
-    path: '/',
-    action: function() {
-      Session.set('layout', 'defaultLayout');
-      this.render('home');
-    }
-  });
+// Router.map(function () {
+  // this.route('about', {
+  //   path: '/about',
+  //   action () {
+  //     this.render('about');
+  //   }
+  // });
+// });
 
-  this.route('about', {
-    path: '/about',
-    action: function() {
-      this.render('about');
-    }
-  });
+Router.route('home', {
+  path: '/',
+  action () {
+    Session.set('layout', 'defaultLayout');
+    this.render('home');
+  }
 });
-
 
 Router.onBeforeAction(function () {
   // reset left/right sidebars flag.
@@ -38,4 +37,3 @@ Router.onAfterAction(function () {
     Session.set('currentView', this.route.getName());
   }
 });
-

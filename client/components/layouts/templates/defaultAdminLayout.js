@@ -1,5 +1,5 @@
 Template.defaultLayout.helpers({
-  isLeftSidebarOpen: function() {
+  isLeftSidebarOpen () {
     return Session.get('isLeftSidebarOpen');
-  },
+  }
 })

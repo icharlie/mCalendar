@@ -1,3 +1,4 @@
+/*global Router, Session, Meteor*/
 [
   'signIn', 'signUp', 'resetPwd',
   'forgotPwd', 'enrollAccount', 'changePwd'
@@ -9,7 +10,7 @@
 
 
 Router.route('logout', {
-  action: function() {
+  action () {
     Session.set('isLeftSidebarOpen', false);
     Meteor.logout();
     Router.go('/');
@@ -19,11 +20,11 @@ Router.route('logout', {
 Router.route('/profile/:_id', {
   template: 'profile',
   name: 'profile',
-  waitOn: function() {
+  waitOn () {
     return Meteor.subscribe('user', this.params._id);
   },
 
-  action: function() {
+  action () {
     if (this.ready()) {
       if (Meteor.user()) {
         this.render('profile');

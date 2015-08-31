@@ -1,3 +1,4 @@
+/*global AccountsTemplates*/
 AccountsTemplates.configure({
   confirmPassword: false,
   enablePasswordChange: true,

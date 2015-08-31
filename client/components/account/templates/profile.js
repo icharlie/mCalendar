@@ -1,45 +1,47 @@
-'use strict';
-var userId = Meteor.userId();
+/*jshint esnext: true*/
+/*global Template, Meteor*/
+const userId = Meteor.userId();
 
 Template.profile.helpers({
-  user: function() {
+  user () {
     return Meteor.user();
   },
 
-  profileImage: function() {
-    var user = Meteor.user();
+  profileImage () {
+    'use strict';
+    const user = Meteor.user();
     if (user && user.profile.photoId) {
-      var photo = Images.findOne({_id: user.profile.photoId});
+      const photo = Images.findOne({_id: user.profile.photoId});
       return photo ?  photo.url() : App.defaultProfileImage;
     }
     return App.defaultProfileImage;
   },
 
-  displayDeleteButton: function() {
+  displayDeleteButton () {
     return Meteor.user() && Meteor.user().profile.photoId;
   }
 });
 
 Template.profile.events({
-  'change #image': function(e, t) {
-    var user = Meteor.user();
-    var photo = new FS.File(e.target.files[0]);
+  'change #image' (e, t) {
+    const user = Meteor.user();
+    const photo = new FS.File(e.target.files[0]);
     photo.owner = user._id;
-    var fileObj = Images.insert(photo);
+    const fileObj = Images.insert(photo);
     // clean old image
-    var oldPhoto = Images.findOne({_id: user.profile.photoId});
+    const oldPhoto = Images.findOne({_id: user.profile.photoId});
     if (oldPhoto) {
       oldPhoto.remove();
     }
     Meteor.call('updateProfile', userId, {'profile.photoId': fileObj._id});
   },
 
-  'click #update-btn': function(e) {
+  'click #update-btn' (e) {
     e.preventDefault();
-    var userId = Meteor.userId();
-    var username = $('#name').val();
-    var email = $('#email').val();
-    var newProfile = {
+    const userId = Meteor.userId();
+    const username = $('#name').val();
+    const email = $('#email').val();
+    const newProfile = {
       username: username,
       emails: [
         {
@@ -57,12 +59,12 @@ Template.profile.events({
     });
   },
 
-  'click #delete-image-btn': function(e, t) {
+  'click #delete-image-btn' (e, t) {
     e.preventDefault();
-    var user = Meteor.user();
-    var photoId = user.profile.photoId;
+    const user = Meteor.user();
+    const photoId = user.profile.photoId;
     if (photoId) {
-      var photo = Images.findOne({_id: photoId});
+      const photo = Images.findOne({_id: photoId});
       photo.remove();
       user.profile.photoId = null;
 			Meteor.call('updateProfile', user);

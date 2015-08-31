@@ -1,9 +1,9 @@
 Router.route('calendar', {
-  waitOn: function() {
+  waitOn () {
     return Meteor.subscribe('events');
   },
 
-  action: function() {
+  action () {
     if (this.ready()) {
       if (Meteor.user()) {
         Session.set('isLeftSidebarOpen', true);

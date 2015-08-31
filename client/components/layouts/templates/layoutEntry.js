@@ -3,7 +3,7 @@
  */
 
 Template.layoutEntry.helpers({
-  getLayout: function() {
+  getLayout () {
     var user = Meteor.user()
 
     var layout = Session.get('layout');
