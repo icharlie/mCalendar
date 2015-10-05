@@ -16,6 +16,9 @@ template(name="calendarSidebarLinks")
 
 
 template(name="defaultSidebarLinks")
+  a.sidebar-list-link(href="{{pathFor 'calendar'}}")
+    i.fa.fa-calendar
+    |Cal
   a.sidebar-list-link(href="{{pathFor 'locationEvent'}}")
     i.fa.fa-plus
     |New
