@@ -12,6 +12,10 @@ template(name='calendar')
 
 template(name="calendarSidebarLinks")
   li.sidebar-list
-    a.sidebar-list-link(href="{{pathFor 'locationEvent'}}")
-      i.fa.fa-plus
-      |New
+    +defaultSidebarLinks
+
+
+template(name="defaultSidebarLinks")
+  a.sidebar-list-link(href="{{pathFor 'locationEvent'}}")
+    i.fa.fa-plus
+    |New

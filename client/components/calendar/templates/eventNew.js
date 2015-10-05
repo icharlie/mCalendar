@@ -4,7 +4,7 @@ Template.locationEvent.onRendered(function() {
   App.geocoder = L.mapbox.geocoder('mapbox.places', {
     accessToken: App.mapboxApiKey
   });
-  var acceptGeo = function(p){
+  const acceptGeo = (p) => {
     App.map = L.mapbox.map('map');
     L.mapbox.tileLayer(App.mapboxMapId, {
       accessToken: App.mapboxApiKey
@@ -14,7 +14,7 @@ Template.locationEvent.onRendered(function() {
     }).addTo(App.map);
     App.map.setView([p.coords.latitude, p.coords.longitude],13);
   };
-  var defaultMapView = function() {
+  const defaultMapView = () => {
     App.map = L.mapbox.map('map');
     L.mapbox.tileLayer(App.mapboxApiKey)
     .on('ready', function () {

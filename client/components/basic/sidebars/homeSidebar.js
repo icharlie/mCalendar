@@ -16,8 +16,10 @@ Template.homeSidebar.helpers({
   },
 
   getViewSidebarLinksTemplate: function () {
-    var routeName = Session.get('currentView');
-    return routeName + 'SidebarLinks';
+    // TODO: dynamic sidebar
+    // var routeName = Session.get('currentView');
+    // return routeName + 'SidebarLinks';
+    return 'calendarSidebarLinks';
   }
 });
 

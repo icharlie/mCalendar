@@ -1,8 +1,0 @@
-{
-  "public": {
-    "velocity:html-reporter": {
-      "position": "bottom right",
-      "tab-index" : 1
-    }
-  }
-}
