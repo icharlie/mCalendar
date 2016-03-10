@@ -1,7 +1,6 @@
 if (!this.App) this.App = {};
 
-// TODO: use schema
-App.eventVars = ['eventStart', 'eventEnd', 'eventType', 'eventTitle', 
+App.eventVars = ['eventStart', 'eventEnd', 'eventType', 'eventTitle',
   'eventDescription'];
 
 var eventsDep = new Tracker.Dependency;
@@ -50,8 +49,8 @@ this.App.generateCalendar = function() {
       select: function (start, end, jsEvent, view) {
         clearEventSessionVars();
         Session.set('eventId', null);
-        Session.set('eventStart', start.toString());
-        Session.set('eventEnd', end.toString());
+        Session.set('eventStart', start.toISOString());
+        Session.set('eventEnd', end.toISOString());
         Session.set('eventType', 'add');
         Sidebar.stack.fullCalendarEvent.open();
       },

@@ -28,7 +28,7 @@ Template.fullCalendarEventSidebar.helpers({
     if (start && end) {
       start = moment.utc(start);
       end = moment.utc(end);
-      var ONE_DAY = 86400000;
+      const ONE_DAY = 86400000;
       var diff = end.diff(start);
       var date;
       if ( diff === ONE_DAY) {
@@ -54,7 +54,7 @@ Template.fullCalendarEventSidebar.events({
   'keyup [name=description]': function(e) {
      var value = $(event.target).val();
 
-     Session.set('eventDescription', e.currentTarget.value);   
+     Session.set('eventDescription', e.currentTarget.value);
   },
 
   'click #deleteEvent': function(e) {
@@ -67,7 +67,7 @@ Template.fullCalendarEventSidebar.events({
 
   'click #saveEvent': function(e) {
     e.preventDefault();
-    var eventType = Session.get('eventType');
+    var eventType = Session.get('eventType') || 'add';
     var event = {};
     _.each(App.eventVars, function(e) {
       var key = e.replace('event', '').toLowerCase();
@@ -83,8 +83,10 @@ Template.fullCalendarEventSidebar.events({
     event.ownerId = Meteor.userId();
 
     if (eventType === 'add') {
-      Events.insert(event)
+      Events.insert(generateEvent(event))
       Sidebar.stack.fullCalendarEvent.toggle()
-    } 
+    } else {
+      Events.update( Session.get('eventId'), {$set: generateEvent(event)})
+    }
   }
 });

@@ -14,7 +14,7 @@ Template.locationEvent.onRendered(function() {
     }).addTo(App.map);
     App.map.setView([p.coords.latitude, p.coords.longitude],13);
   };
-  const defaultMapView = () => {
+  const defaultMapView = function() {
     App.map = L.mapbox.map('map');
     L.mapbox.tileLayer(App.mapboxApiKey)
     .on('ready', function () {
