@@ -9,12 +9,12 @@ Template.locationEvent.onRendered(function() {
     L.mapbox.tileLayer(App.mapboxMapId, {
       accessToken: App.mapboxApiKey
     })
-    .on('ready', function () {
+    .on('ready', () => {
       $('#floatingBarsG').remove();
     }).addTo(App.map);
     App.map.setView([p.coords.latitude, p.coords.longitude],13);
   };
-  const defaultMapView = function() {
+  const defaultMapView = () => {
     App.map = L.mapbox.map('map');
     L.mapbox.tileLayer(App.mapboxApiKey)
     .on('ready', function () {
